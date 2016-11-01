@@ -26,7 +26,7 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- The mapping information of entities -->
-        <mapping class="com.vgates.entity.CustomerDetail"/>
+        <mapping class="com.vgates.customerportal.model.CustomerDetail"/>
 
     </session-factory>
 

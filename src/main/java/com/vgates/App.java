@@ -1,4 +1,4 @@
-package com.vgates;
+package com.vgates.customerportal;
 
 import org.apache.log4j.Logger;
 
@@ -13,20 +13,11 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Hello World!");
 
-        App obj = new App();
-//        obj.runMe("test log 4j");
+//        CustomerDetail customerDetail = new CustomerDetail();
+//        customerDetail.setCustomerName("Chamith Sithara Kodikara");
+//        CustomerDetailController customerDetailController = new CustomerDetailController();
+//        customerDetailController.addNewCustomerDetails(customerDetail);
 
-//        SessionFactory sessionFactory = HibernateSessionManager.getSessionFactory();
-//        Session session = sessionFactory.openSession();
-//
-//        CustomerDetail customerDetail =new CustomerDetail();
-//        customerDetail.setCustomerName("Manoj");
-//
-//        session.beginTransaction();
-//        session.save(customerDetail);
-//        session.getTransaction().commit();
-//        session.close();
-//        HibernateSessionManager.shutdown();
 
 //        Properties prop = new Properties();
 //        OutputStream output = null;
@@ -58,19 +49,4 @@ public class App {
 //        }
     }
 
-    private void runMe(String parameter){
-
-        if(LOGGER.isDebugEnabled()){
-            LOGGER.debug("This is debug : " + parameter);
-        }
-
-        if(LOGGER.isInfoEnabled()){
-            LOGGER.info("This is info : " + parameter);
-        }
-
-        LOGGER.warn("This is warn : " + parameter);
-        LOGGER.error("This is error : " + parameter);
-        LOGGER.fatal("This is fatal : " + parameter);
-
-    }
 }

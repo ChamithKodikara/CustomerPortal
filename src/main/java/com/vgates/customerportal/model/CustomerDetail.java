@@ -1,4 +1,4 @@
-package com.vgates.entity;
+package com.vgates.customerportal.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -55,6 +55,6 @@ public class CustomerDetail implements Serializable {
 
     @Override
     public String toString() {
-        return "com.vgates.entity.CustomerDetail[ id=" + id + " ]";
+        return "com.vgates.customerportal.model.CustomerDetail[ id=" + id + " ]";
     }
 }

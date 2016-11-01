@@ -1,4 +1,4 @@
-package com.vgates.session;
+package com.vgates.customerportal.session;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
