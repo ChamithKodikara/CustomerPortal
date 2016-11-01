@@ -17,7 +17,7 @@ public class CustomerDetail implements Serializable {
     private Long id;
 
     @Column(name = "CUSTOMER_NAME_")
-    private Long customerName;
+    private String customerName;
 
     public Long getId() {
         return id;
@@ -27,11 +27,11 @@ public class CustomerDetail implements Serializable {
         this.id = id;
     }
 
-    public Long getCustomerName() {
+    public String getCustomerName() {
         return customerName;
     }
 
-    public void setCustomerName(Long customerName) {
+    public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
     @Override

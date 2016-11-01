@@ -20,10 +20,10 @@
         <property name="connection.pool_size">10</property>
 
         <!-- Disable the second-level cache  -->
-        <!--<property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>-->
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!-- The mapping information of entities -->
         <mapping class="com.vgates.entity.CustomerDetail"/>
