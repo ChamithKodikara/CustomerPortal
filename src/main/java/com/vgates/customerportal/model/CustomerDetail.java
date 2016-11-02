@@ -16,6 +16,9 @@ public class CustomerDetail implements Serializable {
     @Column(name = "ID_")
     private Long id;
 
+    @Column(name = "ACTIVE_")
+    private Boolean active=true;
+
     @Column(name = "CUSTOMER_NAME_")
     private String customerName;
 
@@ -56,5 +59,13 @@ public class CustomerDetail implements Serializable {
     @Override
     public String toString() {
         return "com.vgates.customerportal.model.CustomerDetail[ id=" + id + " ]";
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

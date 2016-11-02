@@ -14,7 +14,7 @@ public class CustomerDetailController {
         customerDetailDAO = new CustomerDetailDAOImpl();
     }
 
-    public void addNewCustomerDetails(CustomerDetail customerDetail) {
-        customerDetailDAO.addNewCustomerDetails(customerDetail);
+    public void addNewCustomerDetail(CustomerDetail customerDetail) {
+        customerDetailDAO.addNewCustomerDetail(customerDetail);
     }
 }

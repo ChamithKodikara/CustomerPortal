@@ -7,6 +7,10 @@ import com.vgates.customerportal.model.CustomerDetail;
  */
 public interface CustomerDetailDAO {
 
-    void addNewCustomerDetails(CustomerDetail customerDetail);
+    void addNewCustomerDetail(CustomerDetail customerDetail);
+
+    void updateCustomerDetail(CustomerDetail customerDetail);
+
+    CustomerDetail findCustomerDetailByID(long id);
 
 }
