@@ -27,6 +27,8 @@
 
         <!-- The mapping information of entities -->
         <mapping class="com.vgates.customerportal.model.CustomerDetail"/>
+        <mapping class="com.vgates.customerportal.model.MasterService"/>
+        <mapping class="com.vgates.customerportal.model.MasterItem"/>
 
     </session-factory>
 
