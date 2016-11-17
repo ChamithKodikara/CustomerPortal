@@ -30,6 +30,8 @@
         <mapping class="com.vgates.customerportal.model.CustomerDetail"/>
         <mapping class="com.vgates.customerportal.model.MasterService"/>
         <mapping class="com.vgates.customerportal.model.MasterItem"/>
+        <mapping class="com.vgates.customerportal.model.Payment"/>
+        <mapping class="com.vgates.customerportal.model.Order"/>
 
     </session-factory>
 
