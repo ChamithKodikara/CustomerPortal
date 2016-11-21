@@ -6,6 +6,7 @@ import com.vgates.customerportal.model.UserDetail;
  * Created by Chamith on 11/21/2016.
  */
 public interface UserDetailDAO {
+
     void addNewUserDetail(UserDetail userDetail);
 
     void updateUserDetail(UserDetail userDetail);
