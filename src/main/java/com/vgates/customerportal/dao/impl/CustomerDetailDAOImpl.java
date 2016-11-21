@@ -45,6 +45,20 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         }
     }
 
+    public void changeCustomerStatus(boolean status, long customerID) {
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("UPDATE CustomerDetail customer SET customer.active = :status WHERE customer.id= :id");
+            query.setParameter("status", status);
+            query.setParameter("id", customerID);
+            query.executeUpdate();
+            session.flush();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            LOGGER.error("Sorry Customer Status Change Error !", ex);
+        }
+    }
+
     public CustomerDetail findCustomerDetailByID(long id) {
         CustomerDetail customerDetail = null;
         try {

@@ -18,10 +18,13 @@ public class CustomerDetail implements Serializable {
     private Long id;
 
     @Column(name = "ACTIVE")
-    private Boolean active=true;
+    private Boolean active = true;
 
-    @Column(name = "CUSTOMER_NAME")
+    @Column(name = "CUSTOMER_NAME", nullable = false)
     private String customerName;
+
+    @Column(name = "CUSTOMER_NO", nullable = false)
+    private String customerNo;
 
     @Column(name = "NIC")
     private String nic;
@@ -35,7 +38,7 @@ public class CustomerDetail implements Serializable {
     @Column(name = "CONTACT_NO")
     private String contactNo;
 
-    @Column(name = "ADDRESS")
+    @Column(name = "ADDRESS", length = 500)
     private String address;
 
     @Column(name = "DOB")
@@ -65,6 +68,7 @@ public class CustomerDetail implements Serializable {
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -159,5 +163,13 @@ public class CustomerDetail implements Serializable {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public String getCustomerNo() {
+        return customerNo;
+    }
+
+    public void setCustomerNo(String customerNo) {
+        this.customerNo = customerNo;
     }
 }

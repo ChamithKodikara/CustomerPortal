@@ -17,7 +17,7 @@ public class UserDetail implements Serializable {
     @Column(name = "ID")
     private String id;
 
-    @Column(name = "USER_NAME")
+    @Column(name = "USER_NAME", nullable = false)
     private String userName;
 
     @Column(name = "NAME")
@@ -29,14 +29,14 @@ public class UserDetail implements Serializable {
     @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false, length = 1000)
     private String password;
 
     @Column(name = "LOCK")
     private Boolean lock;
 
-    @Column(name = "STATUS")
-    private Boolean status;
+    @Column(name = "ACTIVE")
+    private Boolean active = true;
 
     @Column(name = "LAST_ACTIVITY_DATE")
     @Temporal(TemporalType.TIMESTAMP)
@@ -98,12 +98,12 @@ public class UserDetail implements Serializable {
         this.lock = lock;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Date getLastActDate() {

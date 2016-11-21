@@ -11,6 +11,8 @@ public interface CustomerDetailDAO {
 
     void updateCustomerDetail(CustomerDetail customerDetail);
 
+    void changeCustomerStatus(boolean status,long customerID);
+
     CustomerDetail findCustomerDetailByID(long id);
 
 }
