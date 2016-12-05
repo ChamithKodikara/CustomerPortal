@@ -62,13 +62,63 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
     public CustomerDetail findCustomerDetailByID(long id) {
         CustomerDetail customerDetail = null;
         try {
-            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.id= :id");
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.id= :id AND customer.active = true");
             query.setParameter("id", id);
             List<CustomerDetail> resultList = (List<CustomerDetail>) query.list();
             customerDetail = resultList.get(0);
         } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find Customer Detail !", ex);
+            LOGGER.error("Sorry Cannot Find Customer Detail By ID !", ex);
         }
         return customerDetail;
+    }
+
+    public List<CustomerDetail> findCustomerDetailByName(String name) {
+        List<CustomerDetail> customerDetailList = null;
+        try {
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.customerName= :name AND customer.active = true");
+            query.setParameter("name", name);
+            customerDetailList = (List<CustomerDetail>) query.list();
+
+        } catch (Exception ex) {
+            LOGGER.error("Sorry Cannot Find Customer Detail By Name !", ex);
+        }
+        return customerDetailList;
+    }
+
+    public CustomerDetail findCustomerDetailByCustomerNo(String customerNo) {
+        CustomerDetail customerDetail = null;
+        try {
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.customerNo= :customerNo AND customer.active = true");
+            query.setParameter("customerNo", customerNo);
+            List<CustomerDetail> resultList = (List<CustomerDetail>) query.list();
+            customerDetail = resultList.get(0);
+        } catch (NoResultException ex) {
+            LOGGER.error("Sorry Cannot Find Customer Detail By Customer No !", ex);
+        }
+        return customerDetail;
+    }
+
+    public List<CustomerDetail> findAllActiveCustomerDetails() {
+        List<CustomerDetail> customerDetailList = null;
+        try {
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.active = true");
+            customerDetailList = (List<CustomerDetail>) query.list();
+
+        } catch (Exception ex) {
+            LOGGER.error("Sorry Cannot Find All Active Customer Details !", ex);
+        }
+        return customerDetailList;
+    }
+
+    public List<CustomerDetail> findAllCustomerDetails() {
+        List<CustomerDetail> customerDetailList = null;
+        try {
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer");
+            customerDetailList = (List<CustomerDetail>) query.list();
+
+        } catch (Exception ex) {
+            LOGGER.error("Sorry Cannot Find All Active Customer Details !", ex);
+        }
+        return customerDetailList;
     }
 }

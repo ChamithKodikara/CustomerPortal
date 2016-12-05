@@ -11,7 +11,11 @@ public interface UserDetailDAO {
 
     void updateUserDetail(UserDetail userDetail);
 
-    void changeUserStatus(boolean status,long userID);
+    void changeUserStatus(boolean status, long userID);
 
     UserDetail findUserDetailByID(long id);
+
+    boolean LoginUser(String userName, String password);
+
+    boolean LogoutUser(String userName);
 }

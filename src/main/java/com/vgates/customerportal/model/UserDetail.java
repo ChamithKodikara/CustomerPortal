@@ -15,7 +15,7 @@ public class UserDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
-    private String id;
+    private Long id;
 
     @Column(name = "USER_NAME", nullable = false)
     private String userName;
@@ -32,9 +32,6 @@ public class UserDetail implements Serializable {
     @Column(name = "PASSWORD", nullable = false, length = 1000)
     private String password;
 
-    @Column(name = "LOCK")
-    private Boolean lock;
-
     @Column(name = "ACTIVE")
     private Boolean active = true;
 
@@ -42,11 +39,15 @@ public class UserDetail implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastActDate;
 
-    public String getId() {
+    @Column(name = "ACTIVE_USER")
+    private Boolean activeUser = false;
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -90,14 +91,6 @@ public class UserDetail implements Serializable {
         this.password = password;
     }
 
-    public Boolean getLock() {
-        return lock;
-    }
-
-    public void setLock(Boolean lock) {
-        this.lock = lock;
-    }
-
     public Boolean getActive() {
         return active;
     }
@@ -138,4 +131,11 @@ public class UserDetail implements Serializable {
         return "com.vgates.customerportal.model.UserDetail[ id=" + id + " ]";
     }
 
+    public Boolean getActiveUser() {
+        return activeUser;
+    }
+
+    public void setActiveUser(Boolean activeUser) {
+        this.activeUser = activeUser;
+    }
 }

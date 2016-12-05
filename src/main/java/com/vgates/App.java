@@ -17,6 +17,7 @@ public class App {
 
         CustomerDetail customerDetail = new CustomerDetail();
         customerDetail.setCustomerName("Chamith Sithara Kodikara");
+        customerDetail.setCustomerNo("000001");
         CustomerDetailController customerDetailController = new CustomerDetailController();
         customerDetailController.addNewCustomerDetail(customerDetail);
 

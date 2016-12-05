@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Chamith on 11/21/2016.
  */
-public class UserDetailDAOImpl implements UserDetailDAO{
+public class UserDetailDAOImpl implements UserDetailDAO {
     private final static Logger LOGGER = Logger.getLogger(UserDetailDAOImpl.class);
 
     private final Session session;
@@ -70,5 +70,41 @@ public class UserDetailDAOImpl implements UserDetailDAO{
             LOGGER.error("Sorry Cannot Find User Detail !", ex);
         }
         return userDetail;
+    }
+
+    public boolean LoginUser(String userName, String password) {
+        boolean loginSuccess = false;
+        try {
+            Query query = session.createQuery("SELECT user FROM UserDetail user WHERE user.userName= :userName AND user.password= :password AND user.active=true ");
+            query.setParameter("userName", userName);
+            query.setParameter("password", password);
+            List<UserDetail> resultList = (List<UserDetail>) query.list();
+            if (resultList != null && !resultList.isEmpty()) {
+                UserDetail userDetail = resultList.get(0);
+                userDetail.setActiveUser(Boolean.TRUE);
+                loginSuccess = Boolean.TRUE;
+            }
+        } catch (NoResultException ex) {
+            LOGGER.error("Sorry Cannot Find User Detail !", ex);
+        }
+        return loginSuccess;
+    }
+
+    public boolean LogoutUser(String userName) {
+        boolean logoutSuccess = false;
+        try {
+            Query query = session.createQuery("UPDATE UserDetail user SET user.activeUser=false,user.lastActDate =current_timestamp WHERE user.userName= :userName");
+            query.setParameter("userName", userName);
+            List<UserDetail> resultList = (List<UserDetail>) query.list();
+            if (resultList != null && !resultList.isEmpty()) {
+                UserDetail userDetail = resultList.get(0);
+                userDetail.setActiveUser(Boolean.TRUE);
+                logoutSuccess = Boolean.TRUE;
+            }
+        } catch (NoResultException ex) {
+            LOGGER.error("Sorry Cannot Find User Detail !", ex);
+        }
+        return logoutSuccess;
+
     }
 }

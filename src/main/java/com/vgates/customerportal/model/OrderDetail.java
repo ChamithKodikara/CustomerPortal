@@ -8,8 +8,8 @@ import java.util.Date;
  * Created by Chamith on 11/15/2016.
  */
 @Entity
-@Table(name = "ORDER")
-public class Order implements Serializable {
+@Table(name = "ORDER_DETAIL")
+public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -90,10 +90,10 @@ public class Order implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Order)) {
+        if (!(object instanceof OrderDetail)) {
             return false;
         }
-        Order other = (Order) object;
+        OrderDetail other = (OrderDetail) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -102,6 +102,6 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return "com.vgates.customerportal.model.Order[ id=" + id + " ]";
+        return "com.vgates.customerportal.model.OrderDetail[ id=" + id + " ]";
     }
 }

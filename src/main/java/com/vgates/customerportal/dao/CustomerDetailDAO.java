@@ -2,6 +2,8 @@ package com.vgates.customerportal.dao;
 
 import com.vgates.customerportal.model.CustomerDetail;
 
+import java.util.List;
+
 /**
  * Created by Chamith on 11/1/2016.
  */
@@ -11,8 +13,16 @@ public interface CustomerDetailDAO {
 
     void updateCustomerDetail(CustomerDetail customerDetail);
 
-    void changeCustomerStatus(boolean status,long customerID);
+    void changeCustomerStatus(boolean status, long customerID);
 
     CustomerDetail findCustomerDetailByID(long id);
+
+    List<CustomerDetail> findCustomerDetailByName(String name);
+
+    CustomerDetail findCustomerDetailByCustomerNo(String customerNo);
+
+    List<CustomerDetail> findAllActiveCustomerDetails();
+
+    List<CustomerDetail> findAllCustomerDetails();
 
 }
