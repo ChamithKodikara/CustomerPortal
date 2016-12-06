@@ -19,8 +19,8 @@ public class MasterItem implements Serializable {
     @Column(name = "ACTIVE")
     private Boolean active = true;
 
-    @Column(name = "SERVICE_NAME")
-    private String serviceName;
+    @Column(name = "ITEM_NAME")
+    private String itemName;
 
     @Column(name = "COST")
     private Double cost;
@@ -58,14 +58,6 @@ public class MasterItem implements Serializable {
 
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
     }
 
     public Double getCost() {
@@ -146,5 +138,13 @@ public class MasterItem implements Serializable {
     @Override
     public String toString() {
         return "com.vgates.customerportal.model.MasterItem[ id=" + id + " ]";
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 }

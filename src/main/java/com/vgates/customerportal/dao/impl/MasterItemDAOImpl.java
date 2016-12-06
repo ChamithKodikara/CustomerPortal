@@ -71,4 +71,28 @@ public class MasterItemDAOImpl implements MasterItemDAO {
         }
         return item;
     }
+
+    public MasterItem findMasterItemByName(String name) {
+        MasterItem item = null;
+        try {
+            Query query = session.createQuery("SELECT item FROM MasterItem item WHERE item.itemName= :name");
+            query.setParameter("name", name);
+            List<MasterItem> resultList = (List<MasterItem>) query.list();
+            item = resultList.get(0);
+        } catch (NoResultException ex) {
+            LOGGER.error("Sorry Cannot Find Item Detail !", ex);
+        }
+        return item;
+    }
+
+    public List<MasterItem> findAllActiveMasterItems() {
+        List<MasterItem> resultList = null;
+        try {
+            Query query = session.createQuery("SELECT item FROM MasterItem item WHERE item.active= true ");
+            resultList = (List<MasterItem>) query.list();
+        } catch (Exception ex) {
+            LOGGER.error("Sorry Cannot Find Item Detail !", ex);
+        }
+        return resultList;
+    }
 }
