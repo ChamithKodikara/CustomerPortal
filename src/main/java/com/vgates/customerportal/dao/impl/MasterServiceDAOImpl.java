@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Chamith on 11/21/2016.
  */
-public class MasterServiceDAOImpl implements MasterServiceDAO{
+public class MasterServiceDAOImpl implements MasterServiceDAO {
     private final static Logger LOGGER = Logger.getLogger(MasterServiceDAOImpl.class);
 
     private final Session session;
@@ -70,5 +70,17 @@ public class MasterServiceDAOImpl implements MasterServiceDAO{
             LOGGER.error("Sorry Cannot Find Service Detail !", ex);
         }
         return service;
+    }
+
+    public List<MasterService> findMasterServiceByName(String name) {
+        List<MasterService> serviceList = null;
+        try {
+            Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.serviceName LIKE :name");
+            query.setParameter("name", name);
+            List<MasterService> resultList = (List<MasterService>) query.list();
+        } catch (Exception ex) {
+            LOGGER.error("Sorry Cannot Find Service Detail !", ex);
+        }
+        return serviceList;
     }
 }
