@@ -15,7 +15,9 @@ public interface UserDetailDAO {
 
     UserDetail findUserDetailByID(long id);
 
-    boolean LoginUser(String userName, String password);
+    boolean loginUser(String userName, String password);
 
-    boolean LogoutUser(String userName);
+    boolean logoutUser(String userName);
+
+    boolean logoutAllUsers();
 }

@@ -72,7 +72,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         return userDetail;
     }
 
-    public boolean LoginUser(String userName, String password) {
+    public boolean loginUser(String userName, String password) {
         boolean loginSuccess = false;
         try {
             Query query = session.createQuery("SELECT user FROM UserDetail user WHERE user.userName= :userName AND user.password= :password AND user.active=true ");
@@ -90,17 +90,28 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         return loginSuccess;
     }
 
-    public boolean LogoutUser(String userName) {
+    public boolean logoutUser(String userName) {
         boolean logoutSuccess = false;
         try {
             Query query = session.createQuery("UPDATE UserDetail user SET user.activeUser=false,user.lastActDate =current_timestamp WHERE user.userName= :userName");
             query.setParameter("userName", userName);
-            List<UserDetail> resultList = (List<UserDetail>) query.list();
-            if (resultList != null && !resultList.isEmpty()) {
-                UserDetail userDetail = resultList.get(0);
-                userDetail.setActiveUser(Boolean.TRUE);
-                logoutSuccess = Boolean.TRUE;
-            }
+            query.executeUpdate();
+            session.flush();
+            logoutSuccess = Boolean.TRUE;
+        } catch (NoResultException ex) {
+            LOGGER.error("Sorry Cannot Find User Detail !", ex);
+        }
+        return logoutSuccess;
+
+    }
+
+    public boolean logoutAllUsers() {
+        boolean logoutSuccess = false;
+        try {
+            Query query = session.createQuery("UPDATE UserDetail user SET user.activeUser=false,user.lastActDate =current_timestamp");
+            query.executeUpdate();
+            session.flush();
+            logoutSuccess = Boolean.TRUE;
         } catch (NoResultException ex) {
             LOGGER.error("Sorry Cannot Find User Detail !", ex);
         }
