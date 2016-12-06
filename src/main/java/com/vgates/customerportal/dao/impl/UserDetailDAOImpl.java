@@ -72,6 +72,18 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         return userDetail;
     }
 
+    public UserDetail findUserDetailForActiveLogin() {
+        UserDetail userDetail = null;
+        try {
+            Query query = session.createQuery("SELECT user FROM UserDetail user WHERE user.activeUser= true");
+            List<UserDetail> resultList = (List<UserDetail>) query.list();
+            userDetail = resultList.get(0);
+        } catch (NoResultException ex) {
+            LOGGER.error("Sorry Cannot Find User Detail !", ex);
+        }
+        return userDetail;
+    }
+
     public boolean loginUser(String userName, String password) {
         boolean loginSuccess = false;
         try {
@@ -85,7 +97,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
                 loginSuccess = Boolean.TRUE;
             }
         } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find User Detail !", ex);
+            LOGGER.error("Sorry Cannot Find User Detail To Login !", ex);
         }
         return loginSuccess;
     }
@@ -99,7 +111,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             session.flush();
             logoutSuccess = Boolean.TRUE;
         } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find User Detail !", ex);
+            LOGGER.error("Logout Failed !", ex);
         }
         return logoutSuccess;
 
@@ -113,7 +125,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             session.flush();
             logoutSuccess = Boolean.TRUE;
         } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find User Detail !", ex);
+            LOGGER.error("Logout Failed !", ex);
         }
         return logoutSuccess;
 

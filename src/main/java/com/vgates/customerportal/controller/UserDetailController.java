@@ -36,6 +36,10 @@ public class UserDetailController {
         return userDetailDAO.findUserDetailByID(userID);
     }
 
+    public UserDetail findUserDetailForActiveLogin() {
+        return userDetailDAO.findUserDetailForActiveLogin();
+    }
+
     public boolean loginUser(String userName, String password) {
         return userDetailDAO.loginUser(userName, encrypter.getEncryptedPassword(password));
     }
