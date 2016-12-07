@@ -1,7 +1,6 @@
 package com.vgates;
 
-import com.vgates.customerportal.controller.CustomerDetailController;
-import com.vgates.customerportal.model.CustomerDetail;
+import com.vgates.customerportal.view.user.UserLogin;
 import org.apache.log4j.Logger;
 
 ;
@@ -13,13 +12,15 @@ public class App {
     final static Logger LOGGER = Logger.getLogger(App.class);
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-
-        CustomerDetail customerDetail = new CustomerDetail();
-        customerDetail.setCustomerName("Chamith Sithara Kodikara");
-        customerDetail.setCustomerNo("000001");
-        CustomerDetailController customerDetailController = new CustomerDetailController();
-        customerDetailController.addNewCustomerDetail(customerDetail);
+        UserLogin login = new UserLogin();
+        login.setVisible(true);
+//        System.out.println("Hello World!");
+//
+//        CustomerDetail customerDetail = new CustomerDetail();
+//        customerDetail.setCustomerName("Chamith Sithara Kodikara");
+//        customerDetail.setCustomerNo("000001");
+//        CustomerDetailController customerDetailController = new CustomerDetailController();
+//        customerDetailController.addNewCustomerDetail(customerDetail);
 
 
 //        Properties prop = new Properties();

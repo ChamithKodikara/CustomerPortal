@@ -95,6 +95,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
                 UserDetail userDetail = resultList.get(0);
                 userDetail.setActiveUser(Boolean.TRUE);
                 loginSuccess = Boolean.TRUE;
+                updateUserDetail(userDetail);
             }
         } catch (NoResultException ex) {
             LOGGER.error("Sorry Cannot Find User Detail To Login !", ex);
@@ -105,10 +106,12 @@ public class UserDetailDAOImpl implements UserDetailDAO {
     public boolean logoutUser(String userName) {
         boolean logoutSuccess = false;
         try {
-            Query query = session.createQuery("UPDATE UserDetail user SET user.activeUser=false,user.lastActDate =current_timestamp WHERE user.userName= :userName");
+            session.beginTransaction();
+            Query query = session.createQuery("UPDATE UserDetail user SET user.activeUser=false,user.lastActDate =current_timestamp WHERE user.userName= :userName ");
             query.setParameter("userName", userName);
             query.executeUpdate();
             session.flush();
+            session.getTransaction().commit();
             logoutSuccess = Boolean.TRUE;
         } catch (NoResultException ex) {
             LOGGER.error("Logout Failed !", ex);
@@ -120,9 +123,11 @@ public class UserDetailDAOImpl implements UserDetailDAO {
     public boolean logoutAllUsers() {
         boolean logoutSuccess = false;
         try {
-            Query query = session.createQuery("UPDATE UserDetail user SET user.activeUser=false,user.lastActDate =current_timestamp");
+            session.beginTransaction();
+            Query query = session.createQuery("UPDATE UserDetail user SET user.activeUser=false, user.lastActDate =CURRENT_TIMESTAMP ");
             query.executeUpdate();
             session.flush();
+            session.getTransaction().commit();
             logoutSuccess = Boolean.TRUE;
         } catch (NoResultException ex) {
             LOGGER.error("Logout Failed !", ex);
