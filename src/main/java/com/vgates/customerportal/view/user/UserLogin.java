@@ -156,13 +156,13 @@ public class UserLogin extends javax.swing.JFrame {
         String userName = txtUserName.getText();
         char[] password = txtPassword.getPassword();
         String passwordStr = "";
-        for (int i = 0; i < password.length; i++) {
-            passwordStr += password[i];
+        for (char c : password) {
+            passwordStr += c;
         }
         boolean loginSuccess = getUserDetailController().loginUser(userName, passwordStr);
         if (loginSuccess) {
             MainWindowForm mainWindowForm=new MainWindowForm();
-            mainWindowForm.setSize(750, 500);
+            mainWindowForm.setSize(1000, 600);
             mainWindowForm.setVisible(loginSuccess);
             this.dispose();
         } else {

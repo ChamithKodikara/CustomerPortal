@@ -6,6 +6,7 @@
 package com.vgates.customerportal.view.main;
 
 import com.vgates.customerportal.controller.UserDetailController;
+import com.vgates.customerportal.view.customer.CustomerMainForm;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class MainWindowForm extends javax.swing.JFrame {
     public MainWindowForm() {
         userDetailController = new UserDetailController();
         initComponents();
+        setSize(1000, 600);
         setLocationRelativeTo(null);
     }
 
@@ -37,10 +39,16 @@ public class MainWindowForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane1 = new javax.swing.JSplitPane();
         panelMain = new javax.swing.JPanel();
+        panelMainBtn = new javax.swing.JPanel();
+        btnCustomerMain = new javax.swing.JButton();
+        panelMainView = new org.jdesktop.swingx.JXImagePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 750));
+        setMaximumSize(new java.awt.Dimension(1000, 600));
+        setMinimumSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -48,15 +56,67 @@ public class MainWindowForm extends javax.swing.JFrame {
             }
         });
 
+        panelMain.setMaximumSize(new java.awt.Dimension(1000, 600));
+        panelMain.setMinimumSize(new java.awt.Dimension(1000, 600));
+        panelMain.setPreferredSize(new java.awt.Dimension(1000, 600));
+
+        panelMainBtn.setMaximumSize(new java.awt.Dimension(200, 600));
+        panelMainBtn.setMinimumSize(new java.awt.Dimension(200, 600));
+        panelMainBtn.setPreferredSize(new java.awt.Dimension(200, 600));
+
+        btnCustomerMain.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnCustomerMain.setText("Customer Details");
+        btnCustomerMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomerMainActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelMainBtnLayout = new javax.swing.GroupLayout(panelMainBtn);
+        panelMainBtn.setLayout(panelMainBtnLayout);
+        panelMainBtnLayout.setHorizontalGroup(
+            panelMainBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMainBtnLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnCustomerMain, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelMainBtnLayout.setVerticalGroup(
+            panelMainBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMainBtnLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(btnCustomerMain)
+                .addContainerGap(525, Short.MAX_VALUE))
+        );
+
+        panelMainView.setMaximumSize(new java.awt.Dimension(800, 600));
+        panelMainView.setMinimumSize(new java.awt.Dimension(800, 600));
+        panelMainView.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        javax.swing.GroupLayout panelMainViewLayout = new javax.swing.GroupLayout(panelMainView);
+        panelMainView.setLayout(panelMainViewLayout);
+        panelMainViewLayout.setHorizontalGroup(
+            panelMainViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        panelMainViewLayout.setVerticalGroup(
+            panelMainViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
         panelMain.setLayout(panelMainLayout);
         panelMainLayout.setHorizontalGroup(
             panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 749, Short.MAX_VALUE)
+            .addGroup(panelMainLayout.createSequentialGroup()
+                .addComponent(panelMainBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelMainView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMainLayout.setVerticalGroup(
             panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addComponent(panelMainBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelMainView, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -84,6 +144,15 @@ public class MainWindowForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnCustomerMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerMainActionPerformed
+        CustomerMainForm view = new CustomerMainForm();
+        view.setSize(panelMainView.getSize());
+        panelMainView.removeAll();
+        panelMainView.add(view);
+        panelMainView.revalidate();
+        panelMainView.repaint();
+    }//GEN-LAST:event_btnCustomerMainActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,7 +190,11 @@ public class MainWindowForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCustomerMain;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel panelMain;
+    private javax.swing.JPanel panelMainBtn;
+    private org.jdesktop.swingx.JXImagePanel panelMainView;
     // End of variables declaration//GEN-END:variables
 
     public UserDetailController getUserDetailController() {
