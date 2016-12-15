@@ -25,11 +25,11 @@ public class UserLogin extends javax.swing.JFrame {
      * Creates new form UserLogin
      */
     public UserLogin() {
-        
+
         try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
-            LOGGER.error("UnsupportedLookAndFeelException !",ex);
+            LOGGER.error("UnsupportedLookAndFeelException !", ex);
         }
 
         userDetailController = new UserDetailController();
@@ -161,8 +161,8 @@ public class UserLogin extends javax.swing.JFrame {
         }
         boolean loginSuccess = getUserDetailController().loginUser(userName, passwordStr);
         if (loginSuccess) {
-            MainWindowForm mainWindowForm=new MainWindowForm();
-            mainWindowForm.setSize(1000, 600);
+            MainWindowForm mainWindowForm = new MainWindowForm();
+            mainWindowForm.setSize(1000, 620);
             mainWindowForm.setVisible(loginSuccess);
             this.dispose();
         } else {
@@ -172,7 +172,7 @@ public class UserLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
-     txtPassword.requestFocus();
+        txtPassword.requestFocus();
     }//GEN-LAST:event_txtUserNameActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
