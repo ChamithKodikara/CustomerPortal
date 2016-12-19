@@ -11,7 +11,7 @@ import javax.persistence.NoResultException;
 import java.util.List;
 
 /**
- * Created by Chamith on 11/21/2016.
+ * @author Chamith
  */
 public class MasterServiceDAOImpl implements MasterServiceDAO {
     private final static Logger LOGGER = Logger.getLogger(MasterServiceDAOImpl.class);

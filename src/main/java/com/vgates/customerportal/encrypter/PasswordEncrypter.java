@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by Chamith on 11/30/2016.
+ * @author Chamith
  */
 public class PasswordEncrypter {
 

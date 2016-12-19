@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * Created by Chamith on 10/31/2016.
+ * @author Chamith
  */
 
 

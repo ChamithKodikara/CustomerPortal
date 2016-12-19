@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by Chamith on 12/18/2016.
+ * @author Chamith
  */
 @Entity
 @Table(name = "CUSTOMER_SERVICE_MAPPER")

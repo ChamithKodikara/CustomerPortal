@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 
 /**
- *
  * @author Chamith
  */
 public class MainWindowForm extends javax.swing.JFrame {

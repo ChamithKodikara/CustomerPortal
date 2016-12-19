@@ -13,7 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
  * @author Chamith
  */
 public class CustomerMainForm extends javax.swing.JPanel {

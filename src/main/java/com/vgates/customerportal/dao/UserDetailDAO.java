@@ -3,7 +3,7 @@ package com.vgates.customerportal.dao;
 import com.vgates.customerportal.model.UserDetail;
 
 /**
- * Created by Chamith on 11/21/2016.
+ * @author Chamith Kodikara
  */
 public interface UserDetailDAO {
 

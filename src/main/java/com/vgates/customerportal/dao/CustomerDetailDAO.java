@@ -5,7 +5,7 @@ import com.vgates.customerportal.model.CustomerDetail;
 import java.util.List;
 
 /**
- * Created by Chamith on 11/1/2016.
+ * @author Chamith Kodikara
  */
 public interface CustomerDetailDAO {
 

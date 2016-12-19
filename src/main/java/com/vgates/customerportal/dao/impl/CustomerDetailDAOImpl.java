@@ -11,7 +11,7 @@ import javax.persistence.NoResultException;
 import java.util.List;
 
 /**
- * Created by Chamith on 11/1/2016.
+ * @author Chamith
  */
 public class CustomerDetailDAOImpl implements CustomerDetailDAO {
     private final static Logger LOGGER = Logger.getLogger(CustomerDetailDAOImpl.class);

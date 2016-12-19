@@ -6,7 +6,7 @@ import com.vgates.customerportal.encrypter.PasswordEncrypter;
 import com.vgates.customerportal.model.UserDetail;
 
 /**
- * Created by Chamith on 12/4/2016.
+ * @author Chamith Kodikara
  */
 public class UserDetailController {
 

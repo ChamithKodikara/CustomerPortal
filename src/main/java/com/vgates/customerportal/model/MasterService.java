@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Chamith on 11/15/2016.
+ * @author Chamith
  */
 @Entity
 @Table(name = "MASTER_SERVICE")

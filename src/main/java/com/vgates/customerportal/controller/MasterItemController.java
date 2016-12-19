@@ -7,7 +7,7 @@ import com.vgates.customerportal.model.MasterItem;
 import java.util.List;
 
 /**
- * Created by Chamith on 12/6/2016.
+ * @author Chamith Kodikara
  */
 public class MasterItemController {
     private MasterItemDAO masterItemDAO;

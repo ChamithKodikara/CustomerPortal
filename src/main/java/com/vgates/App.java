@@ -3,10 +3,9 @@ package com.vgates;
 import com.vgates.customerportal.view.user.UserLogin;
 import org.apache.log4j.Logger;
 
-;
 
 /**
- * Hello world!
+ * @author Chamith
  */
 public class App {
     final static Logger LOGGER = Logger.getLogger(App.class);

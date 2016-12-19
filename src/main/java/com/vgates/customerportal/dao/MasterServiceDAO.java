@@ -5,7 +5,7 @@ import com.vgates.customerportal.model.MasterService;
 import java.util.List;
 
 /**
- * Created by Chamith on 11/21/2016.
+ * @author Chamith Kodikara
  */
 public interface MasterServiceDAO {
 

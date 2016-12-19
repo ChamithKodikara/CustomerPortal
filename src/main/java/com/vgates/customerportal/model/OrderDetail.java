@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by Chamith on 11/15/2016.
+ * @author Chamith
  */
 @Entity
 @Table(name = "ORDER_DETAIL")
