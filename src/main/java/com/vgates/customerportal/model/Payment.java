@@ -38,6 +38,14 @@ public class Payment implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date paymentDate;
 
+    @JoinColumn(name = "ORDER_DETAIL")
+    @OneToOne
+    private OrderDetail orderDetail;
+
+    @JoinColumn(name = "CUSTOMER_DETAIL")
+    @ManyToOne
+    private CustomerDetail customerDetail;
+
     public Long getId() {
         return id;
     }
@@ -126,4 +134,19 @@ public class Payment implements Serializable {
         return "com.vgates.customerportal.model.Payment[ id=" + id + " ]";
     }
 
+    public OrderDetail getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(OrderDetail orderDetail) {
+        this.orderDetail = orderDetail;
+    }
+
+    public CustomerDetail getCustomerDetail() {
+        return customerDetail;
+    }
+
+    public void setCustomerDetail(CustomerDetail customerDetail) {
+        this.customerDetail = customerDetail;
+    }
 }

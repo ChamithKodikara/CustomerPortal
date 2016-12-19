@@ -33,6 +33,10 @@ public class OrderDetail implements Serializable {
     @Column(name = "COMMENT")
     private String comment;
 
+    @JoinColumn(name = "CUSTOMER_DETAIL")
+    @ManyToOne
+    private CustomerDetail customerDetail;
+
     public Long getId() {
         return id;
     }
@@ -103,5 +107,13 @@ public class OrderDetail implements Serializable {
     @Override
     public String toString() {
         return "com.vgates.customerportal.model.OrderDetail[ id=" + id + " ]";
+    }
+
+    public CustomerDetail getCustomerDetail() {
+        return customerDetail;
+    }
+
+    public void setCustomerDetail(CustomerDetail customerDetail) {
+        this.customerDetail = customerDetail;
     }
 }
