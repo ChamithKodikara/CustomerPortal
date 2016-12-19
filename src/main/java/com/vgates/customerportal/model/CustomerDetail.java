@@ -3,6 +3,7 @@ package com.vgates.customerportal.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Chamith on 11/1/2016.
@@ -51,6 +52,9 @@ public class CustomerDetail implements Serializable {
 
     @Column(name = "CREATED_BY")
     private String createdBy;
+
+    @OneToMany(mappedBy = "customerDetail")
+    private List<CustomerServiceMapper> customerServiceMapperList;
 
 
     public Long getId() {
@@ -171,5 +175,13 @@ public class CustomerDetail implements Serializable {
 
     public void setCustomerNo(String customerNo) {
         this.customerNo = customerNo;
+    }
+
+    public List<CustomerServiceMapper> getCustomerServiceMapperList() {
+        return customerServiceMapperList;
+    }
+
+    public void setCustomerServiceMapperList(List<CustomerServiceMapper> customerServiceMapperList) {
+        this.customerServiceMapperList = customerServiceMapperList;
     }
 }
