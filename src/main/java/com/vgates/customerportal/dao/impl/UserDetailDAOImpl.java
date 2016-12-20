@@ -3,6 +3,7 @@ package com.vgates.customerportal.dao.impl;
 import com.vgates.customerportal.dao.UserDetailDAO;
 import com.vgates.customerportal.model.UserDetail;
 import com.vgates.customerportal.session.HibernateSessionManager;
+import com.vgates.customerportal.util.MethodResult;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,30 +23,45 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         session = HibernateSessionManager.getSessionFactory().openSession();
     }
 
-    public void addNewUserDetail(UserDetail userDetail) {
+    public MethodResult addNewUserDetail(UserDetail userDetail) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             session.save(userDetail);
             session.getTransaction().commit();
             session.close();
+            result.setOk(true);
+            result.setMessage("User Details Successfully Added !");
         } catch (Exception ex) {
             LOGGER.error("Sorry User Detail Add Error !", ex);
+            result.setMessage("Sorry User Detail Add Error !");
+            result.setStackMessage(ex.getMessage());
         }
-
+        return result;
     }
 
-    public void updateUserDetail(UserDetail userDetail) {
+    public MethodResult updateUserDetail(UserDetail userDetail) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             session.update(userDetail);
             session.flush();
             session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("User Details Successfully updated !");
         } catch (Exception ex) {
             LOGGER.error("Sorry User Detail Update Error !", ex);
+            result.setMessage("Sorry User Detail Update Error !");
+            result.setStackMessage(ex.getMessage());
         }
+        return result;
     }
 
-    public void changeUserStatus(boolean status, long userID) {
+    public MethodResult changeUserStatus(boolean status, long userID) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             Query query = session.createQuery("UPDATE UserDetail user SET user.active = :status WHERE user.id= :id");
@@ -54,9 +70,14 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             query.executeUpdate();
             session.flush();
             session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("User status Successfully updated !");
         } catch (Exception ex) {
             LOGGER.error("Sorry User Status Change Error !", ex);
+            result.setMessage("Sorry User Status Change Error !!");
+            result.setStackMessage(ex.getMessage());
         }
+        return result;
     }
 
     public UserDetail findUserDetailByID(long id) {

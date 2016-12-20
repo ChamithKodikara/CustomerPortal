@@ -3,6 +3,7 @@ package com.vgates.customerportal.dao.impl;
 import com.vgates.customerportal.dao.MasterServiceDAO;
 import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.session.HibernateSessionManager;
+import com.vgates.customerportal.util.MethodResult;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,30 +23,46 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
         session = HibernateSessionManager.getSessionFactory().openSession();
     }
 
-    public void addNewMasterService(MasterService service) {
+    public MethodResult addNewMasterService(MasterService service) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             session.save(service);
             session.getTransaction().commit();
             session.close();
+            result.setOk(true);
+            result.setMessage("Service Details Successfully Added !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Service Detail Add Error !", ex);
-        }
+            result.setMessage("Sorry Service Detail Add Error !");
+            result.setStackMessage(ex.getMessage());
 
+        }
+        return result;
     }
 
-    public void updateMasterService(MasterService service) {
+    public MethodResult updateMasterService(MasterService service) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             session.update(service);
             session.flush();
             session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("Service Details Successfully updated !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Service Detail Update Error !", ex);
+            result.setMessage("Sorry Service Detail Update Error !");
+            result.setStackMessage(ex.getMessage());
         }
+        return result;
     }
 
-    public void changeServiceStatus(boolean status, long serviceID) {
+    public MethodResult changeServiceStatus(boolean status, long serviceID) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             Query query = session.createQuery("UPDATE MasterService service SET service.active = :status WHERE service.id= :id");
@@ -54,9 +71,14 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
             query.executeUpdate();
             session.flush();
             session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("Service Status Successfully updated !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Service Status Change Error !", ex);
+            result.setMessage("Sorry Service Status Change Error !");
+            result.setStackMessage(ex.getMessage());
         }
+        return result;
     }
 
     public MasterService findMasterServiceByID(long id) {

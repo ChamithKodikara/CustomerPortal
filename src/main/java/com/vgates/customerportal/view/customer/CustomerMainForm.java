@@ -7,6 +7,7 @@ package com.vgates.customerportal.view.customer;
 
 import com.vgates.customerportal.controller.CustomerDetailController;
 import com.vgates.customerportal.model.CustomerDetail;
+import com.vgates.customerportal.util.MethodResult;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
@@ -518,7 +519,20 @@ public class CustomerMainForm extends javax.swing.JPanel {
             customerDetail.setCreatedDate(new Date());
             customerDetail.setActive(Boolean.TRUE);
 
-            customerDetailController.addNewCustomerDetail(customerDetail);
+            MethodResult result = customerDetailController.addNewCustomerDetail(customerDetail);
+            if (result.isOk()) {
+                JOptionPane.showMessageDialog(this, result.getMessage(), "New Customer", JOptionPane.INFORMATION_MESSAGE);
+                txtNewCustRef.setText("");
+                txtNewCustName.setText("");
+                txtNewNicNo.setText("");
+                txtNewDob.setDate(null);
+                txtNewEmail.setText("");
+                txtNewContactNo.setText("");
+                txtNewAddress.setText("");
+                radioBtnMale.setSelected(true);
+            } else {
+                JOptionPane.showMessageDialog(this, result.getMessage(), "New Customer", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
 
     }//GEN-LAST:event_btnAddCustomerActionPerformed

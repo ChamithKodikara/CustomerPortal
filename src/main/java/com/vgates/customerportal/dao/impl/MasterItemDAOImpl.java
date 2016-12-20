@@ -3,6 +3,7 @@ package com.vgates.customerportal.dao.impl;
 import com.vgates.customerportal.dao.MasterItemDAO;
 import com.vgates.customerportal.model.MasterItem;
 import com.vgates.customerportal.session.HibernateSessionManager;
+import com.vgates.customerportal.util.MethodResult;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,30 +23,45 @@ public class MasterItemDAOImpl implements MasterItemDAO {
         session = HibernateSessionManager.getSessionFactory().openSession();
     }
 
-    public void addNewMasterItem(MasterItem item) {
+    public MethodResult addNewMasterItem(MasterItem item) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             session.save(item);
             session.getTransaction().commit();
             session.close();
+            result.setOk(true);
+            result.setMessage("Item Details Successfully Added !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Item Detail Add Error !", ex);
+            result.setMessage("Sorry Item Detail Add Error !");
+            result.setStackMessage(ex.getMessage());
         }
-
+        return result;
     }
 
-    public void updateMasterItem(MasterItem item) {
+    public MethodResult updateMasterItem(MasterItem item) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             session.update(item);
             session.flush();
             session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("Item Details Successfully Updated !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Item Detail Update Error !", ex);
+            result.setMessage("Sorry Item Detail Update Error !");
+            result.setStackMessage(ex.getMessage());
         }
+        return result;
     }
 
-    public void changeItemStatus(boolean status, long itemID) {
+    public MethodResult changeItemStatus(boolean status, long itemID) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             Query query = session.createQuery("UPDATE MasterItem item SET item.active = :status WHERE item.id= :id");
@@ -54,9 +70,14 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             query.executeUpdate();
             session.flush();
             session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("Item Status Successfully Updated !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Item Status Change Error !", ex);
+            result.setMessage("Sorry Item Status Change Error !");
+            result.setStackMessage(ex.getMessage());
         }
+        return result;
     }
 
     public MasterItem findMasterItemByID(long id) {

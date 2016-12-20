@@ -1,17 +1,18 @@
 package com.vgates.customerportal.dao;
 
 import com.vgates.customerportal.model.UserDetail;
+import com.vgates.customerportal.util.MethodResult;
 
 /**
  * @author Chamith Kodikara
  */
 public interface UserDetailDAO {
 
-    void addNewUserDetail(UserDetail userDetail);
+    MethodResult addNewUserDetail(UserDetail userDetail);
 
-    void updateUserDetail(UserDetail userDetail);
+    MethodResult updateUserDetail(UserDetail userDetail);
 
-    void changeUserStatus(boolean status, long userID);
+    MethodResult changeUserStatus(boolean status, long userID);
 
     UserDetail findUserDetailByID(long id);
 

@@ -3,6 +3,7 @@ package com.vgates.customerportal.controller;
 import com.vgates.customerportal.dao.MasterServiceDAO;
 import com.vgates.customerportal.dao.impl.MasterServiceDAOImpl;
 import com.vgates.customerportal.model.MasterService;
+import com.vgates.customerportal.util.MethodResult;
 
 import java.util.List;
 
@@ -16,16 +17,16 @@ public class MasterServiceController {
         serviceDAO = new MasterServiceDAOImpl();
     }
 
-    public void addNewServiceDetail(MasterService masterService) {
-        serviceDAO.addNewMasterService(masterService);
+    public MethodResult addNewServiceDetail(MasterService masterService) {
+        return serviceDAO.addNewMasterService(masterService);
     }
 
-    public void updateServiceDetails(MasterService masterService) {
-        serviceDAO.updateMasterService(masterService);
+    public MethodResult updateServiceDetails(MasterService masterService) {
+        return serviceDAO.updateMasterService(masterService);
     }
 
-    public void changeServiceStatus(boolean status, long serviceID) {
-        serviceDAO.changeServiceStatus(status, serviceID);
+    public MethodResult changeServiceStatus(boolean status, long serviceID) {
+        return serviceDAO.changeServiceStatus(status, serviceID);
     }
 
     private MasterService searchServiceByID(long id) {

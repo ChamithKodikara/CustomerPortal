@@ -3,6 +3,7 @@ package com.vgates.customerportal.controller;
 import com.vgates.customerportal.dao.MasterItemDAO;
 import com.vgates.customerportal.dao.impl.MasterItemDAOImpl;
 import com.vgates.customerportal.model.MasterItem;
+import com.vgates.customerportal.util.MethodResult;
 
 import java.util.List;
 
@@ -16,16 +17,16 @@ public class MasterItemController {
         masterItemDAO = new MasterItemDAOImpl();
     }
 
-    public void addNewItemDetail(MasterItem item) {
-        masterItemDAO.addNewMasterItem(item);
+    public MethodResult addNewItemDetail(MasterItem item) {
+        return masterItemDAO.addNewMasterItem(item);
     }
 
-    public void updateItemDetail(MasterItem item) {
-        masterItemDAO.updateMasterItem(item);
+    public MethodResult updateItemDetail(MasterItem item) {
+        return masterItemDAO.updateMasterItem(item);
     }
 
-    public void changeItemStatus(boolean status, long id) {
-        masterItemDAO.changeItemStatus(status, id);
+    public MethodResult changeItemStatus(boolean status, long id) {
+        return masterItemDAO.changeItemStatus(status, id);
     }
 
     public MasterItem searchItemByID(long id) {

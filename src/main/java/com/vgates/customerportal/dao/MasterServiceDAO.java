@@ -1,6 +1,7 @@
 package com.vgates.customerportal.dao;
 
 import com.vgates.customerportal.model.MasterService;
+import com.vgates.customerportal.util.MethodResult;
 
 import java.util.List;
 
@@ -9,11 +10,11 @@ import java.util.List;
  */
 public interface MasterServiceDAO {
 
-    void addNewMasterService(MasterService service);
+    MethodResult addNewMasterService(MasterService service);
 
-    void updateMasterService(MasterService service);
+    MethodResult updateMasterService(MasterService service);
 
-    void changeServiceStatus(boolean status, long paymentID);
+    MethodResult changeServiceStatus(boolean status, long paymentID);
 
     MasterService findMasterServiceByID(long id);
 

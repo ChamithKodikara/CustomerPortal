@@ -4,6 +4,7 @@ import com.vgates.customerportal.dao.UserDetailDAO;
 import com.vgates.customerportal.dao.impl.UserDetailDAOImpl;
 import com.vgates.customerportal.encrypter.PasswordEncrypter;
 import com.vgates.customerportal.model.UserDetail;
+import com.vgates.customerportal.util.MethodResult;
 
 /**
  * @author Chamith Kodikara
@@ -18,18 +19,18 @@ public class UserDetailController {
         encrypter = new PasswordEncrypter();
     }
 
-    public void addNewUserDetail(UserDetail userDetail) {
+    public MethodResult addNewUserDetail(UserDetail userDetail) {
         userDetail.setPassword(encrypter.getEncryptedPassword(userDetail.getPassword()));
-        userDetailDAO.addNewUserDetail(userDetail);
+        return userDetailDAO.addNewUserDetail(userDetail);
     }
 
-    public void updateNewUserDetail(UserDetail userDetail) {
+    public MethodResult updateNewUserDetail(UserDetail userDetail) {
         userDetail.setPassword(encrypter.getEncryptedPassword(userDetail.getPassword()));
-        userDetailDAO.updateUserDetail(userDetail);
+        return userDetailDAO.updateUserDetail(userDetail);
     }
 
-    public void updateUserStatus(boolean status, long userID) {
-        userDetailDAO.changeUserStatus(status, userID);
+    public MethodResult updateUserStatus(boolean status, long userID) {
+        return userDetailDAO.changeUserStatus(status, userID);
     }
 
     public UserDetail searchUserByID(long userID) {

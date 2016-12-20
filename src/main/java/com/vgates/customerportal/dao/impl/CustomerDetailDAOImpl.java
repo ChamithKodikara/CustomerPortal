@@ -3,6 +3,7 @@ package com.vgates.customerportal.dao.impl;
 import com.vgates.customerportal.dao.CustomerDetailDAO;
 import com.vgates.customerportal.model.CustomerDetail;
 import com.vgates.customerportal.session.HibernateSessionManager;
+import com.vgates.customerportal.util.MethodResult;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,30 +23,45 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         session = HibernateSessionManager.getSessionFactory().openSession();
     }
 
-    public void addNewCustomerDetail(CustomerDetail customerDetail) {
+    public MethodResult addNewCustomerDetail(CustomerDetail customerDetail) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             session.save(customerDetail);
             session.getTransaction().commit();
             session.close();
+            result.setOk(true);
+            result.setMessage("Customer Detail Successfully Added !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Customer Detail Add Error !", ex);
+            result.setStackMessage(ex.getMessage());
+            result.setMessage("Sorry Customer Detail Add Error !");
         }
-
+        return result;
     }
 
-    public void updateCustomerDetail(CustomerDetail customerDetail) {
+    public MethodResult updateCustomerDetail(CustomerDetail customerDetail) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             session.update(customerDetail);
             session.flush();
             session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("Customer Detail Successfully Updated !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Customer Detail Update Error !", ex);
+            result.setStackMessage(ex.getMessage());
+            result.setMessage("Sorry Customer Detail Update Error !");
         }
+        return result;
     }
 
-    public void changeCustomerStatus(boolean status, long customerID) {
+    public MethodResult changeCustomerStatus(boolean status, long customerID) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             Query query = session.createQuery("UPDATE CustomerDetail customer SET customer.active = :status WHERE customer.id= :id");
@@ -54,9 +70,14 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             query.executeUpdate();
             session.flush();
             session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("Customer Status Successfully Updated !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Customer Status Change Error !", ex);
+            result.setStackMessage(ex.getMessage());
+            result.setMessage("Sorry Customer Status Change Error !");
         }
+        return result;
     }
 
     public CustomerDetail findCustomerDetailByID(long id) {

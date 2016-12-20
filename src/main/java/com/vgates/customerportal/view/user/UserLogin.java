@@ -155,11 +155,7 @@ public class UserLogin extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String userName = txtUserName.getText();
         char[] password = txtPassword.getPassword();
-        String passwordStr = "";
-        for (char c : password) {
-            passwordStr += c;
-        }
-        boolean loginSuccess = getUserDetailController().loginUser(userName, passwordStr);
+        boolean loginSuccess = getUserDetailController().loginUser(userName, new String(password));
         if (loginSuccess) {
             MainWindowForm mainWindowForm = new MainWindowForm();
             mainWindowForm.setSize(1000, 620);

@@ -1,6 +1,7 @@
 package com.vgates.customerportal.dao;
 
 import com.vgates.customerportal.model.MasterItem;
+import com.vgates.customerportal.util.MethodResult;
 
 import java.util.List;
 
@@ -9,11 +10,11 @@ import java.util.List;
  */
 public interface MasterItemDAO {
 
-    void addNewMasterItem(MasterItem item);
+    MethodResult addNewMasterItem(MasterItem item);
 
-    void updateMasterItem(MasterItem item);
+    MethodResult updateMasterItem(MasterItem item);
 
-    void changeItemStatus(boolean status, long itemID);
+    MethodResult changeItemStatus(boolean status, long itemID);
 
     MasterItem findMasterItemByID(long id);
 

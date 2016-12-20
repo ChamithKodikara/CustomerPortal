@@ -3,6 +3,7 @@ package com.vgates.customerportal.dao.impl;
 import com.vgates.customerportal.dao.PaymentDAO;
 import com.vgates.customerportal.model.Payment;
 import com.vgates.customerportal.session.HibernateSessionManager;
+import com.vgates.customerportal.util.MethodResult;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,30 +23,45 @@ public class PaymentDAOImpl implements PaymentDAO {
         session = HibernateSessionManager.getSessionFactory().openSession();
     }
 
-    public void addNewPayment(Payment payment) {
+    public MethodResult addNewPayment(Payment payment) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             session.save(payment);
             session.getTransaction().commit();
             session.close();
+            result.setOk(true);
+            result.setMessage("Payment Details Successfully Added !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Payment Detail Add Error !", ex);
+            result.setMessage("Sorry Payment Detail Add Error ");
+            result.setStackMessage(ex.getMessage());
         }
-
+        return result;
     }
 
-    public void updatePayment(Payment payment) {
+    public MethodResult updatePayment(Payment payment) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             session.update(payment);
             session.flush();
             session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("Payment Details Successfully updated !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Payment Detail Update Error !", ex);
+            result.setMessage("Sorry Payment Detail Update Error !");
+            result.setStackMessage(ex.getMessage());
         }
+        return result;
     }
 
-    public void changePaymentStatus(boolean status, long paymentID) {
+    public MethodResult changePaymentStatus(boolean status, long paymentID) {
+        MethodResult result = new MethodResult();
+        result.setOk(false);
         try {
             session.beginTransaction();
             Query query = session.createQuery("UPDATE Payment payment SET payment.active = :status WHERE payment.id= :id");
@@ -54,9 +70,14 @@ public class PaymentDAOImpl implements PaymentDAO {
             query.executeUpdate();
             session.flush();
             session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("Payment status Successfully updated !");
         } catch (Exception ex) {
             LOGGER.error("Sorry Payment Status Change Error !", ex);
+            result.setMessage("Sorry Payment Status Change Error !");
+            result.setStackMessage(ex.getMessage());
         }
+        return result;
     }
 
     public Payment findPaymentByID(long id) {

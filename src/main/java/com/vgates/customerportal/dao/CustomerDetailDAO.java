@@ -1,6 +1,7 @@
 package com.vgates.customerportal.dao;
 
 import com.vgates.customerportal.model.CustomerDetail;
+import com.vgates.customerportal.util.MethodResult;
 
 import java.util.List;
 
@@ -9,11 +10,11 @@ import java.util.List;
  */
 public interface CustomerDetailDAO {
 
-    void addNewCustomerDetail(CustomerDetail customerDetail);
+    MethodResult addNewCustomerDetail(CustomerDetail customerDetail);
 
-    void updateCustomerDetail(CustomerDetail customerDetail);
+    MethodResult updateCustomerDetail(CustomerDetail customerDetail);
 
-    void changeCustomerStatus(boolean status, long customerID);
+    MethodResult changeCustomerStatus(boolean status, long customerID);
 
     CustomerDetail findCustomerDetailByID(long id);
 

@@ -3,6 +3,7 @@ package com.vgates.customerportal.controller;
 import com.vgates.customerportal.dao.CustomerDetailDAO;
 import com.vgates.customerportal.dao.impl.CustomerDetailDAOImpl;
 import com.vgates.customerportal.model.CustomerDetail;
+import com.vgates.customerportal.util.MethodResult;
 
 import java.util.List;
 
@@ -16,16 +17,16 @@ public class CustomerDetailController {
         customerDetailDAO = new CustomerDetailDAOImpl();
     }
 
-    public void addNewCustomerDetail(CustomerDetail customerDetail) {
-        customerDetailDAO.addNewCustomerDetail(customerDetail);
+    public MethodResult addNewCustomerDetail(CustomerDetail customerDetail) {
+        return customerDetailDAO.addNewCustomerDetail(customerDetail);
     }
 
-    public void updateCustomerDetail(CustomerDetail customerDetail) {
-        customerDetailDAO.updateCustomerDetail(customerDetail);
+    public MethodResult updateCustomerDetail(CustomerDetail customerDetail) {
+        return customerDetailDAO.updateCustomerDetail(customerDetail);
     }
 
-    public void changeCustomerStatus(boolean status, long customerID) {
-        customerDetailDAO.changeCustomerStatus(status, customerID);
+    public MethodResult changeCustomerStatus(boolean status, long customerID) {
+        return customerDetailDAO.changeCustomerStatus(status, customerID);
     }
 
     public CustomerDetail searchCustomerByID(long customerID) {

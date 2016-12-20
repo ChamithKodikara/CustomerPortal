@@ -1,17 +1,18 @@
 package com.vgates.customerportal.dao;
 
 import com.vgates.customerportal.model.Payment;
+import com.vgates.customerportal.util.MethodResult;
 
 /**
  * @author Chamith Kodikara
  */
 public interface PaymentDAO {
 
-    void addNewPayment(Payment payment);
+    MethodResult addNewPayment(Payment payment);
 
-    void updatePayment(Payment payment);
+    MethodResult updatePayment(Payment payment);
 
-    void changePaymentStatus(boolean status, long paymentID);
+    MethodResult changePaymentStatus(boolean status, long paymentID);
 
     Payment findPaymentByID(long id);
 }
