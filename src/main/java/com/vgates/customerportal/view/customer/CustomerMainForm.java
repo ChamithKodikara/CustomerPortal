@@ -10,8 +10,10 @@ import com.vgates.customerportal.model.CustomerDetail;
 import com.vgates.customerportal.util.MethodResult;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Chamith
@@ -20,6 +22,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private CustomerDetailController customerDetailController;
+    private DefaultTableModel defaultCustTableModel;
 
     /**
      * Creates new form CustomerMainForm
@@ -30,6 +33,8 @@ public class CustomerMainForm extends javax.swing.JPanel {
         txtNewDob.setFormats(simpleDateFormat);
         radioBtnMale.setSelected(true);
         customerDetailController = new CustomerDetailController();
+        defaultCustTableModel = (DefaultTableModel) tblCustomerDetail.getModel();
+        defaultCustTableModel.setRowCount(0);
     }
 
     /**
@@ -343,20 +348,20 @@ public class CustomerMainForm extends javax.swing.JPanel {
 
         tblCustomerDetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Ref", "Name", "NIC", "DOB", "Gender", "Email", "Contact No", "Address"
+                "Ref", "Name", "DOB", "Email", "Contact No", "Address"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -369,13 +374,12 @@ public class CustomerMainForm extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblCustomerDetail);
         if (tblCustomerDetail.getColumnModel().getColumnCount() > 0) {
+            tblCustomerDetail.getColumnModel().getColumn(0).setResizable(false);
             tblCustomerDetail.getColumnModel().getColumn(1).setResizable(false);
             tblCustomerDetail.getColumnModel().getColumn(2).setResizable(false);
             tblCustomerDetail.getColumnModel().getColumn(3).setResizable(false);
             tblCustomerDetail.getColumnModel().getColumn(4).setResizable(false);
             tblCustomerDetail.getColumnModel().getColumn(5).setResizable(false);
-            tblCustomerDetail.getColumnModel().getColumn(6).setResizable(false);
-            tblCustomerDetail.getColumnModel().getColumn(7).setResizable(false);
         }
 
         javax.swing.GroupLayout panelSearchCustomerLayout = new javax.swing.GroupLayout(panelSearchCustomer);
@@ -550,11 +554,21 @@ public class CustomerMainForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtFindNicNoActionPerformed
 
     private void btnCancelFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelFindActionPerformed
-        // TODO add your handling code here:
+        defaultCustTableModel.setRowCount(0);
+        txtFindCustName.setText("");
+        txtFindCustRef.setText("");
+        txtFindNicNo.setText("");
     }//GEN-LAST:event_btnCancelFindActionPerformed
 
     private void btnFindCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindCustomerActionPerformed
-        // TODO add your handling code here:
+        defaultCustTableModel.setRowCount(0);
+        List<CustomerDetail> customerList = customerDetailController.getActiveCustomerList(txtFindCustName.getText(), txtFindCustRef.getText(), txtFindNicNo.getText());
+        if (customerList != null) {
+            customerList.stream().forEach(e -> {
+                Object rows[] = {e.getCustomerNo(), e.getCustomerName(), e.getDob(), e.getEmail(), e.getContactNo(), e.getAddress()};
+                defaultCustTableModel.addRow(rows);
+            });
+        }
     }//GEN-LAST:event_btnFindCustomerActionPerformed
 
 

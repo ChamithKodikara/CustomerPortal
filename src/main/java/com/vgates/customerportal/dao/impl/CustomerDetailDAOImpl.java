@@ -122,7 +122,40 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
     public List<CustomerDetail> findAllActiveCustomerDetails() {
         List<CustomerDetail> customerDetailList = null;
         try {
-            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.active = true");
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.active = true ORDER BY customer.customerName ASC ");
+            customerDetailList = (List<CustomerDetail>) query.list();
+
+        } catch (Exception ex) {
+            LOGGER.error("Sorry Cannot Find All Active Customer Details !", ex);
+        }
+        return customerDetailList;
+    }
+
+    public List<CustomerDetail> findActiveCustomerDetails(String customerName, String refNo, String nic) {
+        StringBuilder sbName = new StringBuilder();
+        StringBuilder sbRef = new StringBuilder();
+        StringBuilder sbNIC = new StringBuilder();
+        if (customerName == null || customerName.isEmpty()) {
+            sbName.append("%%");
+        } else {
+            sbName.append("%").append(customerName).append("%");
+        }
+        if (refNo == null || refNo.isEmpty()) {
+            sbRef.append("%%");
+        } else {
+            sbRef.append("%").append(refNo).append("%");
+        }
+        if (nic == null || nic.isEmpty()) {
+            sbNIC.append("%%");
+        } else {
+            sbNIC.append("%").append(nic).append("%");
+        }
+        List<CustomerDetail> customerDetailList = null;
+        try {
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.active = true AND customer.customerName LIKE :name AND customer.customerNo LIKE :ref AND customer.nic LIKE :nic ORDER BY customer.customerName ASC ");
+            query.setParameter("name", sbName.toString());
+            query.setParameter("ref", sbRef.toString());
+            query.setParameter("nic", sbNIC.toString());
             customerDetailList = (List<CustomerDetail>) query.list();
 
         } catch (Exception ex) {
@@ -134,7 +167,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
     public List<CustomerDetail> findAllCustomerDetails() {
         List<CustomerDetail> customerDetailList = null;
         try {
-            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer");
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer ORDER BY customer.customerName ASC ");
             customerDetailList = (List<CustomerDetail>) query.list();
 
         } catch (Exception ex) {
