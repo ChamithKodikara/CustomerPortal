@@ -124,7 +124,7 @@ public class MasterService implements Serializable{
 
     @Override
     public String toString() {
-        return "com.vgates.customerportal.model.MasterService[ id=" + id + " ]";
+        return serviceName;
     }
 
     public Date getCreatedDate() {

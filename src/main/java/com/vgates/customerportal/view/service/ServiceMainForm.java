@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
  * @author Chamith
  */
 public class ServiceMainForm extends javax.swing.JPanel {
@@ -31,6 +30,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
     private final DefaultTableModel defaultServiceTableModel;
 
     private UserDetail userDetail;
+    private MasterService searchedService;
 
     /**
      * Creates new form ServiceMainForm
@@ -49,6 +49,20 @@ public class ServiceMainForm extends javax.swing.JPanel {
 
         txtNewCost.setText("00.00");
         txtNewDiscount.setText("00.00");
+
+        txtUpdateCost.setText("00.00");
+        txtUpdateDiscount.setText("00.00");
+
+        loadServiceList();
+    }
+
+    private void loadServiceList() {
+        comboServiceName.removeAllItems();
+        comboServiceName.addItem("[SELECT]");
+        List<MasterService> serviceList = serviceController.searchAllActiveService();
+        serviceList.forEach(e -> {
+            comboServiceName.addItem(e);
+        });
     }
 
     /**
@@ -88,6 +102,22 @@ public class ServiceMainForm extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblServiceDetail = new javax.swing.JTable();
         panelUpdateService = new javax.swing.JPanel();
+        lblUpdateServiceMain = new javax.swing.JLabel();
+        lblUpdateServiceNameList = new javax.swing.JLabel();
+        lblUpdateServiceCategory = new javax.swing.JLabel();
+        txtUpdateServiceCategory = new javax.swing.JTextField();
+        lblUpdateDesc = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtUpdateDesc = new javax.swing.JTextArea();
+        lblUpdateCost = new javax.swing.JLabel();
+        txtUpdateCost = new javax.swing.JFormattedTextField();
+        lblUpdateDiscount = new javax.swing.JLabel();
+        txtUpdateDiscount = new javax.swing.JFormattedTextField();
+        comboServiceName = new javax.swing.JComboBox();
+        lblUpdateServiceName = new javax.swing.JLabel();
+        txtUpdateServiceName = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         lblServiceMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblServiceMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -348,15 +378,150 @@ public class ServiceMainForm extends javax.swing.JPanel {
 
         tabServiceMain.addTab("Search Service Details", panelFindService);
 
+        lblUpdateServiceMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblUpdateServiceMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUpdateServiceMain.setText("Update Service Details");
+
+        lblUpdateServiceNameList.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblUpdateServiceNameList.setText("Service List");
+
+        lblUpdateServiceCategory.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblUpdateServiceCategory.setText("Category");
+
+        txtUpdateServiceCategory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtUpdateServiceCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUpdateServiceCategoryActionPerformed(evt);
+            }
+        });
+
+        lblUpdateDesc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblUpdateDesc.setText("Description");
+
+        txtUpdateDesc.setColumns(20);
+        txtUpdateDesc.setRows(5);
+        jScrollPane3.setViewportView(txtUpdateDesc);
+
+        lblUpdateCost.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblUpdateCost.setText("Cost");
+
+        txtUpdateCost.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtUpdateCost.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        lblUpdateDiscount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblUpdateDiscount.setText("Discount");
+
+        txtUpdateDiscount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtUpdateDiscount.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        comboServiceName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        comboServiceName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "[SELECT]" }));
+        comboServiceName.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboServiceNameItemStateChanged(evt);
+            }
+        });
+
+        lblUpdateServiceName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblUpdateServiceName.setText("Category");
+
+        txtUpdateServiceName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtUpdateServiceName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUpdateServiceNameActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDelete.setText("Delete Service Detail");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnUpdate.setText("Update Service Detail");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelUpdateServiceLayout = new javax.swing.GroupLayout(panelUpdateService);
         panelUpdateService.setLayout(panelUpdateServiceLayout);
         panelUpdateServiceLayout.setHorizontalGroup(
             panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(panelUpdateServiceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUpdateServiceMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                    .addGroup(panelUpdateServiceLayout.createSequentialGroup()
+                        .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelUpdateServiceLayout.createSequentialGroup()
+                                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblUpdateDiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblUpdateDesc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblUpdateCost, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtUpdateCost, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUpdateDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))
+                            .addGroup(panelUpdateServiceLayout.createSequentialGroup()
+                                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblUpdateServiceCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblUpdateServiceNameList, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtUpdateServiceCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                    .addComponent(comboServiceName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(panelUpdateServiceLayout.createSequentialGroup()
+                                .addComponent(lblUpdateServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtUpdateServiceName)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUpdateServiceLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnUpdate)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete)))
+                .addContainerGap())
         );
         panelUpdateServiceLayout.setVerticalGroup(
             panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGroup(panelUpdateServiceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblUpdateServiceMain, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUpdateServiceNameList)
+                    .addComponent(comboServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUpdateServiceName)
+                    .addComponent(txtUpdateServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUpdateServiceCategory)
+                    .addComponent(txtUpdateServiceCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUpdateDesc))
+                .addGap(18, 18, 18)
+                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUpdateCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUpdateCost))
+                .addGap(18, 18, 18)
+                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUpdateDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUpdateDiscount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnUpdate))
+                .addContainerGap())
         );
 
         tabServiceMain.addTab("Update Service Details", panelUpdateService);
@@ -376,7 +541,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblServiceMain, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabServiceMain, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE))
+                .addComponent(tabServiceMain))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -417,6 +582,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 txtNewServiceCategory.setText("");
                 txtNewServiceName.setText("");
                 txtNewDesc.setText("");
+                loadServiceList();
             } else {
                 JOptionPane.showMessageDialog(this, result.getMessage(), "New Service", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -440,20 +606,97 @@ public class ServiceMainForm extends javax.swing.JPanel {
         List<MasterService> serviceList = serviceController.searchService(txtFindServiceName.getText(), txtFindCategory.getText());
         if (serviceList != null) {
             serviceList.forEach(e -> {
-                Object rowData[] = {e.getServiceName(), e.getCategory(),  e.getCost(), e.getDiscount(), e.getDescription()};
+                Object rowData[] = {e.getServiceName(), e.getCategory(), e.getCost(), e.getDiscount(), e.getDescription()};
                 defaultServiceTableModel.addRow(rowData);
             });
         }
     }//GEN-LAST:event_btnSearchServiceActionPerformed
 
+    private void txtUpdateServiceCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateServiceCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUpdateServiceCategoryActionPerformed
+
+    private void comboServiceNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboServiceNameItemStateChanged
+        if (comboServiceName.getSelectedIndex() != 0) {
+            searchedService = (MasterService) comboServiceName.getSelectedItem();
+            if (searchedService != null) {
+                txtUpdateCost.setText(String.valueOf(searchedService.getCost()));
+                txtUpdateDiscount.setText(String.valueOf(searchedService.getDiscount()));
+                txtUpdateDesc.setText(searchedService.getDescription());
+                txtUpdateServiceCategory.setText(searchedService.getCategory());
+                txtUpdateServiceName.setText(searchedService.getServiceName());
+            }
+        }
+    }//GEN-LAST:event_comboServiceNameItemStateChanged
+
+    private void txtUpdateServiceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateServiceNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUpdateServiceNameActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if (searchedService != null) {
+            int res = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this record...?", "Delete Service", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (res == JOptionPane.YES_OPTION) {
+                MethodResult result = serviceController.changeServiceStatus(Boolean.FALSE, searchedService.getId());
+                if (result.isOk()) {
+                    JOptionPane.showMessageDialog(this, "Service Detail Successfully deleted...!", "Delete Service", JOptionPane.INFORMATION_MESSAGE);
+
+                    txtUpdateCost.setText("00.00");
+                    txtUpdateDiscount.setText("00.00");
+                    txtUpdateDesc.setText("");
+                    txtUpdateServiceCategory.setText("");
+                    txtUpdateServiceName.setText("");
+                    loadServiceList();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Service Detail delete failed...!", "Delete Service", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+
+        if (searchedService != null) {
+            int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to update this Service...?", "Update Service", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if (response == JOptionPane.YES_OPTION) {
+                searchedService.setActive(Boolean.TRUE);
+                searchedService.setCategory(txtNewServiceCategory.getText());
+                searchedService.setCost(Double.parseDouble(txtNewCost.getText()));
+                searchedService.setDescription(txtNewDesc.getText());
+                searchedService.setDiscount(Double.parseDouble(txtNewDiscount.getText()));
+                searchedService.setServiceName(txtNewServiceName.getText());
+
+                MethodResult result = serviceController.updateServiceDetails(searchedService);
+                if (result.isOk()) {
+                    JOptionPane.showMessageDialog(this, result.getMessage(), "Update Service", JOptionPane.INFORMATION_MESSAGE);
+
+                    txtUpdateCost.setText("00.00");
+                    txtUpdateDiscount.setText("00.00");
+                    txtUpdateDesc.setText("");
+                    txtUpdateServiceCategory.setText("");
+                    txtUpdateServiceName.setText("");
+
+                    loadServiceList();
+                } else {
+                    JOptionPane.showMessageDialog(this, result.getMessage(), "Update Service", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelAdd;
     private javax.swing.JButton btnCancelSearch;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearchService;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox comboServiceName;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblFindCategory;
     private javax.swing.JLabel lblFindServiceName;
     private javax.swing.JLabel lblNewCost;
@@ -464,6 +707,13 @@ public class ServiceMainForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblNewdesc;
     private javax.swing.JLabel lblSearchServiceMain;
     private javax.swing.JLabel lblServiceMain;
+    private javax.swing.JLabel lblUpdateCost;
+    private javax.swing.JLabel lblUpdateDesc;
+    private javax.swing.JLabel lblUpdateDiscount;
+    private javax.swing.JLabel lblUpdateServiceCategory;
+    private javax.swing.JLabel lblUpdateServiceMain;
+    private javax.swing.JLabel lblUpdateServiceName;
+    private javax.swing.JLabel lblUpdateServiceNameList;
     private javax.swing.JPanel panelFindService;
     private javax.swing.JPanel panelNewService;
     private javax.swing.JPanel panelUpdateService;
@@ -476,6 +726,11 @@ public class ServiceMainForm extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txtNewDiscount;
     private javax.swing.JTextField txtNewServiceCategory;
     private javax.swing.JTextField txtNewServiceName;
+    private javax.swing.JFormattedTextField txtUpdateCost;
+    private javax.swing.JTextArea txtUpdateDesc;
+    private javax.swing.JFormattedTextField txtUpdateDiscount;
+    private javax.swing.JTextField txtUpdateServiceCategory;
+    private javax.swing.JTextField txtUpdateServiceName;
     // End of variables declaration//GEN-END:variables
 
     public UserDetail getUserDetail() {
@@ -484,5 +739,13 @@ public class ServiceMainForm extends javax.swing.JPanel {
 
     public void setUserDetail(UserDetail userDetail) {
         this.userDetail = userDetail;
+    }
+
+    public MasterService getSearchedService() {
+        return searchedService;
+    }
+
+    public void setSearchedService(MasterService searchedService) {
+        this.searchedService = searchedService;
     }
 }

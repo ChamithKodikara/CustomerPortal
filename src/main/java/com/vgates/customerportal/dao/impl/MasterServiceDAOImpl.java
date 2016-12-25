@@ -105,7 +105,19 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
         try {
             Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.active = true AND service.serviceName LIKE :name");
             query.setParameter("name", name);
-            List<MasterService> resultList = (List<MasterService>) query.list();
+            serviceList = (List<MasterService>) query.list();
+        } catch (Exception ex) {
+            LOGGER.error("Sorry Cannot Find Service Detail !", ex);
+        }
+        return serviceList;
+    }
+
+    @Override
+    public List<MasterService> findAllActiveMasterService() {
+        List<MasterService> serviceList = null;
+        try {
+            Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.active = true ");
+            serviceList = (List<MasterService>) query.list();
         } catch (Exception ex) {
             LOGGER.error("Sorry Cannot Find Service Detail !", ex);
         }

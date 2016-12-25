@@ -20,5 +20,7 @@ public interface MasterServiceDAO {
 
     List<MasterService> findMasterServiceByName(String name);
 
+    List<MasterService> findAllActiveMasterService();
+
     List<MasterService> findMasterService(String name, String category);
 }
