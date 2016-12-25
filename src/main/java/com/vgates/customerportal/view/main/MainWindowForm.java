@@ -7,6 +7,7 @@ package com.vgates.customerportal.view.main;
 
 import com.vgates.customerportal.controller.UserDetailController;
 import com.vgates.customerportal.view.customer.CustomerMainForm;
+import com.vgates.customerportal.view.service.ServiceMainForm;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -42,6 +43,7 @@ public class MainWindowForm extends javax.swing.JFrame {
         panelMain = new javax.swing.JPanel();
         panelMainBtn = new javax.swing.JPanel();
         btnCustomerMain = new javax.swing.JButton();
+        btnServiceMain = new javax.swing.JButton();
         panelMainView = new org.jdesktop.swingx.JXImagePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -70,13 +72,23 @@ public class MainWindowForm extends javax.swing.JFrame {
             }
         });
 
+        btnServiceMain.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnServiceMain.setText("Service Details");
+        btnServiceMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServiceMainActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMainBtnLayout = new javax.swing.GroupLayout(panelMainBtn);
         panelMainBtn.setLayout(panelMainBtnLayout);
         panelMainBtnLayout.setHorizontalGroup(
             panelMainBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMainBtnLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnCustomerMain, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addGroup(panelMainBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCustomerMain, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(btnServiceMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelMainBtnLayout.setVerticalGroup(
@@ -84,7 +96,9 @@ public class MainWindowForm extends javax.swing.JFrame {
             .addGroup(panelMainBtnLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(btnCustomerMain)
-                .addContainerGap(525, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnServiceMain)
+                .addContainerGap(484, Short.MAX_VALUE))
         );
 
         panelMainView.setMaximumSize(new java.awt.Dimension(800, 600));
@@ -152,6 +166,15 @@ public class MainWindowForm extends javax.swing.JFrame {
         panelMainView.repaint();
     }//GEN-LAST:event_btnCustomerMainActionPerformed
 
+    private void btnServiceMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiceMainActionPerformed
+        ServiceMainForm view = new ServiceMainForm();
+        view.setSize(panelMainView.getSize());
+        panelMainView.removeAll();
+        panelMainView.add(view);
+        panelMainView.revalidate();
+        panelMainView.repaint();
+    }//GEN-LAST:event_btnServiceMainActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -189,6 +212,7 @@ public class MainWindowForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomerMain;
+    private javax.swing.JButton btnServiceMain;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelMainBtn;

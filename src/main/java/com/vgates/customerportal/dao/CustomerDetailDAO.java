@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface CustomerDetailDAO {
 
+    String newCustomerRefNo();
+
     MethodResult addNewCustomerDetail(CustomerDetail customerDetail);
 
     MethodResult updateCustomerDetail(CustomerDetail customerDetail);

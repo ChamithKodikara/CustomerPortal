@@ -17,6 +17,10 @@ public class CustomerDetailController {
         customerDetailDAO = new CustomerDetailDAOImpl();
     }
 
+    public String newCustomerRef() {
+        return customerDetailDAO.newCustomerRefNo();
+    }
+
     public MethodResult addNewCustomerDetail(CustomerDetail customerDetail) {
         return customerDetailDAO.addNewCustomerDetail(customerDetail);
     }

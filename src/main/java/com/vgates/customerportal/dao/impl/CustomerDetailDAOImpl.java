@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.persistence.NoResultException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -19,8 +20,20 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
 
     private final Session session;
 
+   private final DecimalFormat decimalFormat = new DecimalFormat("###");
+
     public CustomerDetailDAOImpl() {
         session = HibernateSessionManager.getSessionFactory().openSession();
+    }
+
+    @Override
+    public String newCustomerRefNo() {
+        StringBuilder queryBulider=new StringBuilder();
+        queryBulider.append("SELECT FLOOR(RAND() * 999999)AS custRef FROM CUSTOMER_DETAIL WHERE 'custRef' NOT IN");
+        queryBulider.append("(SELECT CUSTOMER_NO FROM CUSTOMER_DETAIL) LIMIT 1");
+        Query query = session.createSQLQuery(queryBulider.toString());
+        List list = query.list();
+        return decimalFormat.format(list.get(0));
     }
 
     public MethodResult addNewCustomerDetail(CustomerDetail customerDetail) {
