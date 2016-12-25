@@ -841,7 +841,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
         defaultCustTableModel.setRowCount(0);
         List<CustomerDetail> customerList = customerDetailController.getActiveCustomerList(txtFindCustName.getText(), txtFindCustRef.getText(), txtFindNicNo.getText());
         if (customerList != null) {
-            customerList.stream().forEach(e -> {
+            customerList.forEach(e -> {
                 Object rows[] = {e.getCustomerNo(), e.getCustomerName(), e.getDob(), e.getEmail(), e.getContactNo(), e.getAddress()};
                 defaultCustTableModel.addRow(rows);
             });

@@ -23,6 +23,7 @@ public class PaymentDAOImpl implements PaymentDAO {
         session = HibernateSessionManager.getSessionFactory().openSession();
     }
 
+    @Override
     public MethodResult addNewPayment(Payment payment) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -40,6 +41,7 @@ public class PaymentDAOImpl implements PaymentDAO {
         return result;
     }
 
+    @Override
     public MethodResult updatePayment(Payment payment) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -58,6 +60,7 @@ public class PaymentDAOImpl implements PaymentDAO {
         return result;
     }
 
+    @Override
     public MethodResult changePaymentStatus(boolean status, long paymentID) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -79,6 +82,7 @@ public class PaymentDAOImpl implements PaymentDAO {
         return result;
     }
 
+    @Override
     public Payment findPaymentByID(long id) {
         Payment payment = null;
         try {

@@ -23,6 +23,7 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
         session = HibernateSessionManager.getSessionFactory().openSession();
     }
 
+    @Override
     public MethodResult addNewMasterService(MasterService service) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -41,6 +42,7 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
         return result;
     }
 
+    @Override
     public MethodResult updateMasterService(MasterService service) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -59,6 +61,7 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
         return result;
     }
 
+    @Override
     public MethodResult changeServiceStatus(boolean status, long serviceID) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -80,10 +83,11 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
         return result;
     }
 
+    @Override
     public MasterService findMasterServiceByID(long id) {
         MasterService service = null;
         try {
-            Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.id= :id");
+            Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.id= :id AND service.active = true");
             query.setParameter("id", id);
             List<MasterService> resultList = (List<MasterService>) query.list();
             if (resultList != null && !resultList.isEmpty()) {
@@ -95,12 +99,40 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
         return service;
     }
 
+    @Override
     public List<MasterService> findMasterServiceByName(String name) {
         List<MasterService> serviceList = null;
         try {
-            Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.serviceName LIKE :name");
+            Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.active = true AND service.serviceName LIKE :name");
             query.setParameter("name", name);
             List<MasterService> resultList = (List<MasterService>) query.list();
+        } catch (Exception ex) {
+            LOGGER.error("Sorry Cannot Find Service Detail !", ex);
+        }
+        return serviceList;
+    }
+
+    @Override
+    public List<MasterService> findMasterService(String name, String category) {
+        StringBuilder sbName = new StringBuilder();
+        StringBuilder sbCategory = new StringBuilder();
+        if (name == null || name.isEmpty()) {
+            sbName.append("%%");
+        } else {
+            sbName.append("%").append(name).append("%");
+        }
+        if (category == null || category.isEmpty()) {
+            sbCategory.append("%%");
+        } else {
+            sbCategory.append("%").append(category).append("%");
+        }
+
+        List<MasterService> serviceList = null;
+        try {
+            Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.active = true AND service.serviceName LIKE :name AND service.category LIKE :category");
+            query.setParameter("name", sbName.toString());
+            query.setParameter("category", sbCategory.toString());
+            serviceList = (List<MasterService>) query.list();
         } catch (Exception ex) {
             LOGGER.error("Sorry Cannot Find Service Detail !", ex);
         }

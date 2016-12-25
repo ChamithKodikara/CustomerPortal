@@ -19,4 +19,6 @@ public interface MasterServiceDAO {
     MasterService findMasterServiceByID(long id);
 
     List<MasterService> findMasterServiceByName(String name);
+
+    List<MasterService> findMasterService(String name, String category);
 }

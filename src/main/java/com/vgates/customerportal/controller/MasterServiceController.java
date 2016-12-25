@@ -37,4 +37,8 @@ public class MasterServiceController {
         return serviceDAO.findMasterServiceByName(name);
     }
 
+    public List<MasterService> searchService(String name, String category) {
+        return serviceDAO.findMasterService(name, category);
+    }
+
 }

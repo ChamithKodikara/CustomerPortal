@@ -36,6 +36,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         return decimalFormat.format(list.get(0));
     }
 
+    @Override
     public MethodResult addNewCustomerDetail(CustomerDetail customerDetail) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -53,6 +54,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         return result;
     }
 
+    @Override
     public MethodResult updateCustomerDetail(CustomerDetail customerDetail) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -71,6 +73,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         return result;
     }
 
+    @Override
     public MethodResult changeCustomerStatus(boolean status, long customerID) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -92,6 +95,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         return result;
     }
 
+    @Override
     public CustomerDetail findCustomerDetailByID(long id) {
         CustomerDetail customerDetail = null;
         try {
@@ -107,6 +111,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         return customerDetail;
     }
 
+    @Override
     public List<CustomerDetail> findCustomerDetailByName(String name) {
         List<CustomerDetail> customerDetailList = null;
         try {
@@ -120,6 +125,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         return customerDetailList;
     }
 
+    @Override
     public CustomerDetail findCustomerDetailByCustomerNo(String customerNo) {
         CustomerDetail customerDetail = null;
         try {
@@ -135,6 +141,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         return customerDetail;
     }
 
+    @Override
     public List<CustomerDetail> findAllActiveCustomerDetails() {
         List<CustomerDetail> customerDetailList = null;
         try {
@@ -147,6 +154,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         return customerDetailList;
     }
 
+    @Override
     public List<CustomerDetail> findActiveCustomerDetails(String customerName, String refNo, String nic) {
         StringBuilder sbName = new StringBuilder();
         StringBuilder sbRef = new StringBuilder();
@@ -180,6 +188,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         return customerDetailList;
     }
 
+    @Override
     public List<CustomerDetail> findAllCustomerDetails() {
         List<CustomerDetail> customerDetailList = null;
         try {

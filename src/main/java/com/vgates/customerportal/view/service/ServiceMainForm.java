@@ -12,8 +12,10 @@ import com.vgates.customerportal.model.UserDetail;
 import com.vgates.customerportal.util.MethodResult;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -25,6 +27,8 @@ public class ServiceMainForm extends javax.swing.JPanel {
 
     private final UserDetailController userDetailController;
     private final MasterServiceController serviceController;
+
+    private final DefaultTableModel defaultServiceTableModel;
 
     private UserDetail userDetail;
 
@@ -39,6 +43,9 @@ public class ServiceMainForm extends javax.swing.JPanel {
         serviceController = new MasterServiceController();
 
         userDetail = userDetailController.findUserDetailForActiveLogin();
+
+        defaultServiceTableModel = (DefaultTableModel) tblServiceDetail.getModel();
+        defaultServiceTableModel.setRowCount(0);
 
         txtNewCost.setText("00.00");
         txtNewDiscount.setText("00.00");
@@ -64,8 +71,6 @@ public class ServiceMainForm extends javax.swing.JPanel {
         lblNewdesc = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtNewDesc = new javax.swing.JTextArea();
-        lblNewType = new javax.swing.JLabel();
-        txtNewType = new javax.swing.JTextField();
         lblNewCost = new javax.swing.JLabel();
         txtNewCost = new javax.swing.JFormattedTextField();
         lblNewDiscount = new javax.swing.JLabel();
@@ -73,6 +78,15 @@ public class ServiceMainForm extends javax.swing.JPanel {
         btnCancelAdd = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         panelFindService = new javax.swing.JPanel();
+        lblSearchServiceMain = new javax.swing.JLabel();
+        txtFindServiceName = new javax.swing.JTextField();
+        txtFindCategory = new javax.swing.JTextField();
+        lblFindCategory = new javax.swing.JLabel();
+        lblFindServiceName = new javax.swing.JLabel();
+        btnCancelSearch = new javax.swing.JButton();
+        btnSearchService = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblServiceDetail = new javax.swing.JTable();
         panelUpdateService = new javax.swing.JPanel();
 
         lblServiceMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -111,16 +125,6 @@ public class ServiceMainForm extends javax.swing.JPanel {
         txtNewDesc.setColumns(20);
         txtNewDesc.setRows(5);
         jScrollPane1.setViewportView(txtNewDesc);
-
-        lblNewType.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblNewType.setText("Type");
-
-        txtNewType.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtNewType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNewTypeActionPerformed(evt);
-            }
-        });
 
         lblNewCost.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNewCost.setText("Cost");
@@ -162,14 +166,12 @@ public class ServiceMainForm extends javax.swing.JPanel {
                         .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelNewServiceLayout.createSequentialGroup()
                                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblNewType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblNewServiceCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                                     .addComponent(lblNewServiceName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNewServiceCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                    .addComponent(txtNewServiceName)
-                                    .addComponent(txtNewType)))
+                                    .addComponent(txtNewServiceName)))
                             .addGroup(panelNewServiceLayout.createSequentialGroup()
                                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(lblNewDiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -202,13 +204,9 @@ public class ServiceMainForm extends javax.swing.JPanel {
                     .addComponent(lblNewServiceCategory)
                     .addComponent(txtNewServiceCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNewType)
-                    .addComponent(txtNewType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNewdesc)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNewdesc))
                 .addGap(18, 18, 18)
                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,7 +215,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNewDiscount))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelAdd)
                     .addComponent(btnSave))
@@ -226,15 +224,126 @@ public class ServiceMainForm extends javax.swing.JPanel {
 
         tabServiceMain.addTab("New Service Details", panelNewService);
 
+        lblSearchServiceMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblSearchServiceMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSearchServiceMain.setText("Service Details");
+
+        txtFindServiceName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtFindServiceName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFindServiceNameActionPerformed(evt);
+            }
+        });
+
+        txtFindCategory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtFindCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFindCategoryActionPerformed(evt);
+            }
+        });
+
+        lblFindCategory.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFindCategory.setText("Category");
+
+        lblFindServiceName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFindServiceName.setText("Service");
+
+        btnCancelSearch.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCancelSearch.setText("Cancel");
+        btnCancelSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelSearchActionPerformed(evt);
+            }
+        });
+
+        btnSearchService.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSearchService.setText("Search Service Details");
+        btnSearchService.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchServiceActionPerformed(evt);
+            }
+        });
+
+        tblServiceDetail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Service", "Category", "Cost", "Discount", "Description"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblServiceDetail);
+        if (tblServiceDetail.getColumnModel().getColumnCount() > 0) {
+            tblServiceDetail.getColumnModel().getColumn(0).setResizable(false);
+            tblServiceDetail.getColumnModel().getColumn(1).setResizable(false);
+            tblServiceDetail.getColumnModel().getColumn(2).setResizable(false);
+            tblServiceDetail.getColumnModel().getColumn(3).setResizable(false);
+            tblServiceDetail.getColumnModel().getColumn(4).setResizable(false);
+        }
+
         javax.swing.GroupLayout panelFindServiceLayout = new javax.swing.GroupLayout(panelFindService);
         panelFindService.setLayout(panelFindServiceLayout);
         panelFindServiceLayout.setHorizontalGroup(
             panelFindServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(panelFindServiceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelFindServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSearchServiceMain, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                    .addGroup(panelFindServiceLayout.createSequentialGroup()
+                        .addGroup(panelFindServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblFindCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblFindServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelFindServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtFindCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(txtFindServiceName))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFindServiceLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSearchService)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         panelFindServiceLayout.setVerticalGroup(
             panelFindServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGroup(panelFindServiceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSearchServiceMain, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelFindServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFindServiceName)
+                    .addComponent(txtFindServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelFindServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFindCategory)
+                    .addComponent(txtFindCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelFindServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSearchService)
+                    .addComponent(btnCancelSearch))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         tabServiceMain.addTab("Search Service Details", panelFindService);
@@ -267,8 +376,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblServiceMain, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabServiceMain, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(tabServiceMain, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -280,16 +388,11 @@ public class ServiceMainForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNewServiceCategoryActionPerformed
 
-    private void txtNewTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNewTypeActionPerformed
-
     private void btnCancelAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddActionPerformed
         txtNewCost.setText("00.00");
         txtNewDiscount.setText("00.00");
         txtNewServiceCategory.setText("");
         txtNewServiceName.setText("");
-        txtNewType.setText("");
         txtNewDesc.setText("");
     }//GEN-LAST:event_btnCancelAddActionPerformed
 
@@ -305,7 +408,6 @@ public class ServiceMainForm extends javax.swing.JPanel {
             service.setDescription(txtNewDesc.getText());
             service.setDiscount(Double.parseDouble(txtNewDiscount.getText()));
             service.setServiceName(txtNewServiceName.getText());
-            service.setType(txtNewType.getText());
 
             MethodResult result = serviceController.addNewServiceDetail(service);
             if (result.isOk()) {
@@ -314,7 +416,6 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 txtNewDiscount.setText("00.00");
                 txtNewServiceCategory.setText("");
                 txtNewServiceName.setText("");
-                txtNewType.setText("");
                 txtNewDesc.setText("");
             } else {
                 JOptionPane.showMessageDialog(this, result.getMessage(), "New Service", JOptionPane.INFORMATION_MESSAGE);
@@ -322,29 +423,59 @@ public class ServiceMainForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void txtFindServiceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindServiceNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFindServiceNameActionPerformed
+
+    private void txtFindCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFindCategoryActionPerformed
+
+    private void btnCancelSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelSearchActionPerformed
+        defaultServiceTableModel.setRowCount(0);
+    }//GEN-LAST:event_btnCancelSearchActionPerformed
+
+    private void btnSearchServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchServiceActionPerformed
+        defaultServiceTableModel.setRowCount(0);
+        List<MasterService> serviceList = serviceController.searchService(txtFindServiceName.getText(), txtFindCategory.getText());
+        if (serviceList != null) {
+            serviceList.forEach(e -> {
+                Object rowData[] = {e.getServiceName(), e.getCategory(),  e.getCost(), e.getDiscount(), e.getDescription()};
+                defaultServiceTableModel.addRow(rowData);
+            });
+        }
+    }//GEN-LAST:event_btnSearchServiceActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelAdd;
+    private javax.swing.JButton btnCancelSearch;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSearchService;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblFindCategory;
+    private javax.swing.JLabel lblFindServiceName;
     private javax.swing.JLabel lblNewCost;
     private javax.swing.JLabel lblNewDiscount;
     private javax.swing.JLabel lblNewServiceCategory;
     private javax.swing.JLabel lblNewServiceMain;
     private javax.swing.JLabel lblNewServiceName;
-    private javax.swing.JLabel lblNewType;
     private javax.swing.JLabel lblNewdesc;
+    private javax.swing.JLabel lblSearchServiceMain;
     private javax.swing.JLabel lblServiceMain;
     private javax.swing.JPanel panelFindService;
     private javax.swing.JPanel panelNewService;
     private javax.swing.JPanel panelUpdateService;
     private javax.swing.JTabbedPane tabServiceMain;
+    private javax.swing.JTable tblServiceDetail;
+    private javax.swing.JTextField txtFindCategory;
+    private javax.swing.JTextField txtFindServiceName;
     private javax.swing.JFormattedTextField txtNewCost;
     private javax.swing.JTextArea txtNewDesc;
     private javax.swing.JFormattedTextField txtNewDiscount;
     private javax.swing.JTextField txtNewServiceCategory;
     private javax.swing.JTextField txtNewServiceName;
-    private javax.swing.JTextField txtNewType;
     // End of variables declaration//GEN-END:variables
 
     public UserDetail getUserDetail() {

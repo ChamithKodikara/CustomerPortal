@@ -23,6 +23,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         session = HibernateSessionManager.getSessionFactory().openSession();
     }
 
+    @Override
     public MethodResult addNewUserDetail(UserDetail userDetail) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -40,6 +41,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         return result;
     }
 
+    @Override
     public MethodResult updateUserDetail(UserDetail userDetail) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -58,6 +60,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         return result;
     }
 
+    @Override
     public MethodResult changeUserStatus(boolean status, long userID) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -79,6 +82,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         return result;
     }
 
+    @Override
     public UserDetail findUserDetailByID(long id) {
         UserDetail userDetail = null;
         try {
@@ -94,6 +98,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         return userDetail;
     }
 
+    @Override
     public UserDetail findUserDetailForActiveLogin() {
         UserDetail userDetail = null;
         try {
@@ -108,6 +113,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         return userDetail;
     }
 
+    @Override
     public boolean loginUser(String userName, String password) {
         boolean loginSuccess = false;
         try {
@@ -127,6 +133,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         return loginSuccess;
     }
 
+    @Override
     public boolean logoutUser(String userName) {
         boolean logoutSuccess = false;
         try {
@@ -144,6 +151,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 
     }
 
+    @Override
     public boolean logoutAllUsers() {
         boolean logoutSuccess = false;
         try {

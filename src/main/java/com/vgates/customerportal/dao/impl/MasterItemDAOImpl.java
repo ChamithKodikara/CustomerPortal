@@ -23,6 +23,7 @@ public class MasterItemDAOImpl implements MasterItemDAO {
         session = HibernateSessionManager.getSessionFactory().openSession();
     }
 
+    @Override
     public MethodResult addNewMasterItem(MasterItem item) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -40,6 +41,7 @@ public class MasterItemDAOImpl implements MasterItemDAO {
         return result;
     }
 
+    @Override
     public MethodResult updateMasterItem(MasterItem item) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -58,6 +60,7 @@ public class MasterItemDAOImpl implements MasterItemDAO {
         return result;
     }
 
+    @Override
     public MethodResult changeItemStatus(boolean status, long itemID) {
         MethodResult result = new MethodResult();
         result.setOk(false);
@@ -79,6 +82,7 @@ public class MasterItemDAOImpl implements MasterItemDAO {
         return result;
     }
 
+    @Override
     public MasterItem findMasterItemByID(long id) {
         MasterItem item = null;
         try {
@@ -94,6 +98,7 @@ public class MasterItemDAOImpl implements MasterItemDAO {
         return item;
     }
 
+    @Override
     public MasterItem findMasterItemByName(String name) {
         MasterItem item = null;
         try {
@@ -109,6 +114,7 @@ public class MasterItemDAOImpl implements MasterItemDAO {
         return item;
     }
 
+    @Override
     public List<MasterItem> findAllActiveMasterItems() {
         List<MasterItem> resultList = null;
         try {
