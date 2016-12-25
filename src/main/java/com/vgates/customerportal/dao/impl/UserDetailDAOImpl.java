@@ -153,7 +153,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             session.flush();
             session.getTransaction().commit();
             logoutSuccess = Boolean.TRUE;
-            session.close();
+            HibernateSessionManager.shutdown();
         } catch (NoResultException ex) {
             LOGGER.error("Logout Failed !", ex);
         }
