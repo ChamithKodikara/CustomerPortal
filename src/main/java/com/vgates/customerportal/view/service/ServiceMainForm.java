@@ -372,8 +372,8 @@ public class ServiceMainForm extends javax.swing.JPanel {
                     .addComponent(btnSearchService)
                     .addComponent(btnCancelSearch))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabServiceMain.addTab("Search Service Details", panelFindService);
