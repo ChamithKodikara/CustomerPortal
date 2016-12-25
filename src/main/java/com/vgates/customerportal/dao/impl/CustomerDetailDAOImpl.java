@@ -30,7 +30,6 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             session.beginTransaction();
             session.save(customerDetail);
             session.getTransaction().commit();
-            session.close();
             result.setOk(true);
             result.setMessage("Customer Detail Successfully Added !");
         } catch (Exception ex) {
@@ -86,7 +85,9 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.id= :id AND customer.active = true");
             query.setParameter("id", id);
             List<CustomerDetail> resultList = (List<CustomerDetail>) query.list();
-            customerDetail = resultList.get(0);
+            if (resultList != null && !resultList.isEmpty()) {
+                customerDetail = resultList.get(0);
+            }
         } catch (NoResultException ex) {
             LOGGER.error("Sorry Cannot Find Customer Detail By ID !", ex);
         }
@@ -112,7 +113,9 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.customerNo= :customerNo AND customer.active = true");
             query.setParameter("customerNo", customerNo);
             List<CustomerDetail> resultList = (List<CustomerDetail>) query.list();
-            customerDetail = resultList.get(0);
+            if (resultList != null && !resultList.isEmpty()) {
+                customerDetail = resultList.get(0);
+            }
         } catch (NoResultException ex) {
             LOGGER.error("Sorry Cannot Find Customer Detail By Customer No !", ex);
         }

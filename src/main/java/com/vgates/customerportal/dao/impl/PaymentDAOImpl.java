@@ -30,7 +30,6 @@ public class PaymentDAOImpl implements PaymentDAO {
             session.beginTransaction();
             session.save(payment);
             session.getTransaction().commit();
-            session.close();
             result.setOk(true);
             result.setMessage("Payment Details Successfully Added !");
         } catch (Exception ex) {
@@ -86,7 +85,9 @@ public class PaymentDAOImpl implements PaymentDAO {
             Query query = session.createQuery("SELECT payment FROM Payment payment WHERE payment.id= :id");
             query.setParameter("id", id);
             List<Payment> resultList = (List<Payment>) query.list();
-            payment = resultList.get(0);
+            if (resultList != null && !resultList.isEmpty()) {
+                payment = resultList.get(0);
+            }
         } catch (NoResultException ex) {
             LOGGER.error("Sorry Cannot Find Payment Detail !", ex);
         }

@@ -30,7 +30,6 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             session.beginTransaction();
             session.save(item);
             session.getTransaction().commit();
-            session.close();
             result.setOk(true);
             result.setMessage("Item Details Successfully Added !");
         } catch (Exception ex) {
@@ -86,7 +85,9 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             Query query = session.createQuery("SELECT item FROM MasterItem item WHERE item.id= :id");
             query.setParameter("id", id);
             List<MasterItem> resultList = (List<MasterItem>) query.list();
-            item = resultList.get(0);
+            if (resultList != null && !resultList.isEmpty()) {
+                item = resultList.get(0);
+            }
         } catch (NoResultException ex) {
             LOGGER.error("Sorry Cannot Find Item Detail !", ex);
         }
@@ -99,7 +100,9 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             Query query = session.createQuery("SELECT item FROM MasterItem item WHERE item.itemName= :name");
             query.setParameter("name", name);
             List<MasterItem> resultList = (List<MasterItem>) query.list();
-            item = resultList.get(0);
+            if (resultList != null && !resultList.isEmpty()) {
+                item = resultList.get(0);
+            }
         } catch (NoResultException ex) {
             LOGGER.error("Sorry Cannot Find Item Detail !", ex);
         }

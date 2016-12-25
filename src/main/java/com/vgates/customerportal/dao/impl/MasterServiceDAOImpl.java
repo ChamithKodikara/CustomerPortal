@@ -30,7 +30,6 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
             session.beginTransaction();
             session.save(service);
             session.getTransaction().commit();
-            session.close();
             result.setOk(true);
             result.setMessage("Service Details Successfully Added !");
         } catch (Exception ex) {
@@ -87,7 +86,9 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
             Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.id= :id");
             query.setParameter("id", id);
             List<MasterService> resultList = (List<MasterService>) query.list();
-            service = resultList.get(0);
+            if (resultList != null && !resultList.isEmpty()) {
+                service = resultList.get(0);
+            }
         } catch (NoResultException ex) {
             LOGGER.error("Sorry Cannot Find Service Detail !", ex);
         }

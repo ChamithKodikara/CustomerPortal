@@ -30,7 +30,6 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             session.beginTransaction();
             session.save(userDetail);
             session.getTransaction().commit();
-            session.close();
             result.setOk(true);
             result.setMessage("User Details Successfully Added !");
         } catch (Exception ex) {
@@ -86,7 +85,9 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             Query query = session.createQuery("SELECT user FROM UserDetail user WHERE user.id= :id");
             query.setParameter("id", id);
             List<UserDetail> resultList = (List<UserDetail>) query.list();
-            userDetail = resultList.get(0);
+            if (resultList != null && !resultList.isEmpty()) {
+                userDetail = resultList.get(0);
+            }
         } catch (NoResultException ex) {
             LOGGER.error("Sorry Cannot Find User Detail !", ex);
         }
@@ -98,7 +99,9 @@ public class UserDetailDAOImpl implements UserDetailDAO {
         try {
             Query query = session.createQuery("SELECT user FROM UserDetail user WHERE user.activeUser= true");
             List<UserDetail> resultList = (List<UserDetail>) query.list();
-            userDetail = resultList.get(0);
+            if (resultList != null && !resultList.isEmpty()) {
+                userDetail = resultList.get(0);
+            }
         } catch (NoResultException ex) {
             LOGGER.error("Sorry Cannot Find User Detail !", ex);
         }
@@ -150,6 +153,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             session.flush();
             session.getTransaction().commit();
             logoutSuccess = Boolean.TRUE;
+            session.close();
         } catch (NoResultException ex) {
             LOGGER.error("Logout Failed !", ex);
         }
