@@ -627,6 +627,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 txtUpdateServiceName.setText(searchedService.getServiceName());
             }
         }
+
     }//GEN-LAST:event_comboServiceNameItemStateChanged
 
     private void txtUpdateServiceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateServiceNameActionPerformed
