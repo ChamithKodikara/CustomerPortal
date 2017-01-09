@@ -32,9 +32,6 @@ public class MasterItem implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "TYPE")
-    private String type;
-
     @Column(name = "DISCOUNT")
     private Double discount;
 
@@ -86,14 +83,6 @@ public class MasterItem implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Double getDiscount() {

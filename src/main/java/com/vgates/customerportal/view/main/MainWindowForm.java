@@ -7,6 +7,7 @@ package com.vgates.customerportal.view.main;
 
 import com.vgates.customerportal.controller.UserDetailController;
 import com.vgates.customerportal.view.customer.CustomerMainForm;
+import com.vgates.customerportal.view.item.ItemMainForm;
 import com.vgates.customerportal.view.service.ServiceMainForm;
 import org.apache.log4j.Logger;
 
@@ -44,6 +45,7 @@ public class MainWindowForm extends javax.swing.JFrame {
         panelMainBtn = new javax.swing.JPanel();
         btnCustomerMain = new javax.swing.JButton();
         btnServiceMain = new javax.swing.JButton();
+        btnServiceMain1 = new javax.swing.JButton();
         panelMainView = new org.jdesktop.swingx.JXImagePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -80,6 +82,14 @@ public class MainWindowForm extends javax.swing.JFrame {
             }
         });
 
+        btnServiceMain1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnServiceMain1.setText("Item Details");
+        btnServiceMain1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServiceMain1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMainBtnLayout = new javax.swing.GroupLayout(panelMainBtn);
         panelMainBtn.setLayout(panelMainBtnLayout);
         panelMainBtnLayout.setHorizontalGroup(
@@ -88,7 +98,8 @@ public class MainWindowForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelMainBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCustomerMain, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(btnServiceMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                    .addComponent(btnServiceMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(btnServiceMain1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelMainBtnLayout.setVerticalGroup(
@@ -98,7 +109,9 @@ public class MainWindowForm extends javax.swing.JFrame {
                 .addComponent(btnCustomerMain)
                 .addGap(18, 18, 18)
                 .addComponent(btnServiceMain)
-                .addContainerGap(484, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnServiceMain1)
+                .addContainerGap(443, Short.MAX_VALUE))
         );
 
         panelMainView.setMaximumSize(new java.awt.Dimension(800, 600));
@@ -149,9 +162,9 @@ public class MainWindowForm extends javax.swing.JFrame {
         int responce = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit Customer Portal...?", "Exiting", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (responce == JOptionPane.YES_OPTION) {
             boolean logoutSuccess = userDetailController.logoutAllUser();
-            if(logoutSuccess){
+            if (logoutSuccess) {
                 System.exit(0);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Failed...!");
             }
         }
@@ -174,6 +187,15 @@ public class MainWindowForm extends javax.swing.JFrame {
         panelMainView.revalidate();
         panelMainView.repaint();
     }//GEN-LAST:event_btnServiceMainActionPerformed
+
+    private void btnServiceMain1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiceMain1ActionPerformed
+        ItemMainForm view = new ItemMainForm();
+        view.setSize(panelMainView.getSize());
+        panelMainView.removeAll();
+        panelMainView.add(view);
+        panelMainView.revalidate();
+        panelMainView.repaint();
+    }//GEN-LAST:event_btnServiceMain1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,6 +235,7 @@ public class MainWindowForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomerMain;
     private javax.swing.JButton btnServiceMain;
+    private javax.swing.JButton btnServiceMain1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelMainBtn;
