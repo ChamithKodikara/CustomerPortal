@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * Created by Chamith on 10/31/2016.
+ * @author Chamith
  */
 
 
@@ -32,7 +32,6 @@ public class HibernateSessionManager {
     }
 
     public static void shutdown() {
-
         // Close caches and connection pools
         getSessionFactory().close();
     }

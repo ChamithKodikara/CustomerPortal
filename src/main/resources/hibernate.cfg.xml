@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
         <!-- SQL dialect -->
@@ -26,7 +26,15 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- The mapping information of entities -->
+        <mapping class="com.vgates.customerportal.model.UserDetail"/>
         <mapping class="com.vgates.customerportal.model.CustomerDetail"/>
+        <mapping class="com.vgates.customerportal.model.MasterService"/>
+        <mapping class="com.vgates.customerportal.model.MasterItem"/>
+        <mapping class="com.vgates.customerportal.model.Payment"/>
+        <mapping class="com.vgates.customerportal.model.OrderDetail"/>
+
+        <mapping class="com.vgates.customerportal.model.CustomerServiceMapper"/>
+        <mapping class="com.vgates.customerportal.model.ServiceItemMapper"/>
 
     </session-factory>
 
