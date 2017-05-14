@@ -9,23 +9,18 @@ import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.log4j.Logger;
 
 import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 
 public class PdfTable {
 
+    private static final Logger LOGGER = Logger.getLogger(EncryptTester.class);
+
     public static void main(String[] args) {
 
-        String pdfFilename = "";
         PdfTable printReport = new PdfTable();
-//        if (args.length < 1) {
-//            System.err.println("Usage: java " + printReport.getClass().getName() +
-//                    " PDF_Filename");
-//            System.exit(1);
-//        }
-
-//        pdfFilename = args[0].trim();
         printReport.createPDF("hello.pdf");
 
     }
@@ -125,9 +120,9 @@ public class PdfTable {
             doc.add(paragraph);
 
         } catch (DocumentException dex) {
-            dex.printStackTrace();
+            LOGGER.error(dex.getMessage(), dex);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error(ex.getMessage(), ex);
         } finally {
             if (doc != null) {
                 //close the document

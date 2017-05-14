@@ -1,5 +1,7 @@
 package com.vgates.sample;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
@@ -9,17 +11,19 @@ import java.util.zip.ZipOutputStream;
  * Created by Chamith on 11/23/2016.
  */
 public class ZipCreateExample {
+    private static final Logger LOGGER = Logger.getLogger(ZipCreateExample.class);
+
     public static void main(String[] args) throws IOException {
-        System.out.print("Please enter file name to zip : ");
+        LOGGER.info("Please enter file name to zip : ");
         BufferedReader input = new BufferedReader
                 (new InputStreamReader(System.in));
         String filesToZip = input.readLine();
         File f = new File(filesToZip);
-        if(!f.exists()) {
-            System.out.println("File not found.");
+        if (!f.exists()) {
+            LOGGER.info("File not found.");
             System.exit(0);
         }
-        System.out.print("Please enter zip file name : ");
+        LOGGER.info("Please enter zip file name : ");
         String zipFileName = input.readLine();
         if (!zipFileName.endsWith(".zip"))
             zipFileName = zipFileName + ".zip";
@@ -38,13 +42,13 @@ public class ZipCreateExample {
             in.close();
             out.close();
         } catch (IllegalArgumentException iae) {
-            iae.printStackTrace();
+            LOGGER.error(iae.getMessage(), iae);
             System.exit(0);
         } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
+            LOGGER.error(fnfe.getMessage(), fnfe);
             System.exit(0);
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            LOGGER.error(ioe.getMessage(), ioe);
             System.exit(0);
         }
     }

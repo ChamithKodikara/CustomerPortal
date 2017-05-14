@@ -1,5 +1,7 @@
 package com.vgates.sample;
 
+import org.apache.log4j.Logger;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -7,8 +9,11 @@ import java.security.NoSuchAlgorithmException;
  * Created by Chamith on 12/6/2016.
  */
 public class EncryptTester {
+
+    private static final Logger LOGGER = Logger.getLogger(EncryptTester.class);
+
     public static void main(String[] args) {
-        System.out.println(encryptPassword("123"));
+        LOGGER.info(encryptPassword("123"));
     }
 
     private static String encryptPassword(String password) {
@@ -35,6 +40,7 @@ public class EncryptTester {
             generatedPassword = sb.toString();
 
         } catch (NoSuchAlgorithmException ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return generatedPassword;
     }
