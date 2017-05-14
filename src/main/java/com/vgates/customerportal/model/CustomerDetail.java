@@ -79,30 +79,6 @@ public class CustomerDetail implements Serializable {
         this.customerName = customerName;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof CustomerDetail)) {
-            return false;
-        }
-        CustomerDetail other = (CustomerDetail) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.vgates.customerportal.model.CustomerDetail[ id=" + id + " ]";
-    }
-
     public Boolean getActive() {
         return active;
     }
@@ -206,4 +182,29 @@ public class CustomerDetail implements Serializable {
     public void setPaymentList(List<Payment> paymentList) {
         this.paymentList = paymentList;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof CustomerDetail)) {
+            return false;
+        }
+        CustomerDetail other = (CustomerDetail) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.vgates.customerportal.model.CustomerDetail[ id=" + id + " ]";
+    }
+
 }

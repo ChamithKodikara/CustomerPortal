@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "MASTER_SERVICE")
-public class MasterService implements Serializable{
+public class MasterService implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class MasterService implements Serializable{
     private Long id;
 
     @Column(name = "ACTIVE")
-    private Boolean active=true;
+    private Boolean active = true;
 
     @Column(name = "SERVICE_NAME")
     private String serviceName;
@@ -44,9 +44,6 @@ public class MasterService implements Serializable{
 
     @OneToMany(mappedBy = "masterService")
     private List<CustomerServiceMapper> customerServiceMapperList;
-
-    @OneToMany(mappedBy = "masterService")
-    private List<ServiceItemMapper> serviceItemMapperList;
 
     public Long getId() {
         return id;
@@ -103,29 +100,7 @@ public class MasterService implements Serializable{
     public void setDiscount(Double discount) {
         this.discount = discount;
     }
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof MasterService)) {
-            return false;
-        }
-        MasterService other = (MasterService) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return serviceName;
-    }
 
     public Date getCreatedDate() {
         return createdDate;
@@ -151,11 +126,27 @@ public class MasterService implements Serializable{
         this.customerServiceMapperList = customerServiceMapperList;
     }
 
-    public List<ServiceItemMapper> getServiceItemMapperList() {
-        return serviceItemMapperList;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 
-    public void setServiceItemMapperList(List<ServiceItemMapper> serviceItemMapperList) {
-        this.serviceItemMapperList = serviceItemMapperList;
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof MasterService)) {
+            return false;
+        }
+        MasterService other = (MasterService) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return serviceName;
     }
 }

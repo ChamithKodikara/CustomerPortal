@@ -107,6 +107,14 @@ public class UserDetail implements Serializable {
         this.lastActDate = lastActDate;
     }
 
+    public Boolean getActiveUser() {
+        return activeUser;
+    }
+
+    public void setActiveUser(Boolean activeUser) {
+        this.activeUser = activeUser;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -129,13 +137,5 @@ public class UserDetail implements Serializable {
     @Override
     public String toString() {
         return "com.vgates.customerportal.model.UserDetail[ id=" + id + " ]";
-    }
-
-    public Boolean getActiveUser() {
-        return activeUser;
-    }
-
-    public void setActiveUser(Boolean activeUser) {
-        this.activeUser = activeUser;
     }
 }

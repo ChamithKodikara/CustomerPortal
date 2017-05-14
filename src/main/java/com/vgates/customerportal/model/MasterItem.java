@@ -3,7 +3,6 @@ package com.vgates.customerportal.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Chamith
@@ -42,8 +41,6 @@ public class MasterItem implements Serializable {
     @Column(name = "CREATED_BY")
     private String createdBy;
 
-    @OneToMany(mappedBy = "masterItem")
-    private List<ServiceItemMapper> serviceItemMapperList;
 
     public Long getId() {
         return id;
@@ -109,6 +106,14 @@ public class MasterItem implements Serializable {
         this.createdBy = createdBy;
     }
 
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -133,19 +138,4 @@ public class MasterItem implements Serializable {
         return "com.vgates.customerportal.model.MasterItem[ id=" + id + " ]";
     }
 
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public List<ServiceItemMapper> getServiceItemMapperList() {
-        return serviceItemMapperList;
-    }
-
-    public void setServiceItemMapperList(List<ServiceItemMapper> serviceItemMapperList) {
-        this.serviceItemMapperList = serviceItemMapperList;
-    }
 }

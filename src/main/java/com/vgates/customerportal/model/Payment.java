@@ -110,6 +110,22 @@ public class Payment implements Serializable {
         this.paymentDate = paymentDate;
     }
 
+    public OrderDetail getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(OrderDetail orderDetail) {
+        this.orderDetail = orderDetail;
+    }
+
+    public CustomerDetail getCustomerDetail() {
+        return customerDetail;
+    }
+
+    public void setCustomerDetail(CustomerDetail customerDetail) {
+        this.customerDetail = customerDetail;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -134,19 +150,4 @@ public class Payment implements Serializable {
         return "com.vgates.customerportal.model.Payment[ id=" + id + " ]";
     }
 
-    public OrderDetail getOrderDetail() {
-        return orderDetail;
-    }
-
-    public void setOrderDetail(OrderDetail orderDetail) {
-        this.orderDetail = orderDetail;
-    }
-
-    public CustomerDetail getCustomerDetail() {
-        return customerDetail;
-    }
-
-    public void setCustomerDetail(CustomerDetail customerDetail) {
-        this.customerDetail = customerDetail;
-    }
 }

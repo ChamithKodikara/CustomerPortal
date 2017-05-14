@@ -85,6 +85,14 @@ public class OrderDetail implements Serializable {
         this.comment = comment;
     }
 
+    public CustomerDetail getCustomerDetail() {
+        return customerDetail;
+    }
+
+    public void setCustomerDetail(CustomerDetail customerDetail) {
+        this.customerDetail = customerDetail;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -109,11 +117,4 @@ public class OrderDetail implements Serializable {
         return "com.vgates.customerportal.model.OrderDetail[ id=" + id + " ]";
     }
 
-    public CustomerDetail getCustomerDetail() {
-        return customerDetail;
-    }
-
-    public void setCustomerDetail(CustomerDetail customerDetail) {
-        this.customerDetail = customerDetail;
-    }
 }

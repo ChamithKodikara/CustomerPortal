@@ -34,7 +34,6 @@
         <mapping class="com.vgates.customerportal.model.OrderDetail"/>
 
         <mapping class="com.vgates.customerportal.model.CustomerServiceMapper"/>
-        <mapping class="com.vgates.customerportal.model.ServiceItemMapper"/>
 
     </session-factory>
 
