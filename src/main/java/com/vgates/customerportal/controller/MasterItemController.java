@@ -11,6 +11,7 @@ import java.util.List;
  * @author Chamith Kodikara
  */
 public class MasterItemController {
+
     private MasterItemDAO masterItemDAO;
 
     public MasterItemController() {
@@ -35,6 +36,10 @@ public class MasterItemController {
 
     public MasterItem searchItemByName(String name) {
         return masterItemDAO.findMasterItemByName(name);
+    }
+
+    public List<MasterItem> searchItemByNameAndCategory(String name, String category) {
+        return masterItemDAO.findMasterItemByNameAndCategory(name, category);
     }
 
     public List<MasterItem> getAllActiveItems() {

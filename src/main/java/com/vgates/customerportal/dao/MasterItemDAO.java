@@ -19,6 +19,8 @@ public interface MasterItemDAO {
     MasterItem findMasterItemByID(long id);
 
     MasterItem findMasterItemByName(String name);
+    
+    List<MasterItem> findMasterItemByNameAndCategory(String name,String category);
 
     List<MasterItem> findAllActiveMasterItems();
 }

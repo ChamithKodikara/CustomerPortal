@@ -15,6 +15,7 @@ import java.util.List;
  * @author Chamith
  */
 public class MasterItemDAOImpl implements MasterItemDAO {
+
     private final static Logger LOGGER = Logger.getLogger(MasterItemDAOImpl.class);
 
     private final Session session;
@@ -112,6 +113,28 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             LOGGER.error("Sorry Cannot Find Item Detail !", ex);
         }
         return item;
+    }
+
+    @Override
+    public List<MasterItem> findMasterItemByNameAndCategory(String name, String category) {
+        List<MasterItem> resultList;
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("SELECT item FROM MasterItem item WHERE item.active =true  ");
+            if (name != null && !name.isEmpty()) {
+                sb.append(" AND item.itemName LIKE :name ");
+            }
+            if (category != null && !category.isEmpty()) {
+                sb.append(" AND item.category LIKE :category");
+            }
+            Query query = session.createQuery(sb.toString());
+            query.setParameter("name", name);
+            resultList = (List<MasterItem>) query.list();
+        } catch (Exception ex) {
+            resultList = null;
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return resultList;
     }
 
     @Override

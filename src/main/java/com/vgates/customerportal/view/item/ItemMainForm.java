@@ -5,17 +5,54 @@
  */
 package com.vgates.customerportal.view.item;
 
+import com.vgates.customerportal.controller.MasterItemController;
+import com.vgates.customerportal.controller.UserDetailController;
+import com.vgates.customerportal.model.MasterItem;
+import com.vgates.customerportal.model.UserDetail;
+import com.vgates.customerportal.util.MethodResult;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
 /**
  *
  * @author Chamith
  */
 public class ItemMainForm extends javax.swing.JPanel {
 
+    private final UserDetailController userDetailController;
+    private final MasterItemController itemController;
+
+    private final DefaultTableModel defaultServiceTableModel;
+
+    private UserDetail userDetail;
+    private MasterItem item;
+
     /**
      * Creates new form ItemMainForm
      */
     public ItemMainForm() {
         initComponents();
+        setSize(800, 550);
+
+        userDetailController = new UserDetailController();
+        itemController = new MasterItemController();
+
+        userDetail = userDetailController.findUserDetailForActiveLogin();
+
+        defaultServiceTableModel = (DefaultTableModel) tblItemDetail.getModel();
+        defaultServiceTableModel.setRowCount(0);
+
+        txtNewCost.setText("00.00");
+        txtNewDiscount.setText("00.00");
+        txtNewCategory.setText("");
+        txtNewItemName.setText("");
+        txtNewDesc.setText("");
+
+        txtSearchCategory.setText("");
+        txtSearchItemName.setText("");
+
     }
 
     /**
@@ -28,7 +65,7 @@ public class ItemMainForm extends javax.swing.JPanel {
     private void initComponents() {
 
         lblItemMain = new javax.swing.JLabel();
-        tabItemMain = new javax.swing.JTabbedPane();
+        panelSearchItem = new javax.swing.JTabbedPane();
         panelNewItem = new javax.swing.JPanel();
         lblNewItemMain = new javax.swing.JLabel();
         lblNewItemName = new javax.swing.JLabel();
@@ -44,12 +81,22 @@ public class ItemMainForm extends javax.swing.JPanel {
         txtNewDiscount = new javax.swing.JFormattedTextField();
         btnCancelAdd = new javax.swing.JButton();
         btnCancelAdd1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        txtSearchCategory = new javax.swing.JTextField();
+        lblSearchItemCategory = new javax.swing.JLabel();
+        lblSearchItemName = new javax.swing.JLabel();
+        txtSearchItemName = new javax.swing.JTextField();
+        lblNewItemMain1 = new javax.swing.JLabel();
+        btnFindItem = new javax.swing.JButton();
+        btnCancelSearchItem = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblItemDetail = new javax.swing.JTable();
 
         lblItemMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblItemMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblItemMain.setText("Item Details");
 
-        tabItemMain.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        panelSearchItem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         lblNewItemMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblNewItemMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -184,7 +231,130 @@ public class ItemMainForm extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        tabItemMain.addTab("New Item Details", panelNewItem);
+        panelSearchItem.addTab("New Item Details", panelNewItem);
+
+        txtSearchCategory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtSearchCategory.setEnabled(false);
+        txtSearchCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchCategoryActionPerformed(evt);
+            }
+        });
+
+        lblSearchItemCategory.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblSearchItemCategory.setText("Item Category");
+
+        lblSearchItemName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblSearchItemName.setText("Item Name");
+
+        txtSearchItemName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtSearchItemName.setEnabled(false);
+        txtSearchItemName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchItemNameActionPerformed(evt);
+            }
+        });
+
+        lblNewItemMain1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNewItemMain1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNewItemMain1.setText("Search Item Details");
+
+        btnFindItem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnFindItem.setText("Search Item");
+        btnFindItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindItemActionPerformed(evt);
+            }
+        });
+
+        btnCancelSearchItem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCancelSearchItem.setText("Cancel");
+        btnCancelSearchItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelSearchItemActionPerformed(evt);
+            }
+        });
+
+        tblItemDetail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Item", "Category", "Description", "Cost", "Discount"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblItemDetail);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblSearchItemName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSearchItemCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSearchCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(txtSearchItemName))
+                        .addGap(293, 293, 293))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblNewItemMain1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnFindItem)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2))
+                        .addContainerGap())))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblNewItemMain1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSearchItemName)
+                    .addComponent(txtSearchItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSearchItemCategory)
+                    .addComponent(txtSearchCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFindItem)
+                    .addComponent(btnCancelSearchItem))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panelSearchItem.addTab("Search Item Details", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -194,19 +364,19 @@ public class ItemMainForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblItemMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(tabItemMain)
+            .addComponent(panelSearchItem)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblItemMain, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabItemMain))
+                .addComponent(panelSearchItem))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNewItemNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewItemNameActionPerformed
-     
+
     }//GEN-LAST:event_txtNewItemNameActionPerformed
 
     private void txtNewCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewCategoryActionPerformed
@@ -214,31 +384,89 @@ public class ItemMainForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNewCategoryActionPerformed
 
     private void btnCancelAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddActionPerformed
-       
+        txtNewCost.setText("00.00");
+        txtNewDiscount.setText("00.00");
+        txtNewCategory.setText("");
+        txtNewItemName.setText("");
+        txtNewDesc.setText("");
     }//GEN-LAST:event_btnCancelAddActionPerformed
 
     private void btnCancelAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAdd1ActionPerformed
-        // TODO add your handling code here:
+        int responce = JOptionPane.showConfirmDialog(this, "Are you sure you want to add this Item...?", "Add New Item", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (responce == JOptionPane.YES_OPTION) {
+            item = new MasterItem();
+            item.setItemName(txtNewItemName.getText());
+            item.setCategory(txtNewCategory.getText());
+            item.setDescription(txtNewDesc.getText());
+            item.setCost(Double.parseDouble(txtNewCost.getText()));
+            item.setDiscount(Double.parseDouble(txtNewDiscount.getText()));
+
+            MethodResult result = itemController.addNewItemDetail(item);
+            if (result.isOk()) {
+                JOptionPane.showMessageDialog(this, result.getMessage(), "New Item", JOptionPane.INFORMATION_MESSAGE);
+                txtNewCost.setText("00.00");
+                txtNewDiscount.setText("00.00");
+                txtNewCategory.setText("");
+                txtNewItemName.setText("");
+                txtNewDesc.setText("");
+                item = new MasterItem();
+            } else {
+                JOptionPane.showMessageDialog(this, result.getMessage(), "New Item", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnCancelAdd1ActionPerformed
+
+    private void txtSearchCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchCategoryActionPerformed
+
+    private void txtSearchItemNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchItemNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchItemNameActionPerformed
+
+    private void btnFindItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindItemActionPerformed
+        defaultServiceTableModel.setRowCount(0);
+        List<MasterItem> itemList = itemController.searchItemByNameAndCategory(txtSearchItemName.getText(), txtSearchCategory.getText());
+        if (itemList != null) {
+            itemList.forEach(e -> {
+                Object rowData[] = {e.getItemName(), e.getCategory(), e.getDescription(), e.getCost(), e.getDiscount()};
+                defaultServiceTableModel.addRow(rowData);
+            });
+        }
+    }//GEN-LAST:event_btnFindItemActionPerformed
+
+    private void btnCancelSearchItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelSearchItemActionPerformed
+        defaultServiceTableModel.setRowCount(0);
+    }//GEN-LAST:event_btnCancelSearchItemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelAdd;
     private javax.swing.JButton btnCancelAdd1;
+    private javax.swing.JButton btnCancelSearchItem;
+    private javax.swing.JButton btnFindItem;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblItemMain;
     private javax.swing.JLabel lblNewCost;
     private javax.swing.JLabel lblNewDiscount;
     private javax.swing.JLabel lblNewItemCategory;
     private javax.swing.JLabel lblNewItemDesc;
     private javax.swing.JLabel lblNewItemMain;
+    private javax.swing.JLabel lblNewItemMain1;
     private javax.swing.JLabel lblNewItemName;
+    private javax.swing.JLabel lblSearchItemCategory;
+    private javax.swing.JLabel lblSearchItemName;
     private javax.swing.JPanel panelNewItem;
-    private javax.swing.JTabbedPane tabItemMain;
+    private javax.swing.JTabbedPane panelSearchItem;
+    private javax.swing.JTable tblItemDetail;
     private javax.swing.JTextField txtNewCategory;
     private javax.swing.JFormattedTextField txtNewCost;
     private javax.swing.JTextArea txtNewDesc;
     private javax.swing.JFormattedTextField txtNewDiscount;
     private javax.swing.JTextField txtNewItemName;
+    private javax.swing.JTextField txtSearchCategory;
+    private javax.swing.JTextField txtSearchItemName;
     // End of variables declaration//GEN-END:variables
 }
