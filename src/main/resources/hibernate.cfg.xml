@@ -32,6 +32,7 @@
         <mapping class="com.vgates.customerportal.model.MasterItem"/>
         <mapping class="com.vgates.customerportal.model.Payment"/>
         <mapping class="com.vgates.customerportal.model.OrderDetail"/>
+        <mapping class="com.vgates.customerportal.model.Invoice"/>
 
         <mapping class="com.vgates.customerportal.model.CustomerServiceMapper"/>
 

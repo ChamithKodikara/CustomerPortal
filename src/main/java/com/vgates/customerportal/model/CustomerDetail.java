@@ -62,6 +62,9 @@ public class CustomerDetail implements Serializable {
     @OneToMany(mappedBy = "customerDetail")
     private List<Payment> paymentList;
 
+    @OneToMany(mappedBy = "customerDetail")
+    private List<Invoice> invoiceList;
+
 
     public Long getId() {
         return id;
@@ -181,6 +184,14 @@ public class CustomerDetail implements Serializable {
 
     public void setPaymentList(List<Payment> paymentList) {
         this.paymentList = paymentList;
+    }
+
+    public List<Invoice> getInvoiceList() {
+        return invoiceList;
+    }
+
+    public void setInvoiceList(List<Invoice> invoiceList) {
+        this.invoiceList = invoiceList;
     }
 
     @Override
