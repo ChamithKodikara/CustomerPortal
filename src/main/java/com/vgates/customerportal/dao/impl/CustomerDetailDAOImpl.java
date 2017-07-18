@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import javax.persistence.NoResultException;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
 
     private final Session session;
 
-   private final DecimalFormat decimalFormat = new DecimalFormat("###");
+    private final DecimalFormat decimalFormat = new DecimalFormat("###");
 
     public CustomerDetailDAOImpl() {
         session = HibernateSessionManager.getSessionFactory().openSession();
@@ -28,7 +27,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
 
     @Override
     public String newCustomerRefNo() {
-        StringBuilder queryBulider=new StringBuilder();
+        StringBuilder queryBulider = new StringBuilder();
         queryBulider.append("SELECT FLOOR(RAND() * 999999)AS custRef FROM CUSTOMER_DETAIL WHERE 'custRef' NOT IN");
         queryBulider.append("(SELECT CUSTOMER_NO FROM CUSTOMER_DETAIL) LIMIT 1");
         Query query = session.createSQLQuery(queryBulider.toString());
@@ -47,7 +46,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             result.setOk(true);
             result.setMessage("Customer Detail Successfully Added !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry Customer Detail Add Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setStackMessage(ex.getMessage());
             result.setMessage("Sorry Customer Detail Add Error !");
         }
@@ -66,7 +65,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             result.setOk(true);
             result.setMessage("Customer Detail Successfully Updated !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry Customer Detail Update Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setStackMessage(ex.getMessage());
             result.setMessage("Sorry Customer Detail Update Error !");
         }
@@ -88,7 +87,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             result.setOk(true);
             result.setMessage("Customer Status Successfully Updated !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry Customer Status Change Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setStackMessage(ex.getMessage());
             result.setMessage("Sorry Customer Status Change Error !");
         }
@@ -105,8 +104,8 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             if (resultList != null && !resultList.isEmpty()) {
                 customerDetail = resultList.get(0);
             }
-        } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find Customer Detail By ID !", ex);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return customerDetail;
     }
@@ -120,7 +119,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             customerDetailList = (List<CustomerDetail>) query.list();
 
         } catch (Exception ex) {
-            LOGGER.error("Sorry Cannot Find Customer Detail By Name !", ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return customerDetailList;
     }
@@ -135,8 +134,8 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             if (resultList != null && !resultList.isEmpty()) {
                 customerDetail = resultList.get(0);
             }
-        } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find Customer Detail By Customer No !", ex);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return customerDetail;
     }
@@ -149,7 +148,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             customerDetailList = (List<CustomerDetail>) query.list();
 
         } catch (Exception ex) {
-            LOGGER.error("Sorry Cannot Find All Active Customer Details !", ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return customerDetailList;
     }
@@ -183,7 +182,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             customerDetailList = (List<CustomerDetail>) query.list();
 
         } catch (Exception ex) {
-            LOGGER.error("Sorry Cannot Find All Active Customer Details !", ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return customerDetailList;
     }
@@ -196,7 +195,7 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
             customerDetailList = (List<CustomerDetail>) query.list();
 
         } catch (Exception ex) {
-            LOGGER.error("Sorry Cannot Find All Active Customer Details !", ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return customerDetailList;
     }

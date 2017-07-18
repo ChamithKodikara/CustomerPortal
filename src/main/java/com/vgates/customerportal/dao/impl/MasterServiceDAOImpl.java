@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import javax.persistence.NoResultException;
 import java.util.List;
 
 /**
@@ -34,7 +33,7 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
             result.setOk(true);
             result.setMessage("Service Details Successfully Added !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry Service Detail Add Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setMessage("Sorry Service Detail Add Error !");
             result.setStackMessage(ex.getMessage());
 
@@ -54,7 +53,7 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
             result.setOk(true);
             result.setMessage("Service Details Successfully updated !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry Service Detail Update Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setMessage("Sorry Service Detail Update Error !");
             result.setStackMessage(ex.getMessage());
         }
@@ -76,7 +75,7 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
             result.setOk(true);
             result.setMessage("Service Status Successfully updated !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry Service Status Change Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setMessage("Sorry Service Status Change Error !");
             result.setStackMessage(ex.getMessage());
         }
@@ -93,8 +92,8 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
             if (resultList != null && !resultList.isEmpty()) {
                 service = resultList.get(0);
             }
-        } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find Service Detail !", ex);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return service;
     }
@@ -107,7 +106,7 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
             query.setParameter("name", name);
             serviceList = (List<MasterService>) query.list();
         } catch (Exception ex) {
-            LOGGER.error("Sorry Cannot Find Service Detail !", ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return serviceList;
     }
@@ -119,7 +118,7 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
             Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.active = true ");
             serviceList = (List<MasterService>) query.list();
         } catch (Exception ex) {
-            LOGGER.error("Sorry Cannot Find Service Detail !", ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return serviceList;
     }
@@ -146,7 +145,7 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
             query.setParameter("category", sbCategory.toString());
             serviceList = (List<MasterService>) query.list();
         } catch (Exception ex) {
-            LOGGER.error("Sorry Cannot Find Service Detail !", ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return serviceList;
     }

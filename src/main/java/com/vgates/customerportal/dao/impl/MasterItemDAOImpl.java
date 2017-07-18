@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import javax.persistence.NoResultException;
 import java.util.List;
 
 /**
@@ -35,7 +34,7 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             result.setOk(true);
             result.setMessage("Item Details Successfully Added !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry Item Detail Add Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setMessage("Sorry Item Detail Add Error !");
             result.setStackMessage(ex.getMessage());
         }
@@ -54,7 +53,7 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             result.setOk(true);
             result.setMessage("Item Details Successfully Updated !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry Item Detail Update Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setMessage("Sorry Item Detail Update Error !");
             result.setStackMessage(ex.getMessage());
         }
@@ -76,7 +75,7 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             result.setOk(true);
             result.setMessage("Item Status Successfully Updated !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry Item Status Change Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setMessage("Sorry Item Status Change Error !");
             result.setStackMessage(ex.getMessage());
         }
@@ -93,8 +92,8 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             if (resultList != null && !resultList.isEmpty()) {
                 item = resultList.get(0);
             }
-        } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find Item Detail !", ex);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return item;
     }
@@ -109,8 +108,8 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             if (resultList != null && !resultList.isEmpty()) {
                 item = resultList.get(0);
             }
-        } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find Item Detail !", ex);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return item;
     }
@@ -144,7 +143,7 @@ public class MasterItemDAOImpl implements MasterItemDAO {
             Query query = session.createQuery("SELECT item FROM MasterItem item WHERE item.active= true ");
             resultList = (List<MasterItem>) query.list();
         } catch (Exception ex) {
-            LOGGER.error("Sorry Cannot Find Item Detail !", ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return resultList;
     }
