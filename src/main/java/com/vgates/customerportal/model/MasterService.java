@@ -43,7 +43,7 @@ public class MasterService implements Serializable {
     private String createdBy;
 
     @OneToMany(mappedBy = "masterService")
-    private List<CustomerServiceMapper> customerServiceMapperList;
+    private List<InvoiceServiceMapper> invoiceServiceMapperList;
 
     public Long getId() {
         return id;
@@ -118,12 +118,12 @@ public class MasterService implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public List<CustomerServiceMapper> getCustomerServiceMapperList() {
-        return customerServiceMapperList;
+    public List<InvoiceServiceMapper> getInvoiceServiceMapperList() {
+        return invoiceServiceMapperList;
     }
 
-    public void setCustomerServiceMapperList(List<CustomerServiceMapper> customerServiceMapperList) {
-        this.customerServiceMapperList = customerServiceMapperList;
+    public void setInvoiceServiceMapperList(List<InvoiceServiceMapper> invoiceServiceMapperList) {
+        this.invoiceServiceMapperList = invoiceServiceMapperList;
     }
 
     @Override

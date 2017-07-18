@@ -2,6 +2,7 @@ package com.vgates.customerportal.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -19,21 +20,30 @@ public class Invoice implements Serializable {
     @Column(name = "INVOICE_NO")
     private String invoiceNo;
 
-    @Column(name = "INVOICE_AMOUNT")
-    private Double invoiceAmount;
+    @Column(name = "TOTAL_AMOUNT")
+    private Double totalAmount;
 
-    @Column(name = "DISCOUNT_AMOUNT")
-    private Double discountAmount;
+    @Column(name = "DISCOUNT")
+    private Double discount;
 
     @Column(name = "PAID_AMOUNT")
     private Double paidAmount;
 
+    @Column(name = "BALANCE_AMOUNT")
+    private Double balanceAmount;
+
     @Column(name = "FINAL_AMOUNT")
     private Double finalAmount;
+
+    @Column(name = "ACTIVE")
+    private Boolean active = true;
 
     @JoinColumn(name = "CUSTOMER_DETAIL")
     @ManyToOne
     private CustomerDetail customerDetail;
+
+    @OneToMany(mappedBy = "invoice")
+    private List<InvoiceServiceMapper> invoiceServiceMapperList;
 
     public Long getId() {
         return id;
@@ -51,20 +61,20 @@ public class Invoice implements Serializable {
         this.invoiceNo = invoiceNo;
     }
 
-    public Double getInvoiceAmount() {
-        return invoiceAmount;
+    public Double getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setInvoiceAmount(Double invoiceAmount) {
-        this.invoiceAmount = invoiceAmount;
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
-    public Double getDiscountAmount() {
-        return discountAmount;
+    public Double getDiscount() {
+        return discount;
     }
 
-    public void setDiscountAmount(Double discountAmount) {
-        this.discountAmount = discountAmount;
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 
     public Double getPaidAmount() {
@@ -75,6 +85,14 @@ public class Invoice implements Serializable {
         this.paidAmount = paidAmount;
     }
 
+    public Double getBalanceAmount() {
+        return balanceAmount;
+    }
+
+    public void setBalanceAmount(Double balanceAmount) {
+        this.balanceAmount = balanceAmount;
+    }
+
     public Double getFinalAmount() {
         return finalAmount;
     }
@@ -83,12 +101,28 @@ public class Invoice implements Serializable {
         this.finalAmount = finalAmount;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     public CustomerDetail getCustomerDetail() {
         return customerDetail;
     }
 
     public void setCustomerDetail(CustomerDetail customerDetail) {
         this.customerDetail = customerDetail;
+    }
+
+    public List<InvoiceServiceMapper> getInvoiceServiceMapperList() {
+        return invoiceServiceMapperList;
+    }
+
+    public void setInvoiceServiceMapperList(List<InvoiceServiceMapper> invoiceServiceMapperList) {
+        this.invoiceServiceMapperList = invoiceServiceMapperList;
     }
 
     @Override

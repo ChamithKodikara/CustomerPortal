@@ -9,7 +9,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "CUSTOMER_SERVICE_MAPPER")
-public class CustomerServiceMapper implements Serializable {
+public class InvoiceServiceMapper implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -17,9 +17,9 @@ public class CustomerServiceMapper implements Serializable {
     @Column(name = "ID")
     private Long id;
 
-    @JoinColumn(name = "CUSTOMER_DETAIL")
+    @JoinColumn(name = "INVOICE")
     @ManyToOne
-    private CustomerDetail customerDetail;
+    private Invoice invoice;
 
     @JoinColumn(name = "MASTER_SERVICE")
     @ManyToOne
@@ -47,12 +47,12 @@ public class CustomerServiceMapper implements Serializable {
         this.id = id;
     }
 
-    public CustomerDetail getCustomerDetail() {
-        return customerDetail;
+    public Invoice getInvoice() {
+        return invoice;
     }
 
-    public void setCustomerDetail(CustomerDetail customerDetail) {
-        this.customerDetail = customerDetail;
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 
     public MasterService getMasterService() {
@@ -104,10 +104,10 @@ public class CustomerServiceMapper implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof CustomerServiceMapper)) {
+        if (!(object instanceof InvoiceServiceMapper)) {
             return false;
         }
-        CustomerServiceMapper other = (CustomerServiceMapper) object;
+        InvoiceServiceMapper other = (InvoiceServiceMapper) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -116,6 +116,6 @@ public class CustomerServiceMapper implements Serializable {
 
     @Override
     public String toString() {
-        return "com.vgates.customerportal.model.CustomerServiceMapper[ id=" + id + " ]";
+        return "com.vgates.customerportal.model.InvoiceServiceMapper[ id=" + id + " ]";
     }
 }

@@ -30,11 +30,9 @@
         <mapping class="com.vgates.customerportal.model.CustomerDetail"/>
         <mapping class="com.vgates.customerportal.model.MasterService"/>
         <mapping class="com.vgates.customerportal.model.MasterItem"/>
-        <mapping class="com.vgates.customerportal.model.Payment"/>
-        <mapping class="com.vgates.customerportal.model.OrderDetail"/>
         <mapping class="com.vgates.customerportal.model.Invoice"/>
 
-        <mapping class="com.vgates.customerportal.model.CustomerServiceMapper"/>
+        <mapping class="com.vgates.customerportal.model.InvoiceServiceMapper"/>
 
     </session-factory>
 
