@@ -18,7 +18,7 @@ public interface MasterInvoiceDAO {
 
     Invoice findInvoiceByID(long id);
 
-    Invoice findInvoiceByInvoiceNo(String name);
+    Invoice findInvoiceByInvoiceNo(String invNo);
 
     List<Invoice> findAllActiveInvoices();
 }

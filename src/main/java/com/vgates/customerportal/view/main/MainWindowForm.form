@@ -101,7 +101,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnCustomerMain" alignment="0" pref="180" max="32767" attributes="0"/>
                           <Component id="btnServiceMain" alignment="1" pref="180" max="32767" attributes="0"/>
-                          <Component id="btnServiceMain1" alignment="0" pref="180" max="32767" attributes="0"/>
+                          <Component id="btnItemMain" alignment="0" pref="180" max="32767" attributes="0"/>
+                          <Component id="btnInvoiceMain" alignment="0" pref="180" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -115,8 +116,10 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnServiceMain" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnServiceMain1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="443" max="32767" attributes="0"/>
+                      <Component id="btnItemMain" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnInvoiceMain" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="402" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -144,7 +147,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnServiceMainActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnServiceMain1">
+            <Component class="javax.swing.JButton" name="btnItemMain">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
@@ -152,7 +155,18 @@
                 <Property name="text" type="java.lang.String" value="Item Details"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnServiceMain1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnItemMainActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnInvoiceMain">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Invoice"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInvoiceMainActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

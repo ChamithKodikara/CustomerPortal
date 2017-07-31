@@ -5,6 +5,7 @@ import com.vgates.customerportal.model.Invoice;
 import com.vgates.customerportal.session.HibernateSessionManager;
 import com.vgates.customerportal.util.MethodResult;
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -41,26 +42,86 @@ public class MasterInvoiceDAOImpl implements MasterInvoiceDAO {
 
     @Override
     public MethodResult updateInvoice(Invoice invoice) {
-        return null;
+        MethodResult result = new MethodResult();
+        result.setOk(false);
+        try {
+            session.beginTransaction();
+            session.update(invoice);
+            session.flush();
+            session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("Invoice Successfully Updated !");
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+            result.setMessage("Sorry Invoice Update Error !");
+            result.setStackMessage(ex.getMessage());
+        }
+        return result;
     }
 
     @Override
     public MethodResult changeInvoiceStatus(boolean status, long invoiceID) {
-        return null;
+        MethodResult result = new MethodResult();
+        result.setOk(false);
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("UPDATE Invoice inv SET inv.active = :status WHERE inv.id= :id");
+            query.setParameter("status", status);
+            query.setParameter("id", invoiceID);
+            query.executeUpdate();
+            session.flush();
+            session.getTransaction().commit();
+            result.setOk(true);
+            result.setMessage("Invoice Status Successfully Updated !");
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+            result.setMessage("Sorry Invoice Status Change Error !");
+            result.setStackMessage(ex.getMessage());
+        }
+        return result;
     }
 
     @Override
     public Invoice findInvoiceByID(long id) {
-        return null;
+        Invoice invoice = null;
+        try {
+            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.id= :id");
+            query.setParameter("id", id);
+            List<Invoice> resultList = (List<Invoice>) query.list();
+            if (resultList != null && !resultList.isEmpty()) {
+                invoice = resultList.get(0);
+            }
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return invoice;
     }
 
     @Override
-    public Invoice findInvoiceByInvoiceNo(String name) {
-        return null;
+    public Invoice findInvoiceByInvoiceNo(String invNo) {
+        Invoice invoice = null;
+        try {
+            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.invoiceNo= :invNo");
+            query.setParameter("invNo", invNo);
+            List<Invoice> resultList = (List<Invoice>) query.list();
+            if (resultList != null && !resultList.isEmpty()) {
+                invoice = resultList.get(0);
+            }
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return invoice;
     }
 
     @Override
     public List<Invoice> findAllActiveInvoices() {
-        return null;
+        List<Invoice> resultList = null;
+        try {
+            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true ");
+            resultList = (List<Invoice>) query.list();
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return resultList;
     }
 }

@@ -2,6 +2,7 @@ package com.vgates.customerportal.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +20,13 @@ public class Invoice implements Serializable {
 
     @Column(name = "INVOICE_NO")
     private String invoiceNo;
+
+    @Column(name = "CREATED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     @Column(name = "TOTAL_AMOUNT")
     private Double totalAmount;
@@ -123,6 +131,22 @@ public class Invoice implements Serializable {
 
     public void setInvoiceServiceMapperList(List<InvoiceServiceMapper> invoiceServiceMapperList) {
         this.invoiceServiceMapperList = invoiceServiceMapperList;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
