@@ -421,6 +421,11 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 comboServiceNameItemStateChanged(evt);
             }
         });
+        comboServiceName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboServiceNameActionPerformed(evt);
+            }
+        });
 
         lblUpdateServiceName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUpdateServiceName.setText("Category");
@@ -685,6 +690,10 @@ public class ServiceMainForm extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void comboServiceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboServiceNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboServiceNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

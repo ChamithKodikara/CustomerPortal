@@ -5,14 +5,17 @@
  */
 package com.vgates.customerportal.view.invoice;
 
+import com.vgates.customerportal.controller.MasterServiceController;
 import com.vgates.customerportal.controller.UserDetailController;
 import com.vgates.customerportal.model.Invoice;
+import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.model.UserDetail;
 import com.vgates.customerportal.util.MethodResult;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -21,11 +24,13 @@ import java.util.Date;
 public class InvoiceMainForm extends javax.swing.JPanel {
 
     private final UserDetailController userDetailController;
+    private final MasterServiceController serviceController;
 
     private final DefaultTableModel defaultServiceTableModel;
 
     private UserDetail userDetail;
     private Invoice invoice;
+    private MasterService searchedService;
 
     /**
      * Creates new form InvoiceMainForm
@@ -35,22 +40,33 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         setSize(800, 550);
 
         userDetailController = new UserDetailController();
+        serviceController = new MasterServiceController();
 
         userDetail = userDetailController.findUserDetailForActiveLogin();
 
-        defaultServiceTableModel = (DefaultTableModel) tblInvoiceDetail.getModel();
+        defaultServiceTableModel = (DefaultTableModel) tblServiceDetail.getModel();
         defaultServiceTableModel.setRowCount(0);
 
-        txtNewCost.setText("00.00");
-        txtNewDiscount.setText("00.00");        
+        txtNewTotalCost.setText("00.00");
+        txtNewDiscount.setText("00.00");
         txtNewPaidAmount.setText("00.00");
         txtNewBalance.setText("00.00");
+        txtNewFinalAmount.setText("00.00");
         txtNewInvoiceNo.setText("");
         txtNewDesc.setText("");
 
         txtSearchInvoiceDate.setText("");
         txtSearchInvoiceNo.setText("");
+        loadServiceList();
+    }
 
+    private void loadServiceList() {
+        comboServiceName.removeAllItems();
+        comboServiceName.addItem("[SELECT]");
+        List<MasterService> serviceList = serviceController.searchAllActiveService();
+        serviceList.forEach(e -> {
+            comboServiceName.addItem(e);
+        });
     }
 
     /**
@@ -73,15 +89,21 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewDesc = new javax.swing.JTextArea();
         lblNewCost = new javax.swing.JLabel();
         lblNewDiscount = new javax.swing.JLabel();
-        txtNewCost = new javax.swing.JFormattedTextField();
-        txtNewDiscount = new javax.swing.JFormattedTextField();
         btnCancelAdd = new javax.swing.JButton();
         btnNewInvoice = new javax.swing.JButton();
-        lblNewCost1 = new javax.swing.JLabel();
+        lblNewPaidAmount = new javax.swing.JLabel();
+        lblNewBalance = new javax.swing.JLabel();
+        lblNewService = new javax.swing.JLabel();
+        comboServiceName = new javax.swing.JComboBox();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblServiceDetail = new javax.swing.JTable();
+        btnAdd = new javax.swing.JButton();
+        lblNewFinalPrice = new javax.swing.JLabel();
+        txtNewTotalCost = new javax.swing.JFormattedTextField();
+        txtNewDiscount = new javax.swing.JFormattedTextField();
+        txtNewFinalAmount = new javax.swing.JFormattedTextField();
         txtNewPaidAmount = new javax.swing.JFormattedTextField();
         txtNewBalance = new javax.swing.JFormattedTextField();
-        lblNewCost2 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         txtSearchInvoiceDate = new javax.swing.JTextField();
         lblSearchInvoiceDate = new javax.swing.JLabel();
@@ -127,20 +149,6 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         lblNewDiscount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNewDiscount.setText("Discount");
 
-        txtNewCost.setEditable(false);
-        txtNewCost.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        txtNewCost.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtNewCost.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        txtNewDiscount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        txtNewDiscount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtNewDiscount.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtNewDiscount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNewDiscountActionPerformed(evt);
-            }
-        });
-
         btnCancelAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCancelAdd.setText("Cancel");
         btnCancelAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -150,29 +158,136 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         });
 
         btnNewInvoice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnNewInvoice.setText("Save Item");
+        btnNewInvoice.setText("Save Invoice");
         btnNewInvoice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewInvoiceActionPerformed(evt);
             }
         });
 
-        lblNewCost1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblNewCost1.setText("Paid Amount");
+        lblNewPaidAmount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNewPaidAmount.setText("Paid Amount");
+
+        lblNewBalance.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNewBalance.setText("Balance");
+
+        lblNewService.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNewService.setText("Service");
+
+        comboServiceName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        comboServiceName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "[SELECT]" }));
+        comboServiceName.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboServiceNameItemStateChanged(evt);
+            }
+        });
+        comboServiceName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboServiceNameActionPerformed(evt);
+            }
+        });
+
+        tblServiceDetail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Service", "Description", "Cost", "Discount"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblServiceDetail);
+
+        btnAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        lblNewFinalPrice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNewFinalPrice.setText("Final Amount");
+
+        txtNewTotalCost.setEditable(false);
+        txtNewTotalCost.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtNewTotalCost.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtNewTotalCost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNewTotalCostActionPerformed(evt);
+            }
+        });
+
+        txtNewDiscount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtNewDiscount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtNewDiscount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNewDiscountFocusLost(evt);
+            }
+        });
+        txtNewDiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNewDiscountActionPerformed(evt);
+            }
+        });
+        txtNewDiscount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNewDiscountKeyPressed(evt);
+            }
+        });
+
+        txtNewFinalAmount.setEditable(false);
+        txtNewFinalAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtNewFinalAmount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtNewFinalAmount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNewFinalAmountActionPerformed(evt);
+            }
+        });
 
         txtNewPaidAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtNewPaidAmount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtNewPaidAmount.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtNewPaidAmount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNewPaidAmountFocusLost(evt);
+            }
+        });
+        txtNewPaidAmount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNewPaidAmountActionPerformed(evt);
+            }
+        });
+        txtNewPaidAmount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNewPaidAmountKeyPressed(evt);
+            }
+        });
 
         txtNewBalance.setEditable(false);
         txtNewBalance.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtNewBalance.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtNewBalance.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        lblNewCost2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblNewCost2.setText("Balance");
-
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtNewBalance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNewBalanceActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelNewItemLayout = new javax.swing.GroupLayout(panelNewItem);
         panelNewItem.setLayout(panelNewItemLayout);
@@ -181,47 +296,60 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             .addGroup(panelNewItemLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNewItemMain, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
                     .addGroup(panelNewItemLayout.createSequentialGroup()
-                        .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblNewInvoiceNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNewInvoiceDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelNewItemLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(panelNewItemLayout.createSequentialGroup()
+                                        .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lblNewDiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblNewCost, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtNewTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNewDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(panelNewItemLayout.createSequentialGroup()
+                                        .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblNewFinalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblNewBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblNewPaidAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtNewFinalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNewPaidAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNewBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(19, 19, 19))
+                    .addGroup(panelNewItemLayout.createSequentialGroup()
                         .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNewItemMain, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
                             .addGroup(panelNewItemLayout.createSequentialGroup()
-                                .addComponent(txtNewInvoiceNo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 458, Short.MAX_VALUE))
+                                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblNewInvoiceNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNewInvoiceDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelNewItemLayout.createSequentialGroup()
+                                        .addComponent(txtNewInvoiceNo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 458, Short.MAX_VALUE))
+                                    .addGroup(panelNewItemLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNewItemLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnNewInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8))
                             .addGroup(panelNewItemLayout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNewItemLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnNewInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNewItemLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNewItemLayout.createSequentialGroup()
-                        .addComponent(lblNewCost2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNewBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNewItemLayout.createSequentialGroup()
-                        .addComponent(lblNewCost1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNewPaidAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNewItemLayout.createSequentialGroup()
-                        .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblNewDiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNewCost, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNewCost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                            .addComponent(txtNewDiscount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField1))))
-                .addGap(19, 19, 19))
+                                .addComponent(lblNewService, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         panelNewItemLayout.setVerticalGroup(
             panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,27 +364,34 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNewInvoiceDesc)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNewCost)
-                    .addComponent(txtNewCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelNewItemLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(lblNewDiscount))
-                    .addComponent(txtNewDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNewCost1)
-                    .addComponent(txtNewPaidAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNewCost2)
-                    .addComponent(txtNewBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNewService)
+                    .addComponent(comboServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNewCost)
+                    .addComponent(txtNewTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNewDiscount)
+                    .addComponent(txtNewDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNewFinalPrice)
+                    .addComponent(txtNewFinalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNewPaidAmount)
+                    .addComponent(txtNewPaidAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNewBalance)
+                    .addComponent(txtNewBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelAdd)
                     .addComponent(btnNewInvoice))
@@ -412,12 +547,14 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNewInvoiceNoActionPerformed
 
     private void btnCancelAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddActionPerformed
-        txtNewCost.setText("00.00");
+        txtNewTotalCost.setText("00.00");
         txtNewDiscount.setText("00.00");
         txtNewPaidAmount.setText("00.00");
         txtNewBalance.setText("00.00");
+        txtNewFinalAmount.setText("00.00");
         txtNewInvoiceNo.setText("");
         txtNewDesc.setText("");
+        defaultServiceTableModel.setRowCount(0);
     }//GEN-LAST:event_btnCancelAddActionPerformed
 
     private void btnNewInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewInvoiceActionPerformed
@@ -427,7 +564,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             invoice.setInvoiceNo(txtNewInvoiceNo.getText());
             invoice.setCreatedDate(new Date());
             invoice.setDescription(txtNewDesc.getText());
-            invoice.setTotalAmount(Double.parseDouble(txtNewCost.getText()));
+            invoice.setTotalAmount(Double.parseDouble(txtNewTotalCost.getText()));
             invoice.setDiscount(Double.parseDouble(txtNewDiscount.getText()));
             invoice.setPaidAmount(Double.parseDouble(txtNewPaidAmount.getText()));
             invoice.setBalanceAmount(Double.parseDouble(txtNewBalance.getText()));
@@ -435,10 +572,11 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             MethodResult result = new MethodResult();
             if (result.isOk()) {
                 JOptionPane.showMessageDialog(this, result.getMessage(), "New Invoice", JOptionPane.INFORMATION_MESSAGE);
-                txtNewCost.setText("00.00");
+                txtNewTotalCost.setText("00.00");
                 txtNewDiscount.setText("00.00");
                 txtNewPaidAmount.setText("00.00");
                 txtNewBalance.setText("00.00");
+                txtNewFinalAmount.setText("00.00");
                 txtNewInvoiceNo.setText("");
                 txtNewDesc.setText("");
                 invoice = new Invoice();
@@ -471,40 +609,100 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         defaultServiceTableModel.setRowCount(0);
     }//GEN-LAST:event_btnCancelSearchInvoiceActionPerformed
 
+    private void comboServiceNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboServiceNameItemStateChanged
+        if (comboServiceName.getSelectedIndex() != 0) {
+            searchedService = (MasterService) comboServiceName.getSelectedItem();
+        } else {
+            searchedService = null;
+        }
+    }//GEN-LAST:event_comboServiceNameItemStateChanged
+
+    private void comboServiceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboServiceNameActionPerformed
+
+    }//GEN-LAST:event_comboServiceNameActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if (searchedService != null) {
+            Object[] rowData = {searchedService.getServiceName(), searchedService.getDescription(), searchedService.getCost(), searchedService.getDiscount()};
+            defaultServiceTableModel.addRow(rowData);
+            txtNewTotalCost.setText(String.valueOf(Double.parseDouble(txtNewTotalCost.getText()) + searchedService.getCost()));
+            txtNewDiscount.setText(String.valueOf(Double.parseDouble(txtNewDiscount.getText()) + searchedService.getDiscount()));
+            txtNewFinalAmount.setText(String.valueOf(Double.parseDouble(txtNewFinalAmount.getText()) + searchedService.getCost()));
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtNewTotalCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewTotalCostActionPerformed
+
+    }//GEN-LAST:event_txtNewTotalCostActionPerformed
+
     private void txtNewDiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewDiscountActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtNewDiscountActionPerformed
+
+    private void txtNewFinalAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewFinalAmountActionPerformed
+
+    }//GEN-LAST:event_txtNewFinalAmountActionPerformed
+
+    private void txtNewPaidAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPaidAmountActionPerformed
+
+    }//GEN-LAST:event_txtNewPaidAmountActionPerformed
+
+    private void txtNewBalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewBalanceActionPerformed
+
+    }//GEN-LAST:event_txtNewBalanceActionPerformed
+
+    private void txtNewDiscountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewDiscountKeyPressed
+
+    }//GEN-LAST:event_txtNewDiscountKeyPressed
+
+    private void txtNewPaidAmountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewPaidAmountKeyPressed
+
+    }//GEN-LAST:event_txtNewPaidAmountKeyPressed
+
+    private void txtNewDiscountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNewDiscountFocusLost
+        txtNewFinalAmount.setText(String.valueOf(Double.parseDouble(txtNewTotalCost.getText()) - Double.parseDouble(txtNewDiscount.getText())));
+    }//GEN-LAST:event_txtNewDiscountFocusLost
+
+    private void txtNewPaidAmountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNewPaidAmountFocusLost
+        txtNewBalance.setText(String.valueOf(Double.parseDouble(txtNewPaidAmount.getText()) - Double.parseDouble(txtNewFinalAmount.getText())));
+    }//GEN-LAST:event_txtNewPaidAmountFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancelAdd;
     private javax.swing.JButton btnCancelSearchInvoice;
     private javax.swing.JButton btnFindInvoice;
     private javax.swing.JButton btnNewInvoice;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JComboBox comboServiceName;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblInvoiceMain;
+    private javax.swing.JLabel lblNewBalance;
     private javax.swing.JLabel lblNewCost;
-    private javax.swing.JLabel lblNewCost1;
-    private javax.swing.JLabel lblNewCost2;
     private javax.swing.JLabel lblNewDiscount;
+    private javax.swing.JLabel lblNewFinalPrice;
     private javax.swing.JLabel lblNewInvoiceDesc;
     private javax.swing.JLabel lblNewInvoiceNo;
     private javax.swing.JLabel lblNewItemMain;
+    private javax.swing.JLabel lblNewPaidAmount;
+    private javax.swing.JLabel lblNewService;
     private javax.swing.JLabel lblSearchInvoice;
     private javax.swing.JLabel lblSearchInvoiceDate;
     private javax.swing.JLabel lblSearchInvoiceNo;
     private javax.swing.JPanel panelNewItem;
     private javax.swing.JTabbedPane panelSearchInvoice;
     private javax.swing.JTable tblInvoiceDetail;
+    private javax.swing.JTable tblServiceDetail;
     private javax.swing.JFormattedTextField txtNewBalance;
-    private javax.swing.JFormattedTextField txtNewCost;
     private javax.swing.JTextArea txtNewDesc;
     private javax.swing.JFormattedTextField txtNewDiscount;
+    private javax.swing.JFormattedTextField txtNewFinalAmount;
     private javax.swing.JTextField txtNewInvoiceNo;
     private javax.swing.JFormattedTextField txtNewPaidAmount;
+    private javax.swing.JFormattedTextField txtNewTotalCost;
     private javax.swing.JTextField txtSearchInvoiceDate;
     private javax.swing.JTextField txtSearchInvoiceNo;
     // End of variables declaration//GEN-END:variables
