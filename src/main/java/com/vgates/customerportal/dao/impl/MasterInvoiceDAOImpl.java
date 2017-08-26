@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -118,6 +119,46 @@ public class MasterInvoiceDAOImpl implements MasterInvoiceDAO {
         List<Invoice> resultList = null;
         try {
             Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true ");
+            resultList = (List<Invoice>) query.list();
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Invoice> findAllActiveInvoicesForDay(Date date) {
+        List<Invoice> resultList = null;
+        try {
+            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true AND DATE(inv.createdDate) = :invDate");
+            query.setParameter("invDate", date);
+            resultList = (List<Invoice>) query.list();
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Invoice> findAllActiveInvoicesByMonth(int year, int month) {
+        List<Invoice> resultList = null;
+        try {
+            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true AND YEAR(inv.createdDate) = :invYear AND MONTH(inv.createdDate) = :invMonth");
+            query.setParameter("invYear", year);
+            query.setParameter("invMonth", month);
+            resultList = (List<Invoice>) query.list();
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<Invoice> findAllActiveInvoicesByYear(int year) {
+        List<Invoice> resultList = null;
+        try {
+            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true AND YEAR(inv.createdDate) = :invYear");
+            query.setParameter("invYear", year);
             resultList = (List<Invoice>) query.list();
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);

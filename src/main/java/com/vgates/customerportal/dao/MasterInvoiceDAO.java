@@ -3,6 +3,7 @@ package com.vgates.customerportal.dao;
 import com.vgates.customerportal.model.Invoice;
 import com.vgates.customerportal.util.MethodResult;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,4 +22,10 @@ public interface MasterInvoiceDAO {
     Invoice findInvoiceByInvoiceNo(String invNo);
 
     List<Invoice> findAllActiveInvoices();
+
+    List<Invoice> findAllActiveInvoicesForDay(Date date);
+
+    List<Invoice> findAllActiveInvoicesByMonth(int year, int month);
+
+    List<Invoice> findAllActiveInvoicesByYear(int year);
 }

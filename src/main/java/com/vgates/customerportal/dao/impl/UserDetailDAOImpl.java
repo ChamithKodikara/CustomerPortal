@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import javax.persistence.NoResultException;
 import java.util.List;
 
 /**
@@ -34,7 +33,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             result.setOk(true);
             result.setMessage("User Details Successfully Added !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry User Detail Add Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setMessage("Sorry User Detail Add Error !");
             result.setStackMessage(ex.getMessage());
         }
@@ -53,7 +52,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             result.setOk(true);
             result.setMessage("User Details Successfully updated !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry User Detail Update Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setMessage("Sorry User Detail Update Error !");
             result.setStackMessage(ex.getMessage());
         }
@@ -75,7 +74,7 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             result.setOk(true);
             result.setMessage("User status Successfully updated !");
         } catch (Exception ex) {
-            LOGGER.error("Sorry User Status Change Error !", ex);
+            LOGGER.error(ex.getMessage(), ex);
             result.setMessage("Sorry User Status Change Error !!");
             result.setStackMessage(ex.getMessage());
         }
@@ -92,8 +91,8 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             if (resultList != null && !resultList.isEmpty()) {
                 userDetail = resultList.get(0);
             }
-        } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find User Detail !", ex);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return userDetail;
     }
@@ -107,8 +106,8 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             if (resultList != null && !resultList.isEmpty()) {
                 userDetail = resultList.get(0);
             }
-        } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find User Detail !", ex);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return userDetail;
     }
@@ -127,8 +126,8 @@ public class UserDetailDAOImpl implements UserDetailDAO {
                 loginSuccess = Boolean.TRUE;
                 updateUserDetail(userDetail);
             }
-        } catch (NoResultException ex) {
-            LOGGER.error("Sorry Cannot Find User Detail To Login !", ex);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return loginSuccess;
     }
@@ -144,8 +143,8 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             session.flush();
             session.getTransaction().commit();
             logoutSuccess = Boolean.TRUE;
-        } catch (NoResultException ex) {
-            LOGGER.error("Logout Failed !", ex);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return logoutSuccess;
 
@@ -162,8 +161,8 @@ public class UserDetailDAOImpl implements UserDetailDAO {
             session.getTransaction().commit();
             logoutSuccess = Boolean.TRUE;
             HibernateSessionManager.shutdown();
-        } catch (NoResultException ex) {
-            LOGGER.error("Logout Failed !", ex);
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
         return logoutSuccess;
 
