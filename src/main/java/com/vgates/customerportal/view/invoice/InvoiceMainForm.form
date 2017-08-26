@@ -98,6 +98,7 @@
                                                   <Component id="txtNewBalance" min="-2" pref="170" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
+                                          <Component id="lblOutput" alignment="0" min="-2" pref="362" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -193,7 +194,9 @@
                           <Component id="lblNewBalance" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNewBalance" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblOutput" pref="27" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnCancelAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnNewInvoice" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -420,7 +423,9 @@
                 <Property name="horizontalAlignment" type="int" value="4"/>
               </Properties>
               <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNewDiscountFocusGained"/>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNewDiscountFocusLost"/>
+                <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="txtNewDiscountCaretPositionChanged"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewDiscountActionPerformed"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNewDiscountKeyPressed"/>
               </Events>
@@ -445,7 +450,9 @@
                 <Property name="horizontalAlignment" type="int" value="4"/>
               </Properties>
               <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNewPaidAmountFocusGained"/>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNewPaidAmountFocusLost"/>
+                <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="txtNewPaidAmountCaretPositionChanged"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewPaidAmountActionPerformed"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNewPaidAmountKeyPressed"/>
               </Events>
@@ -461,6 +468,13 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewBalanceActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblOutput">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="cc" type="rgb"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -532,7 +546,7 @@
                           <Component id="btnCancelSearchInvoice" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="299" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="327" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
