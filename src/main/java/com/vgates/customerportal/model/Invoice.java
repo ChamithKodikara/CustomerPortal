@@ -52,7 +52,7 @@ public class Invoice implements Serializable {
 
     @JoinColumn(name = "EMPLOYEE_DETAIL")
     @ManyToOne
-    private CustomerDetail employeeDetail;
+    private EmployeeDetail employeeDetail;
 
     @OneToMany(mappedBy = "invoice")
     private List<InvoiceServiceMapper> invoiceServiceMapperList;
@@ -153,11 +153,11 @@ public class Invoice implements Serializable {
         this.description = description;
     }
 
-    public CustomerDetail getEmployeeDetail() {
+    public EmployeeDetail getEmployeeDetail() {
         return employeeDetail;
     }
 
-    public void setEmployeeDetail(CustomerDetail employeeDetail) {
+    public void setEmployeeDetail(EmployeeDetail employeeDetail) {
         this.employeeDetail = employeeDetail;
     }
 
