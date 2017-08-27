@@ -5,8 +5,10 @@
  */
 package com.vgates.customerportal.view.invoice;
 
+import com.vgates.customerportal.controller.CustomerDetailController;
 import com.vgates.customerportal.controller.MasterServiceController;
 import com.vgates.customerportal.controller.UserDetailController;
+import com.vgates.customerportal.model.CustomerDetail;
 import com.vgates.customerportal.model.Invoice;
 import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.model.UserDetail;
@@ -41,6 +43,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
     private final UserDetailController userDetailController;
     private final MasterServiceController serviceController;
+    private final CustomerDetailController customerDetailController;
 
     private final DefaultTableModel defaultServiceTableModel;
     private final Logger LOGGER = Logger.getLogger(InvoiceMainForm.class);
@@ -61,6 +64,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         serviceController = new MasterServiceController();
 
         userDetail = userDetailController.findUserDetailForActiveLogin();
+        customerDetailController = new CustomerDetailController();
 
         defaultServiceTableModel = (DefaultTableModel) tblServiceDetail.getModel();
         defaultServiceTableModel.setRowCount(0);
@@ -76,11 +80,20 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtSearchInvoiceDate.setText("");
         txtSearchInvoiceNo.setText("");
         loadServiceList();
-
+        loadCustomerList();
         jasperFile = new File("./reports/InvoiceReport.jasper");
         dtm = (DefaultTableModel) tblInvoiceDetail.getModel();
     }
 
+    private void loadCustomerList(){
+        comboCustomer.removeAllItems();
+        comboCustomer.addItem("[SELECT]");
+        List<CustomerDetail> allActiveCustomerList = customerDetailController.getAllActiveCustomerList();
+        allActiveCustomerList.forEach(e ->{
+            comboCustomer.addItem(e);
+        });
+    }
+    
     private void loadServiceList() {
         comboServiceName.removeAllItems();
         comboServiceName.addItem("[SELECT]");
@@ -127,6 +140,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewBalance = new javax.swing.JFormattedTextField();
         lblOutput = new javax.swing.JLabel();
         btnPrintInvoice = new javax.swing.JButton();
+        lblCustomer = new javax.swing.JLabel();
+        comboCustomer = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         txtSearchInvoiceDate = new javax.swing.JTextField();
         lblSearchInvoiceDate = new javax.swing.JLabel();
@@ -342,6 +357,22 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             }
         });
 
+        lblCustomer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblCustomer.setText("Customer");
+
+        comboCustomer.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        comboCustomer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "[SELECT]" }));
+        comboCustomer.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboCustomerItemStateChanged(evt);
+            }
+        });
+        comboCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCustomerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelNewItemLayout = new javax.swing.GroupLayout(panelNewItem);
         panelNewItem.setLayout(panelNewItemLayout);
         panelNewItemLayout.setHorizontalGroup(
@@ -405,7 +436,12 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(panelNewItemLayout.createSequentialGroup()
+                        .addComponent(lblCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         panelNewItemLayout.setVerticalGroup(
             panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,6 +452,10 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNewInvoiceNo)
                     .addComponent(txtNewInvoiceNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCustomer)
+                    .addComponent(comboCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNewInvoiceDesc)
@@ -448,8 +488,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                     .addComponent(lblNewBalance)
                     .addComponent(txtNewBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelAdd)
                     .addComponent(btnNewInvoice)
@@ -576,7 +616,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                     .addComponent(btnFindInvoice)
                     .addComponent(btnCancelSearchInvoice))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -622,7 +662,10 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private void btnNewInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewInvoiceActionPerformed
 //        int responce = JOptionPane.showConfirmDialog(this, "Are you sure you want to add this Invoice...?", "New Invoice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 //        int responce = JOptionPane.YES_OPTION;
-
+        if (comboCustomer.getSelectedIndex() == 0 ) {
+            lblOutput.setText("Customer Not selected...");
+            return;
+        }
         if (Double.parseDouble(txtNewFinalAmount.getText()) <= Double.parseDouble(txtNewPaidAmount.getText())) {
 //            LOGGER.debug("Enter to if condition");
 //            if (responce == JOptionPane.YES_OPTION) {
@@ -634,7 +677,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             invoice.setDiscount(Double.parseDouble(txtNewDiscount.getText()));
             invoice.setPaidAmount(Double.parseDouble(txtNewPaidAmount.getText()));
             invoice.setBalanceAmount(Double.parseDouble(txtNewBalance.getText()));
-
+            invoice.setCustomerDetail((CustomerDetail) comboCustomer.getSelectedItem());
             MethodResult result = new MethodResult();
             if (result.isOk()) {
 
@@ -782,6 +825,14 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnPrintInvoiceActionPerformed
 
+    private void comboCustomerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCustomerItemStateChanged
+        lblOutput.setText("");
+    }//GEN-LAST:event_comboCustomerItemStateChanged
+
+    private void comboCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCustomerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -790,11 +841,13 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private javax.swing.JButton btnFindInvoice;
     private javax.swing.JButton btnNewInvoice;
     private javax.swing.JButton btnPrintInvoice;
+    private javax.swing.JComboBox comboCustomer;
     private javax.swing.JComboBox comboServiceName;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblCustomer;
     private javax.swing.JLabel lblInvoiceMain;
     private javax.swing.JLabel lblNewBalance;
     private javax.swing.JLabel lblNewCost;
