@@ -48,7 +48,7 @@ public class MasterInvoiceController {
         return masterInvoiceDAO.findAllActiveInvoicesForDay(date);
     }
 
-    public List<Invoice> getAllInvoicesOfMonth(int month, int year) {
+    public List<Invoice> getAllInvoicesOfMonth(int year, int month) {
         return masterInvoiceDAO.findAllActiveInvoicesByMonth(year, month);
     }
 
