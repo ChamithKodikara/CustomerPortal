@@ -14,23 +14,16 @@ import com.vgates.customerportal.model.Invoice;
 import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.model.UserDetail;
 import com.vgates.customerportal.util.MethodResult;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
-import net.sf.jasperreports.view.JasperViewer;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,6 +46,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private final MasterInvoiceController invoiceController;
 
     private final DefaultTableModel defaultServiceTableModel;
+    private final DefaultTableModel dtmOfDailyReportTbl;
     private final Logger LOGGER = Logger.getLogger(InvoiceMainForm.class);
     private UserDetail userDetail;
     private Invoice invoice;
@@ -97,7 +91,9 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         jasperFile = new File("./reports/InvoiceReport.jasper");
         dtm = (DefaultTableModel) tblInvoiceDetail.getModel();
         pattern = Pattern.compile("^\\d+.\\d?\\d?$");
-
+        
+        datePickerDailyReport.setDate(new Date());
+        dtmOfDailyReportTbl = (DefaultTableModel) tblDailyReport.getModel();
     }
 
     private void loadCustomerList() {
@@ -168,6 +164,16 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         btnCancelSearchInvoice = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblInvoiceDetail = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        lblDate = new javax.swing.JLabel();
+        datePickerDailyReport = new org.jdesktop.swingx.JXDatePicker();
+        btnViewDailyRecords = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblDailyReport = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
 
         lblInvoiceMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblInvoiceMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -618,6 +624,120 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
         panelSearchInvoice.addTab("Search Invoices", jPanel1);
 
+        lblDate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblDate.setText("Date");
+
+        btnViewDailyRecords.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnViewDailyRecords.setText("View");
+        btnViewDailyRecords.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewDailyRecordsActionPerformed(evt);
+            }
+        });
+
+        tblDailyReport.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Invoice No", "Customer", "Billed by", "Employee", "Total Cost", "Final Cost"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tblDailyReport);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(datePickerDailyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnViewDailyRecords)
+                        .addGap(316, 316, 316))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4)
+                        .addContainerGap())))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDate)
+                    .addComponent(datePickerDailyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnViewDailyRecords))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Daily", jPanel3);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 770, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 490, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Monthly", jPanel4);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 770, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 490, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Annually", jPanel5);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
+        );
+
+        panelSearchInvoice.addTab("Reports", jPanel2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -665,6 +785,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             invoice.setDiscount(Double.parseDouble(txtNewDiscount.getText()));
             invoice.setPaidAmount(Double.parseDouble(txtNewPaidAmount.getText()));
             invoice.setBalanceAmount(Double.parseDouble(txtNewBalance.getText()));
+            invoice.setFinalAmount(Double.parseDouble(txtNewFinalAmount.getText()));
             invoice.setCustomerDetail((CustomerDetail) comboCustomer.getSelectedItem());
 
             MethodResult result = invoiceController.generateNewInvoice(invoice, masterServices);
@@ -830,6 +951,21 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         masterServices.remove(selectedRow);
     }//GEN-LAST:event_btnRemoveActionPerformed
 
+    private void btnViewDailyRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDailyRecordsActionPerformed
+        Date date = datePickerDailyReport.getDate();
+        List<Invoice> allInvoiceOfDay = invoiceController.getAllInvoiceOfDay(date);
+        allInvoiceOfDay.forEach((e) -> {
+            System.out.println(e + " print e");
+            System.out.println(e.getTotalAmount() + " print e.getTotalAmount()");
+            System.out.println(e.getFinalAmount() + " print e.getFinalAmount()");
+            dtmOfDailyReportTbl.addRow(new Object[]{
+                e.getInvoiceNo(),
+                e.getCustomerDetail().toString(),
+                "user0",
+                "employee0", e.getTotalAmount(), e.getFinalAmount()});
+        });
+    }//GEN-LAST:event_btnViewDailyRecordsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -839,13 +975,22 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private javax.swing.JButton btnNewInvoice;
     private javax.swing.JButton btnPrintInvoice;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnViewDailyRecords;
     private javax.swing.JComboBox comboCustomer;
     private javax.swing.JComboBox comboServiceName;
+    private org.jdesktop.swingx.JXDatePicker datePickerDailyReport;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCustomer;
+    private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblInvoiceMain;
     private javax.swing.JLabel lblNewBalance;
     private javax.swing.JLabel lblNewCost;
@@ -862,6 +1007,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblSearchInvoiceNo;
     private javax.swing.JPanel panelNewItem;
     private javax.swing.JTabbedPane panelSearchInvoice;
+    private javax.swing.JTable tblDailyReport;
     private javax.swing.JTable tblInvoiceDetail;
     private javax.swing.JTable tblServiceDetail;
     private javax.swing.JFormattedTextField txtNewBalance;
