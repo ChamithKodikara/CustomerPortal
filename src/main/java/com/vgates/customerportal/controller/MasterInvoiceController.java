@@ -17,6 +17,9 @@ public class MasterInvoiceController {
         masterInvoiceDAO = new MasterInvoiceDAOImpl();
     }
 
+    public String newInvoiceNo() {
+        return masterInvoiceDAO.newInvoiceNo();
+    }
     public MethodResult generateNewInvoice(Invoice invoice, List<MasterService> serviceList) {
         return masterInvoiceDAO.addNewInvoice(invoice, serviceList);
     }

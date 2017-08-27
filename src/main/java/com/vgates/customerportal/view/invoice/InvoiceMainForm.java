@@ -6,6 +6,7 @@
 package com.vgates.customerportal.view.invoice;
 
 import com.vgates.customerportal.controller.CustomerDetailController;
+import com.vgates.customerportal.controller.MasterInvoiceController;
 import com.vgates.customerportal.controller.MasterServiceController;
 import com.vgates.customerportal.controller.UserDetailController;
 import com.vgates.customerportal.model.CustomerDetail;
@@ -13,6 +14,15 @@ import com.vgates.customerportal.model.Invoice;
 import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.model.UserDetail;
 import com.vgates.customerportal.util.MethodResult;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -43,6 +53,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private final UserDetailController userDetailController;
     private final MasterServiceController serviceController;
     private final CustomerDetailController customerDetailController;
+    private final MasterInvoiceController invoiceController;
 
     private final DefaultTableModel defaultServiceTableModel;
     private final Logger LOGGER = Logger.getLogger(InvoiceMainForm.class);
@@ -64,6 +75,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
         userDetailController = new UserDetailController();
         serviceController = new MasterServiceController();
+        invoiceController = new MasterInvoiceController();
 
         userDetail = userDetailController.findUserDetailForActiveLogin();
         customerDetailController = new CustomerDetailController();
@@ -78,6 +90,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewFinalAmount.setText("00.00");
         txtNewInvoiceNo.setText("");
         txtNewDesc.setText("");
+        txtNewInvoiceNo.setText(invoiceController.newInvoiceNo());
 
         txtSearchInvoiceDate.setText("");
         txtSearchInvoiceNo.setText("");
@@ -658,6 +671,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 txtNewFinalAmount.setText("00.00");
                 txtNewInvoiceNo.setText("");
                 txtNewDesc.setText("");
+                txtNewInvoiceNo.setText(invoiceController.newInvoiceNo());
                 invoice = new Invoice();
 
             } else {

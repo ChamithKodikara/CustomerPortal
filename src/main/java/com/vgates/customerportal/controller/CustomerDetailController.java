@@ -49,8 +49,8 @@ public class CustomerDetailController {
         return customerDetailDAO.findAllActiveCustomerDetails();
     }
 
-    public List<CustomerDetail> getActiveCustomerList(String customerName, String refNo, String nic) {
-        return customerDetailDAO.findActiveCustomerDetails(customerName, refNo, nic);
+    public List<CustomerDetail> getActiveCustomerList(String customerName, String refNo) {
+        return customerDetailDAO.findActiveCustomerDetails(customerName, refNo);
     }
 
     public List<CustomerDetail> getAllCustomers() {

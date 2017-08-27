@@ -6,6 +6,7 @@ import com.vgates.customerportal.model.InvoiceServiceMapper;
 import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.session.HibernateSessionManager;
 import com.vgates.customerportal.util.MethodResult;
+import com.vgates.customerportal.util.ReferenceGenerationUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -23,6 +24,18 @@ public class MasterInvoiceDAOImpl implements MasterInvoiceDAO {
 
     public MasterInvoiceDAOImpl() {
         session = HibernateSessionManager.getSessionFactory().openSession();
+    }
+
+    @Override
+    public String newInvoiceNo() {
+        Query query = session.createQuery("SELECT inv.id FROM Invoice inv ORDER BY inv.id DESC");
+        query.setMaxResults(1);
+        List list = query.list();
+        if (list == null || list.isEmpty()) {
+            return ReferenceGenerationUtil.generateInvoiceReference("1");
+        } else {
+            return ReferenceGenerationUtil.generateInvoiceReference(String.valueOf(((long) list.get(0)) + 1));
+        }
     }
 
     @Override

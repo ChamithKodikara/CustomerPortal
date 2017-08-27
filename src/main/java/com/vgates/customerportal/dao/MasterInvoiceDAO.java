@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface MasterInvoiceDAO {
 
+    String newInvoiceNo();
+
     MethodResult addNewInvoice(Invoice invoice, List<MasterService> serviceList);
 
     MethodResult updateInvoice(Invoice invoice);
@@ -32,4 +34,6 @@ public interface MasterInvoiceDAO {
     List<Invoice> findAllActiveInvoicesByYear(int year);
 
     List<InvoiceServiceMapper> findInvoiceServiceDetails(long invoiceId);
+
+
 }

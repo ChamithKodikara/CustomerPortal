@@ -4,6 +4,7 @@ import com.vgates.customerportal.dao.CustomerDetailDAO;
 import com.vgates.customerportal.model.CustomerDetail;
 import com.vgates.customerportal.session.HibernateSessionManager;
 import com.vgates.customerportal.util.MethodResult;
+import com.vgates.customerportal.util.ReferenceGenerationUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -27,12 +28,14 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
 
     @Override
     public String newCustomerRefNo() {
-        StringBuilder queryBulider = new StringBuilder();
-        queryBulider.append("SELECT FLOOR(RAND() * 999999)AS custRef FROM CUSTOMER_DETAIL WHERE 'custRef' NOT IN");
-        queryBulider.append("(SELECT CUSTOMER_NO FROM CUSTOMER_DETAIL) LIMIT 1");
-        Query query = session.createSQLQuery(queryBulider.toString());
+        Query query = session.createQuery("SELECT cust.id FROM CustomerDetail cust ORDER BY cust.id DESC");
+        query.setMaxResults(1);
         List list = query.list();
-        return decimalFormat.format(list.get(0));
+        if (list == null || list.isEmpty()) {
+            return ReferenceGenerationUtil.generateCustomerReference("1");
+        } else {
+            return ReferenceGenerationUtil.generateCustomerReference(String.valueOf(((long) list.get(0)) + 1));
+        }
     }
 
     @Override
@@ -154,10 +157,9 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
     }
 
     @Override
-    public List<CustomerDetail> findActiveCustomerDetails(String customerName, String refNo, String nic) {
+    public List<CustomerDetail> findActiveCustomerDetails(String customerName, String refNo) {
         StringBuilder sbName = new StringBuilder();
         StringBuilder sbRef = new StringBuilder();
-        StringBuilder sbNIC = new StringBuilder();
         if (customerName == null || customerName.isEmpty()) {
             sbName.append("%%");
         } else {
@@ -168,17 +170,11 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         } else {
             sbRef.append("%").append(refNo).append("%");
         }
-        if (nic == null || nic.isEmpty()) {
-            sbNIC.append("%%");
-        } else {
-            sbNIC.append("%").append(nic).append("%");
-        }
         List<CustomerDetail> customerDetailList = null;
         try {
-            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.active = true AND customer.customerName LIKE :name AND customer.customerNo LIKE :ref AND customer.nic LIKE :nic ORDER BY customer.customerName ASC ");
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.active = true AND customer.customerName LIKE :name AND customer.customerNo LIKE :ref ORDER BY customer.customerName ASC ");
             query.setParameter("name", sbName.toString());
             query.setParameter("ref", sbRef.toString());
-            query.setParameter("nic", sbNIC.toString());
             customerDetailList = (List<CustomerDetail>) query.list();
 
         } catch (Exception ex) {

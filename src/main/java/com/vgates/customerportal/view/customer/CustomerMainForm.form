@@ -338,7 +338,6 @@
                           <Component id="lblFindCustMain" alignment="0" pref="775" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="lblFindNicNo" alignment="1" max="32767" attributes="0"/>
                                   <Component id="lblFindCustRef" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lblFindCustName" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -346,7 +345,6 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="txtFindCustRef" pref="301" max="32767" attributes="0"/>
                                   <Component id="txtFindCustName" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtFindNicNo" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -375,12 +373,7 @@
                           <Component id="lblFindCustName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtFindCustName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblFindNicNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtFindNicNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnFindCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCancelFind" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -436,24 +429,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFindCustNameActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblFindNicNo">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="NIC No                           "/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtFindNicNo">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFindNicNoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnCancelFind">
@@ -558,11 +533,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="lblUpdateAddress" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblUpdateDOB" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lblUpdateContactNo" alignment="1" max="32767" attributes="0"/>
                                   <Component id="lblUpdateEmail" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="lblUpdateGender" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblUpdateNicNo" alignment="1" max="32767" attributes="0"/>
                                   <Component id="lblUpdateCustRef" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lblUpdateCustName" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -570,18 +542,7 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="txtUpdateCustName" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtUpdateCustRef" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtUpdateNicNo" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="radioBtnMaleUpdate" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="radioBtnFemaleUpdate" min="-2" pref="150" max="-2" attributes="0"/>
-                                  </Group>
                                   <Component id="txtUpdateEmail" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtUpdateDob" min="-2" pref="170" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblDatePattern1" max="32767" attributes="0"/>
-                                  </Group>
                                   <Component id="jScrollPane3" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="txtUpdateContactNo" min="-2" pref="170" max="-2" attributes="0"/>
@@ -623,23 +584,6 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblUpdateNicNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtUpdateNicNo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblUpdateDOB" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtUpdateDob" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDatePattern1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblUpdateGender" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="radioBtnMaleUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="radioBtnFemaleUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblUpdateEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtUpdateEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -654,7 +598,7 @@
                           <Component id="lblUpdateAddress" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="76" max="32767" attributes="0"/>
+                      <EmptySpace pref="197" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnDeleteCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnUpdateCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -679,30 +623,6 @@
                   <Font name="Tahoma" size="12" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Customer Name              "/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblUpdateNicNo">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="NIC No                           "/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblUpdateDOB">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Date Of Birth"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblUpdateGender">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Gender                           "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblUpdateEmail">
@@ -747,58 +667,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUpdateCustNameActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtUpdateNicNo">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUpdateNicNoActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="txtUpdateDob">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUpdateDobActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblDatePattern1">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="1"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="DD-MM-YYYY"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="radioBtnFemaleUpdate">
-              <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="btnGroupGenderUpdate"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Female"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioBtnFemaleUpdateActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="radioBtnMaleUpdate">
-              <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="btnGroupGenderUpdate"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Male"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioBtnMaleUpdateActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtUpdateEmail">
