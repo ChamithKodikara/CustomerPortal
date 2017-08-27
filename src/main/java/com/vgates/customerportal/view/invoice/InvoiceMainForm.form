@@ -81,8 +81,8 @@
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txtNewTotalCost" min="-2" pref="170" max="-2" attributes="0"/>
                                                   <Component id="txtNewDiscount" min="-2" pref="170" max="-2" attributes="0"/>
+                                                  <Component id="txtNewTotalCost" min="-2" pref="170" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" attributes="0">
@@ -93,9 +93,9 @@
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txtNewFinalAmount" min="-2" pref="170" max="-2" attributes="0"/>
-                                                  <Component id="txtNewPaidAmount" min="-2" pref="170" max="-2" attributes="0"/>
                                                   <Component id="txtNewBalance" min="-2" pref="170" max="-2" attributes="0"/>
+                                                  <Component id="txtNewPaidAmount" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                                                  <Component id="txtNewFinalAmount" min="-2" pref="170" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Component id="lblOutput" alignment="0" min="-2" pref="362" max="-2" attributes="0"/>
@@ -192,7 +192,7 @@
                           <Component id="lblNewDiscount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNewDiscount" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblNewFinalPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNewFinalAmount" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -202,13 +202,13 @@
                           <Component id="lblNewPaidAmount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNewPaidAmount" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblNewBalance" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNewBalance" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblOutput" pref="22" max="32767" attributes="0"/>
+                      <Component id="lblOutput" pref="33" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnCancelAdd" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -417,72 +417,6 @@
                 <Property name="text" type="java.lang.String" value="Final Amount"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtNewTotalCost">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="#0.00" subtype="-1" type="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewTotalCostActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtNewDiscount">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="#0.00" subtype="-1" type="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-              </Properties>
-              <Events>
-                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNewDiscountFocusGained"/>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNewDiscountFocusLost"/>
-                <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="txtNewDiscountCaretPositionChanged"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewDiscountActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNewDiscountKeyPressed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtNewFinalAmount">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="#0.00" subtype="-1" type="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewFinalAmountActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtNewPaidAmount">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="#0.00" subtype="-1" type="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-              </Properties>
-              <Events>
-                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNewPaidAmountFocusGained"/>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNewPaidAmountFocusLost"/>
-                <EventHandler event="caretPositionChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="txtNewPaidAmountCaretPositionChanged"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewPaidAmountActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNewPaidAmountKeyPressed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtNewBalance">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="#0.00" subtype="-1" type="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewBalanceActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JLabel" name="lblOutput">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -524,6 +458,59 @@
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboCustomerItemStateChanged"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboCustomerActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtNewDiscount">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#,###.00" subtype="-1" type="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+              </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNewDiscountFocusGained"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewDiscountActionPerformed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNewDiscountKeyReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtNewPaidAmount">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#,###.00" subtype="-1" type="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+              </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNewPaidAmountFocusGained"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewPaidAmountActionPerformed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNewPaidAmountKeyReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtNewBalance">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0.00" subtype="-1" type="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtNewFinalAmount">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0.00" subtype="-1" type="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtNewTotalCost">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0.00" subtype="-1" type="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
