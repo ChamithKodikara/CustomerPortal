@@ -30,10 +30,7 @@ import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -65,6 +62,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
     Matcher priceMatcher;
     private final Pattern pattern;
+    private List<MasterService> masterServices;
 
     /**
      * Creates new form InvoiceMainForm
@@ -76,7 +74,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         userDetailController = new UserDetailController();
         serviceController = new MasterServiceController();
         invoiceController = new MasterInvoiceController();
-
+        masterServices = new ArrayList<>();
         userDetail = userDetailController.findUserDetailForActiveLogin();
         customerDetailController = new CustomerDetailController();
 
@@ -159,6 +157,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewBalance = new javax.swing.JFormattedTextField();
         txtNewFinalAmount = new javax.swing.JFormattedTextField();
         txtNewTotalCost = new javax.swing.JFormattedTextField();
+        btnRemove = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtSearchInvoiceDate = new javax.swing.JTextField();
         lblSearchInvoiceDate = new javax.swing.JLabel();
@@ -183,8 +182,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         lblNewInvoiceNo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNewInvoiceNo.setText("Invoice No");
 
+        txtNewInvoiceNo.setEditable(false);
         txtNewInvoiceNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtNewInvoiceNo.setEnabled(false);
         txtNewInvoiceNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNewInvoiceNoActionPerformed(evt);
@@ -268,7 +267,10 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblServiceDetail.setColumnSelectionAllowed(true);
+        tblServiceDetail.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tblServiceDetail);
+        tblServiceDetail.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         btnAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAdd.setText("Add");
@@ -355,6 +357,15 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewTotalCost.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtNewTotalCost.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
+        btnRemove.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnRemove.setForeground(new java.awt.Color(153, 0, 0));
+        btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelNewItemLayout = new javax.swing.GroupLayout(panelNewItem);
         panelNewItem.setLayout(panelNewItemLayout);
         panelNewItemLayout.setHorizontalGroup(
@@ -417,6 +428,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                                 .addComponent(comboServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(panelNewItemLayout.createSequentialGroup()
@@ -446,7 +459,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNewService)
                     .addComponent(comboServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd))
+                    .addComponent(btnAdd)
+                    .addComponent(btnRemove))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -628,15 +642,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNewInvoiceNoActionPerformed
 
     private void btnCancelAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddActionPerformed
-
-        txtNewTotalCost.setText("00.00");
-        txtNewDiscount.setText("00.00");
-        txtNewPaidAmount.setText("00.00");
-        txtNewBalance.setText("00.00");
-        txtNewFinalAmount.setText("00.00");
-        txtNewInvoiceNo.setText("");
-        txtNewDesc.setText("");
-        defaultServiceTableModel.setRowCount(0);
+        clearForm();
 
 
     }//GEN-LAST:event_btnCancelAddActionPerformed
@@ -660,19 +666,16 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             invoice.setPaidAmount(Double.parseDouble(txtNewPaidAmount.getText()));
             invoice.setBalanceAmount(Double.parseDouble(txtNewBalance.getText()));
             invoice.setCustomerDetail((CustomerDetail) comboCustomer.getSelectedItem());
-            MethodResult result = ;
+
+            MethodResult result = invoiceController.generateNewInvoice(invoice, masterServices);
             if (result.isOk()) {
 
-                JOptionPane.showMessageDialog(this, result.getMessage(), "New Invoice", JOptionPane.INFORMATION_MESSAGE);
-                txtNewTotalCost.setText("00.00");
-                txtNewDiscount.setText("00.00");
-                txtNewPaidAmount.setText("00.00");
-                txtNewBalance.setText("00.00");
-                txtNewFinalAmount.setText("00.00");
-                txtNewInvoiceNo.setText("");
-                txtNewDesc.setText("");
-                txtNewInvoiceNo.setText(invoiceController.newInvoiceNo());
-                invoice = new Invoice();
+                int res = JOptionPane.showConfirmDialog(this, result.getMessage() + "\nDo you want to print the invoice?", "New Invoice", JOptionPane.YES_NO_OPTION);
+                if (res == JOptionPane.YES_OPTION) {
+                    btnPrintInvoice.doClick();
+                }
+
+                clearForm();
 
             } else {
                 JOptionPane.showMessageDialog(this, result.getMessage(), "New Invoice", JOptionPane.INFORMATION_MESSAGE);
@@ -684,6 +687,22 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_btnNewInvoiceActionPerformed
+
+    private void clearForm() {
+        txtNewTotalCost.setText("00.00");
+        txtNewDiscount.setText("00.00");
+        txtNewPaidAmount.setText("00.00");
+        txtNewBalance.setText("00.00");
+        txtNewFinalAmount.setText("00.00");
+        txtNewInvoiceNo.setText("");
+        txtNewDesc.setText("");
+        comboCustomer.setSelectedIndex(0);
+        comboServiceName.setSelectedIndex(0);
+        txtNewInvoiceNo.setText(invoiceController.newInvoiceNo());
+        invoice = new Invoice();
+        masterServices = new ArrayList<>();
+        defaultServiceTableModel.setRowCount(0);
+    }
 
     private void txtSearchInvoiceDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchInvoiceDateActionPerformed
         // TODO add your handling code here:
@@ -722,6 +741,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         if (searchedService != null) {
+            masterServices.add(searchedService);
             Object[] rowData = {searchedService.getServiceName(), searchedService.getDescription(), searchedService.getCost(), searchedService.getDiscount()};
             defaultServiceTableModel.addRow(rowData);
             txtNewTotalCost.setText(String.valueOf(Double.parseDouble(txtNewTotalCost.getText()) + searchedService.getCost()));
@@ -804,6 +824,12 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewPaidAmount.selectAll();
     }//GEN-LAST:event_txtNewPaidAmountFocusGained
 
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        final int selectedRow = tblServiceDetail.getSelectedRow();
+        defaultServiceTableModel.removeRow(selectedRow);
+        masterServices.remove(selectedRow);
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -812,6 +838,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private javax.swing.JButton btnFindInvoice;
     private javax.swing.JButton btnNewInvoice;
     private javax.swing.JButton btnPrintInvoice;
+    private javax.swing.JButton btnRemove;
     private javax.swing.JComboBox comboCustomer;
     private javax.swing.JComboBox comboServiceName;
     private javax.swing.JPanel jPanel1;
