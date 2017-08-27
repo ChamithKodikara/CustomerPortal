@@ -1,6 +1,8 @@
 package com.vgates.customerportal.dao;
 
 import com.vgates.customerportal.model.Invoice;
+import com.vgates.customerportal.model.InvoiceServiceMapper;
+import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.util.MethodResult;
 
 import java.util.Date;
@@ -11,7 +13,7 @@ import java.util.List;
  */
 public interface MasterInvoiceDAO {
 
-    MethodResult addNewInvoice(Invoice invoice);
+    MethodResult addNewInvoice(Invoice invoice, List<MasterService> serviceList);
 
     MethodResult updateInvoice(Invoice invoice);
 
@@ -28,4 +30,6 @@ public interface MasterInvoiceDAO {
     List<Invoice> findAllActiveInvoicesByMonth(int year, int month);
 
     List<Invoice> findAllActiveInvoicesByYear(int year);
+
+    List<InvoiceServiceMapper> findInvoiceServiceDetails(long invoiceId);
 }

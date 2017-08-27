@@ -2,13 +2,12 @@ package com.vgates.customerportal.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author Chamith
  */
 @Entity
-@Table(name = "CUSTOMER_SERVICE_MAPPER")
+@Table(name = "INVOICE_SERVICE_MAPPER")
 public class InvoiceServiceMapper implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,19 +24,8 @@ public class InvoiceServiceMapper implements Serializable {
     @ManyToOne
     private MasterService masterService;
 
-    @Column(name = "APPOINTMENT_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date appointmentDate;
-
-    @Column(name = "CREATED_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Column(name = "CREATED_BY")
-    private String createdBy;
-
-    @Column(name = "DESCRIPTION")
-    private String description;
+    @Column(name = "MASTER_SERVICE_COST")
+    private Double masterServiceCost;
 
     public Long getId() {
         return id;
@@ -63,36 +51,12 @@ public class InvoiceServiceMapper implements Serializable {
         this.masterService = masterService;
     }
 
-    public Date getAppointmentDate() {
-        return appointmentDate;
+    public Double getMasterServiceCost() {
+        return masterServiceCost;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setMasterServiceCost(Double masterServiceCost) {
+        this.masterServiceCost = masterServiceCost;
     }
 
     @Override
