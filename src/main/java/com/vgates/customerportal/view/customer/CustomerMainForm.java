@@ -40,8 +40,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
 
         txtNewCustRef.setEnabled(false);
 
-        txtUpdateDob.setFormats(simpleDateFormat);
-
         customerDetailController = new CustomerDetailController();
         userDetailController = new UserDetailController();
 
@@ -90,8 +88,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
         txtFindCustRef = new javax.swing.JTextField();
         lblFindCustName = new javax.swing.JLabel();
         txtFindCustName = new javax.swing.JTextField();
-        lblFindNicNo = new javax.swing.JLabel();
-        txtFindNicNo = new javax.swing.JTextField();
         btnCancelFind = new javax.swing.JButton();
         btnFindCustomer = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -99,19 +95,11 @@ public class CustomerMainForm extends javax.swing.JPanel {
         panelUpdateCustomer = new javax.swing.JPanel();
         lblUpdateCustRef = new javax.swing.JLabel();
         lblUpdateCustName = new javax.swing.JLabel();
-        lblUpdateNicNo = new javax.swing.JLabel();
-        lblUpdateDOB = new javax.swing.JLabel();
-        lblUpdateGender = new javax.swing.JLabel();
         lblUpdateEmail = new javax.swing.JLabel();
         lblUpdateContactNo = new javax.swing.JLabel();
         lblUpdateAddress = new javax.swing.JLabel();
         txtUpdateCustRef = new javax.swing.JTextField();
         txtUpdateCustName = new javax.swing.JTextField();
-        txtUpdateNicNo = new javax.swing.JTextField();
-        txtUpdateDob = new org.jdesktop.swingx.JXDatePicker();
-        lblDatePattern1 = new javax.swing.JLabel();
-        radioBtnFemaleUpdate = new javax.swing.JRadioButton();
-        radioBtnMaleUpdate = new javax.swing.JRadioButton();
         txtUpdateEmail = new javax.swing.JTextField();
         txtUpdateContactNo = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -312,16 +300,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
             }
         });
 
-        lblFindNicNo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblFindNicNo.setText("NIC No                           ");
-
-        txtFindNicNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtFindNicNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFindNicNoActionPerformed(evt);
-            }
-        });
-
         btnCancelFind.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCancelFind.setText("Cancel");
         btnCancelFind.addActionListener(new java.awt.event.ActionListener() {
@@ -385,14 +363,12 @@ public class CustomerMainForm extends javax.swing.JPanel {
                     .addComponent(lblFindCustMain, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelSearchCustomerLayout.createSequentialGroup()
                         .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblFindNicNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblFindCustRef, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblFindCustName, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtFindCustRef, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                            .addComponent(txtFindCustName)
-                            .addComponent(txtFindNicNo)))
+                            .addComponent(txtFindCustName)))
                     .addGroup(panelSearchCustomerLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnFindCustomer)
@@ -413,11 +389,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
                 .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFindCustName)
                     .addComponent(txtFindCustName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFindNicNo)
-                    .addComponent(txtFindNicNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(57, 57, 57)
                 .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFindCustomer)
                     .addComponent(btnCancelFind))
@@ -433,15 +405,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
 
         lblUpdateCustName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUpdateCustName.setText("Customer Name              ");
-
-        lblUpdateNicNo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblUpdateNicNo.setText("NIC No                           ");
-
-        lblUpdateDOB.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblUpdateDOB.setText("Date Of Birth");
-
-        lblUpdateGender.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblUpdateGender.setText("Gender                           ");
 
         lblUpdateEmail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUpdateEmail.setText("Email");
@@ -463,41 +426,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
         txtUpdateCustName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUpdateCustNameActionPerformed(evt);
-            }
-        });
-
-        txtUpdateNicNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtUpdateNicNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUpdateNicNoActionPerformed(evt);
-            }
-        });
-
-        txtUpdateDob.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUpdateDobActionPerformed(evt);
-            }
-        });
-
-        lblDatePattern1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblDatePattern1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDatePattern1.setText("DD-MM-YYYY");
-
-        btnGroupGenderUpdate.add(radioBtnFemaleUpdate);
-        radioBtnFemaleUpdate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        radioBtnFemaleUpdate.setText("Female");
-        radioBtnFemaleUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioBtnFemaleUpdateActionPerformed(evt);
-            }
-        });
-
-        btnGroupGenderUpdate.add(radioBtnMaleUpdate);
-        radioBtnMaleUpdate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        radioBtnMaleUpdate.setText("Male");
-        radioBtnMaleUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioBtnMaleUpdateActionPerformed(evt);
             }
         });
 
@@ -561,27 +489,15 @@ public class CustomerMainForm extends javax.swing.JPanel {
                     .addGroup(panelUpdateCustomerLayout.createSequentialGroup()
                         .addGroup(panelUpdateCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lblUpdateAddress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblUpdateDOB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblUpdateContactNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblUpdateEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblUpdateGender, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblUpdateNicNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblUpdateCustRef, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblUpdateCustName, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addGroup(panelUpdateCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUpdateCustName)
                             .addComponent(txtUpdateCustRef)
-                            .addComponent(txtUpdateNicNo)
-                            .addGroup(panelUpdateCustomerLayout.createSequentialGroup()
-                                .addComponent(radioBtnMaleUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(radioBtnFemaleUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtUpdateEmail)
-                            .addGroup(panelUpdateCustomerLayout.createSequentialGroup()
-                                .addComponent(txtUpdateDob, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblDatePattern1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelUpdateCustomerLayout.createSequentialGroup()
                                 .addComponent(txtUpdateContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -614,20 +530,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
                     .addComponent(txtUpdateCustName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelUpdateCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUpdateNicNo)
-                    .addComponent(txtUpdateNicNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelUpdateCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUpdateDOB)
-                    .addComponent(txtUpdateDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDatePattern1))
-                .addGap(18, 18, 18)
-                .addGroup(panelUpdateCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUpdateGender)
-                    .addComponent(radioBtnMaleUpdate)
-                    .addComponent(radioBtnFemaleUpdate))
-                .addGap(18, 18, 18)
-                .addGroup(panelUpdateCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUpdateEmail)
                     .addComponent(txtUpdateEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -639,7 +541,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
                 .addGroup(panelUpdateCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblUpdateAddress)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                 .addGroup(panelUpdateCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDeleteCustomer)
                     .addComponent(btnUpdateCustomer))
@@ -740,20 +642,15 @@ public class CustomerMainForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFindCustNameActionPerformed
 
-    private void txtFindNicNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindNicNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFindNicNoActionPerformed
-
     private void btnCancelFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelFindActionPerformed
         defaultCustTableModel.setRowCount(0);
         txtFindCustName.setText("");
         txtFindCustRef.setText("");
-        txtFindNicNo.setText("");
     }//GEN-LAST:event_btnCancelFindActionPerformed
 
     private void btnFindCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindCustomerActionPerformed
         defaultCustTableModel.setRowCount(0);
-        List<CustomerDetail> customerList = customerDetailController.getActiveCustomerList(txtFindCustName.getText(), txtFindCustRef.getText(), txtFindNicNo.getText());
+        List<CustomerDetail> customerList = customerDetailController.getActiveCustomerList(txtFindCustName.getText(), txtFindCustRef.getText());
         if (customerList != null) {
             customerList.forEach(e -> {
                 Object rows[] = {e.getCustomerNo(), e.getCustomerName(), e.getEmail(), e.getContactNo(), e.getAddress()};
@@ -769,22 +666,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
     private void txtUpdateCustNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateCustNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUpdateCustNameActionPerformed
-
-    private void txtUpdateNicNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateNicNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUpdateNicNoActionPerformed
-
-    private void txtUpdateDobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateDobActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUpdateDobActionPerformed
-
-    private void radioBtnFemaleUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnFemaleUpdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioBtnFemaleUpdateActionPerformed
-
-    private void radioBtnMaleUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnMaleUpdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioBtnMaleUpdateActionPerformed
 
     private void txtUpdateEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateEmailActionPerformed
         // TODO add your handling code here:
@@ -806,8 +687,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Cannot Find Customer details....!", "Search Customer", JOptionPane.ERROR_MESSAGE);
             txtUpdateCustName.setText("");
-            txtUpdateDob.setDate(null);
-            txtUpdateNicNo.setText("");
             txtUpdateEmail.setText("");
             txtUpdateContactNo.setText("");
             txtUpdateAddress.setText("");
@@ -822,8 +701,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
                 if (result.isOk()) {
                     JOptionPane.showMessageDialog(this, "Customer Detail Successfully deleted...!", "Delete Customer", JOptionPane.INFORMATION_MESSAGE);
                     txtUpdateCustName.setText("");
-                    txtUpdateDob.setDate(null);
-                    txtUpdateNicNo.setText("");
                     txtUpdateEmail.setText("");
                     txtUpdateContactNo.setText("");
                     txtUpdateAddress.setText("");
@@ -839,14 +716,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
 
         if (responce == JOptionPane.YES_OPTION) {
 
-            String gender = "Male";
-
-            if (radioBtnMaleUpdate.isSelected()) {
-                gender = "Male";
-            } else if (radioBtnFemaleUpdate.isSelected()) {
-                gender = "Female";
-            }
-
             searchCustomer.setCustomerNo(txtUpdateCustRef.getText());
             searchCustomer.setCustomerName(txtUpdateCustName.getText());
 
@@ -860,12 +729,9 @@ public class CustomerMainForm extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, result.getMessage(), "Update Customer", JOptionPane.INFORMATION_MESSAGE);
                 txtUpdateCustRef.setText("");
                 txtUpdateCustName.setText("");
-                txtUpdateNicNo.setText("");
-                txtUpdateDob.setDate(null);
                 txtUpdateEmail.setText("");
                 txtUpdateContactNo.setText("");
                 txtUpdateAddress.setText("");
-                radioBtnMaleUpdate.setSelected(true);
             } else {
                 JOptionPane.showMessageDialog(this, result.getMessage(), "Update Customer", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -890,11 +756,9 @@ public class CustomerMainForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblContactNoPatten2;
     private javax.swing.JLabel lblCustMain;
     private javax.swing.JLabel lblCustUpdate;
-    private javax.swing.JLabel lblDatePattern1;
     private javax.swing.JLabel lblFindCustMain;
     private javax.swing.JLabel lblFindCustName;
     private javax.swing.JLabel lblFindCustRef;
-    private javax.swing.JLabel lblFindNicNo;
     private javax.swing.JLabel lblNewAddress;
     private javax.swing.JLabel lblNewContactNo;
     private javax.swing.JLabel lblNewCustMain;
@@ -906,20 +770,14 @@ public class CustomerMainForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblUpdateContactNo;
     private javax.swing.JLabel lblUpdateCustName;
     private javax.swing.JLabel lblUpdateCustRef;
-    private javax.swing.JLabel lblUpdateDOB;
     private javax.swing.JLabel lblUpdateEmail;
-    private javax.swing.JLabel lblUpdateGender;
-    private javax.swing.JLabel lblUpdateNicNo;
     private javax.swing.JPanel panelNewCustomer;
     private javax.swing.JPanel panelSearchCustomer;
     private javax.swing.JPanel panelUpdateCustomer;
-    private javax.swing.JRadioButton radioBtnFemaleUpdate;
-    private javax.swing.JRadioButton radioBtnMaleUpdate;
     private javax.swing.JTabbedPane tabCustomerDetail;
     private javax.swing.JTable tblCustomerDetail;
     private javax.swing.JTextField txtFindCustName;
     private javax.swing.JTextField txtFindCustRef;
-    private javax.swing.JTextField txtFindNicNo;
     private javax.swing.JTextArea txtNewAddress;
     private javax.swing.JTextField txtNewContactNo;
     private javax.swing.JTextField txtNewCustName;
@@ -930,9 +788,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
     private javax.swing.JTextField txtUpdateContactNo;
     private javax.swing.JTextField txtUpdateCustName;
     private javax.swing.JTextField txtUpdateCustRef;
-    private org.jdesktop.swingx.JXDatePicker txtUpdateDob;
     private javax.swing.JTextField txtUpdateEmail;
-    private javax.swing.JTextField txtUpdateNicNo;
     // End of variables declaration//GEN-END:variables
 
     public CustomerDetail getSearchCustomer() {
