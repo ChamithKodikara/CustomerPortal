@@ -50,6 +50,10 @@ public class Invoice implements Serializable {
     @ManyToOne
     private CustomerDetail customerDetail;
 
+    @JoinColumn(name = "EMPLOYEE_DETAIL")
+    @ManyToOne
+    private CustomerDetail employeeDetail;
+
     @OneToMany(mappedBy = "invoice")
     private List<InvoiceServiceMapper> invoiceServiceMapperList;
 
@@ -147,6 +151,14 @@ public class Invoice implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public CustomerDetail getEmployeeDetail() {
+        return employeeDetail;
+    }
+
+    public void setEmployeeDetail(CustomerDetail employeeDetail) {
+        this.employeeDetail = employeeDetail;
     }
 
     @Override

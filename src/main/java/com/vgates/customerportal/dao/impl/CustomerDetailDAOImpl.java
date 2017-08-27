@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -19,8 +18,6 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
     private final static Logger LOGGER = Logger.getLogger(CustomerDetailDAOImpl.class);
 
     private final Session session;
-
-    private final DecimalFormat decimalFormat = new DecimalFormat("###");
 
     public CustomerDetailDAOImpl() {
         session = HibernateSessionManager.getSessionFactory().openSession();
