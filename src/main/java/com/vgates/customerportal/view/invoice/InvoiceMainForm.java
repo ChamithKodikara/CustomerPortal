@@ -10,12 +10,27 @@ import com.vgates.customerportal.controller.UserDetailController;
 import com.vgates.customerportal.model.Invoice;
 import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.model.UserDetail;
+import com.vgates.customerportal.session.HibernateSessionManager;
 import com.vgates.customerportal.util.MethodResult;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import org.apache.log4j.Logger;
 
 /**
@@ -32,6 +47,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private UserDetail userDetail;
     private Invoice invoice;
     private MasterService searchedService;
+    private File jasperFile;
+    private DefaultTableModel dtm;
 
     /**
      * Creates new form InvoiceMainForm
@@ -59,6 +76,9 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtSearchInvoiceDate.setText("");
         txtSearchInvoiceNo.setText("");
         loadServiceList();
+
+        jasperFile = new File("./reports/InvoiceReport.jasper");
+        dtm = (DefaultTableModel) tblInvoiceDetail.getModel();
     }
 
     private void loadServiceList() {
@@ -106,6 +126,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewPaidAmount = new javax.swing.JFormattedTextField();
         txtNewBalance = new javax.swing.JFormattedTextField();
         lblOutput = new javax.swing.JLabel();
+        btnPrintInvoice = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtSearchInvoiceDate = new javax.swing.JTextField();
         lblSearchInvoiceDate = new javax.swing.JLabel();
@@ -313,6 +334,14 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
         lblOutput.setForeground(new java.awt.Color(204, 0, 0));
 
+        btnPrintInvoice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnPrintInvoice.setText("Print");
+        btnPrintInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintInvoiceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelNewItemLayout = new javax.swing.GroupLayout(panelNewItem);
         panelNewItem.setLayout(panelNewItemLayout);
         panelNewItemLayout.setHorizontalGroup(
@@ -363,6 +392,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNewItemLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnPrintInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnNewInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnCancelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -421,7 +452,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelAdd)
-                    .addComponent(btnNewInvoice))
+                    .addComponent(btnNewInvoice)
+                    .addComponent(btnPrintInvoice))
                 .addContainerGap())
         );
 
@@ -574,6 +606,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNewInvoiceNoActionPerformed
 
     private void btnCancelAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddActionPerformed
+
         txtNewTotalCost.setText("00.00");
         txtNewDiscount.setText("00.00");
         txtNewPaidAmount.setText("00.00");
@@ -582,6 +615,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewInvoiceNo.setText("");
         txtNewDesc.setText("");
         defaultServiceTableModel.setRowCount(0);
+
+
     }//GEN-LAST:event_btnCancelAddActionPerformed
 
     private void btnNewInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewInvoiceActionPerformed
@@ -602,6 +637,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
             MethodResult result = new MethodResult();
             if (result.isOk()) {
+
                 JOptionPane.showMessageDialog(this, result.getMessage(), "New Invoice", JOptionPane.INFORMATION_MESSAGE);
                 txtNewTotalCost.setText("00.00");
                 txtNewDiscount.setText("00.00");
@@ -611,6 +647,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 txtNewInvoiceNo.setText("");
                 txtNewDesc.setText("");
                 invoice = new Invoice();
+
             } else {
                 JOptionPane.showMessageDialog(this, result.getMessage(), "New Invoice", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -724,6 +761,27 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewPaidAmount.selectAll();
     }//GEN-LAST:event_txtNewPaidAmountFocusGained
 
+    private void btnPrintInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintInvoiceActionPerformed
+        FileInputStream fileInputStream = null;
+        try {
+            Map<String, Object> param = new HashMap<>();
+            fileInputStream = new FileInputStream(jasperFile);
+            //        param.put("CONNECTION", DBConnection.getConnection());
+//        param.put("TITLE", title);
+            JRTableModelDataSource ds = new JRTableModelDataSource(defaultServiceTableModel);
+            JasperPrint jp = JasperFillManager.fillReport(fileInputStream, param, ds);
+            JasperViewer.viewReport(jp);
+        } catch (FileNotFoundException | JRException ex) {
+            java.util.logging.Logger.getLogger(InvoiceMainForm.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fileInputStream.close();
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(InvoiceMainForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnPrintInvoiceActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -731,6 +789,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelSearchInvoice;
     private javax.swing.JButton btnFindInvoice;
     private javax.swing.JButton btnNewInvoice;
+    private javax.swing.JButton btnPrintInvoice;
     private javax.swing.JComboBox comboServiceName;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

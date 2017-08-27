@@ -27,12 +27,6 @@ public class CustomerDetail implements Serializable {
     @Column(name = "CUSTOMER_NO", nullable = false)
     private String customerNo;
 
-    @Column(name = "NIC")
-    private String nic;
-
-    @Column(name = "GENDER")
-    private String gender;
-
     @Column(name = "EMAIL")
     private String email;
 
@@ -41,10 +35,6 @@ public class CustomerDetail implements Serializable {
 
     @Column(name = "ADDRESS", length = 500)
     private String address;
-
-    @Column(name = "DOB")
-    @Temporal(TemporalType.DATE)
-    private Date dob;
 
     @Column(name = "CREATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
@@ -81,22 +71,6 @@ public class CustomerDetail implements Serializable {
         this.active = active;
     }
 
-    public String getNic() {
-        return nic;
-    }
-
-    public void setNic(String nic) {
-        this.nic = nic;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -119,14 +93,6 @@ public class CustomerDetail implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
     }
 
     public Date getCreatedDate() {
