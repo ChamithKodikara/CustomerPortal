@@ -20,10 +20,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,11 +52,13 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private Invoice invoice;
     private MasterService searchedService;
     private File jasperFile;
-    private DefaultTableModel dtm;
+    private DefaultTableModel dtmOfMonthlyReportTbl;
+    private DefaultTableModel dtmOfAnnualReportTbl;
 
-    Matcher priceMatcher;
+    private Matcher priceMatcher;
     private final Pattern pattern;
     private List<MasterService> masterServices;
+    private SimpleDateFormat sdf;
 
     /**
      * Creates new form InvoiceMainForm
@@ -64,7 +66,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     public InvoiceMainForm() {
         initComponents();
         setSize(800, 550);
-
+        sdf = new SimpleDateFormat("yyyy-MM-dd");
         userDetailController = new UserDetailController();
         serviceController = new MasterServiceController();
         invoiceController = new MasterInvoiceController();
@@ -89,11 +91,12 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         loadServiceList();
         loadCustomerList();
         jasperFile = new File("./reports/InvoiceReport.jasper");
-        dtm = (DefaultTableModel) tblInvoiceDetail.getModel();
         pattern = Pattern.compile("^\\d+.\\d?\\d?$");
-        
+
         datePickerDailyReport.setDate(new Date());
         dtmOfDailyReportTbl = (DefaultTableModel) tblDailyReport.getModel();
+        dtmOfMonthlyReportTbl = (DefaultTableModel) tblMonthlyReport.getModel();
+        dtmOfAnnualReportTbl = (DefaultTableModel) tblAnnualReport.getModel();
     }
 
     private void loadCustomerList() {
@@ -154,16 +157,6 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewFinalAmount = new javax.swing.JFormattedTextField();
         txtNewTotalCost = new javax.swing.JFormattedTextField();
         btnRemove = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        txtSearchInvoiceDate = new javax.swing.JTextField();
-        lblSearchInvoiceDate = new javax.swing.JLabel();
-        lblSearchInvoiceNo = new javax.swing.JLabel();
-        txtSearchInvoiceNo = new javax.swing.JTextField();
-        lblSearchInvoice = new javax.swing.JLabel();
-        btnFindInvoice = new javax.swing.JButton();
-        btnCancelSearchInvoice = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblInvoiceDetail = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -172,8 +165,26 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         btnViewDailyRecords = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblDailyReport = new javax.swing.JTable();
+        lblDate1 = new javax.swing.JLabel();
+        txtTotalIncomeDailyReport = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
+        txtYearMonthlyReport = new javax.swing.JFormattedTextField();
+        lblYearMonthlyReport = new javax.swing.JLabel();
+        lblMonthMonthlyReport = new javax.swing.JLabel();
+        comboMonthMonthlyReport = new javax.swing.JComboBox();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblMonthlyReport = new javax.swing.JTable();
+        btnViewMonthlyRecords = new javax.swing.JButton();
+        lblDate2 = new javax.swing.JLabel();
+        txtTotalIncomeMonthlyReport = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
+        lblDate3 = new javax.swing.JLabel();
+        btnViewAnnualRecords = new javax.swing.JButton();
+        txtTotalIncomeAnnualReport = new javax.swing.JTextField();
+        txtYearAnnualReport = new javax.swing.JFormattedTextField();
+        lblYearMonthlyReport1 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblAnnualReport = new javax.swing.JTable();
 
         lblInvoiceMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblInvoiceMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -501,129 +512,6 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
         panelSearchInvoice.addTab("New Invoice", panelNewItem);
 
-        txtSearchInvoiceDate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtSearchInvoiceDate.setEnabled(false);
-        txtSearchInvoiceDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchInvoiceDateActionPerformed(evt);
-            }
-        });
-
-        lblSearchInvoiceDate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblSearchInvoiceDate.setText("Date");
-
-        lblSearchInvoiceNo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblSearchInvoiceNo.setText("Invoice No");
-
-        txtSearchInvoiceNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtSearchInvoiceNo.setEnabled(false);
-        txtSearchInvoiceNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchInvoiceNoActionPerformed(evt);
-            }
-        });
-
-        lblSearchInvoice.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblSearchInvoice.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSearchInvoice.setText("Search Item Details");
-
-        btnFindInvoice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnFindInvoice.setText("Search Item");
-        btnFindInvoice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFindInvoiceActionPerformed(evt);
-            }
-        });
-
-        btnCancelSearchInvoice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnCancelSearchInvoice.setText("Cancel");
-        btnCancelSearchInvoice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelSearchInvoiceActionPerformed(evt);
-            }
-        });
-
-        tblInvoiceDetail.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Item", "Category", "Description", "Cost", "Discount"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(tblInvoiceDetail);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblSearchInvoiceNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblSearchInvoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSearchInvoiceDate, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(txtSearchInvoiceNo))
-                        .addGap(293, 293, 293))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblSearchInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnFindInvoice)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCancelSearchInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2))
-                        .addContainerGap())))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSearchInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSearchInvoiceNo)
-                    .addComponent(txtSearchInvoiceNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSearchInvoiceDate)
-                    .addComponent(txtSearchInvoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFindInvoice)
-                    .addComponent(btnCancelSearchInvoice))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        panelSearchInvoice.addTab("Search Invoices", jPanel1);
-
         lblDate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblDate.setText("Date");
 
@@ -660,6 +548,13 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(tblDailyReport);
 
+        lblDate1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblDate1.setText("Total Income");
+
+        txtTotalIncomeDailyReport.setEditable(false);
+        txtTotalIncomeDailyReport.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTotalIncomeDailyReport.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -677,6 +572,12 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane4)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTotalIncomeDailyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -687,34 +588,197 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                     .addComponent(datePickerDailyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnViewDailyRecords))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDate1)
+                    .addComponent(txtTotalIncomeDailyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Daily", jPanel3);
+
+        txtYearMonthlyReport.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy"))));
+
+        lblYearMonthlyReport.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblYearMonthlyReport.setText("Year");
+
+        lblMonthMonthlyReport.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblMonthMonthlyReport.setText("Month");
+
+        comboMonthMonthlyReport.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        comboMonthMonthlyReport.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "Apirl", "May", "June", "July", "August", "September", "October", "November", "December" }));
+
+        tblMonthlyReport.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Invoice No", "Customer", "Billed by", "Employee", "Total Cost", "Final Cost"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tblMonthlyReport);
+
+        btnViewMonthlyRecords.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnViewMonthlyRecords.setText("View");
+        btnViewMonthlyRecords.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewMonthlyRecordsActionPerformed(evt);
+            }
+        });
+
+        lblDate2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblDate2.setText("Total Income");
+
+        txtTotalIncomeMonthlyReport.setEditable(false);
+        txtTotalIncomeMonthlyReport.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTotalIncomeMonthlyReport.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(lblYearMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtYearMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblMonthMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboMonthMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnViewMonthlyRecords)
+                        .addGap(0, 122, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTotalIncomeMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblYearMonthlyReport)
+                    .addComponent(txtYearMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMonthMonthlyReport)
+                    .addComponent(comboMonthMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnViewMonthlyRecords))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDate2)
+                    .addComponent(txtTotalIncomeMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Monthly", jPanel4);
+
+        lblDate3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblDate3.setText("Total Income");
+
+        btnViewAnnualRecords.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnViewAnnualRecords.setText("View");
+        btnViewAnnualRecords.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewAnnualRecordsActionPerformed(evt);
+            }
+        });
+
+        txtTotalIncomeAnnualReport.setEditable(false);
+        txtTotalIncomeAnnualReport.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTotalIncomeAnnualReport.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        txtYearAnnualReport.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy"))));
+
+        lblYearMonthlyReport1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblYearMonthlyReport1.setText("Year");
+
+        tblAnnualReport.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Invoice No", "Customer", "Billed by", "Employee", "Total Cost", "Final Cost"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tblAnnualReport);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lblYearMonthlyReport1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtYearAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(btnViewAnnualRecords)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblDate3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTotalIncomeAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnViewAnnualRecords)
+                    .addComponent(lblYearMonthlyReport1)
+                    .addComponent(txtYearAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDate3)
+                    .addComponent(txtTotalIncomeAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Annually", jPanel5);
@@ -825,29 +889,6 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         defaultServiceTableModel.setRowCount(0);
     }
 
-    private void txtSearchInvoiceDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchInvoiceDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchInvoiceDateActionPerformed
-
-    private void txtSearchInvoiceNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchInvoiceNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchInvoiceNoActionPerformed
-
-    private void btnFindInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindInvoiceActionPerformed
-//        defaultServiceTableModel.setRowCount(0);
-//        List<MasterInvoice> invoiceList = invoiceController.searchInvoiceByNameAndCategory(txtSearchInvoiceName.getText(), txtSearchInvoiceDate.getText());
-//        if (invoiceList != null) {
-//            invoiceList.forEach(e -> {
-//                Object rowData[] = {e.getInvoiceName(), e.getCategory(), e.getDescription(), e.getCost(), e.getDiscount()};
-//                defaultServiceTableModel.addRow(rowData);
-//            });
-//        }
-    }//GEN-LAST:event_btnFindInvoiceActionPerformed
-
-    private void btnCancelSearchInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelSearchInvoiceActionPerformed
-        defaultServiceTableModel.setRowCount(0);
-    }//GEN-LAST:event_btnCancelSearchInvoiceActionPerformed
-
     private void comboServiceNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboServiceNameItemStateChanged
         if (comboServiceName.getSelectedIndex() != 0) {
             searchedService = (MasterService) comboServiceName.getSelectedItem();
@@ -954,44 +995,103 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private void btnViewDailyRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDailyRecordsActionPerformed
         Date date = datePickerDailyReport.getDate();
         List<Invoice> allInvoiceOfDay = invoiceController.getAllInvoiceOfDay(date);
-        allInvoiceOfDay.forEach((e) -> {
-            System.out.println(e + " print e");
-            System.out.println(e.getTotalAmount() + " print e.getTotalAmount()");
-            System.out.println(e.getFinalAmount() + " print e.getFinalAmount()");
+        if (allInvoiceOfDay == null || allInvoiceOfDay.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No any invoice for " + sdf.format(date));
+            return;
+        }
+        double totalIncome = 0;
+        dtmOfDailyReportTbl.setRowCount(0);
+        for (Invoice e : allInvoiceOfDay) {
             dtmOfDailyReportTbl.addRow(new Object[]{
                 e.getInvoiceNo(),
                 e.getCustomerDetail().toString(),
                 "user0",
-                "employee0", e.getTotalAmount(), e.getFinalAmount()});
-        });
+                "employee0", e.getTotalAmount(),
+                e.getFinalAmount()
+            });
+            totalIncome += e.getFinalAmount();
+        }
+        txtTotalIncomeDailyReport.setText(totalIncome + "");
     }//GEN-LAST:event_btnViewDailyRecordsActionPerformed
+
+    private void btnViewMonthlyRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewMonthlyRecordsActionPerformed
+        String year = txtYearMonthlyReport.getText();
+        int month = comboMonthMonthlyReport.getSelectedIndex() + 1;
+        System.out.println(year + " "  + month);
+        List<Invoice> allInvoicesOfMonth = invoiceController.getAllInvoicesOfMonth(Integer.parseInt(year), month);
+        if (allInvoicesOfMonth == null || allInvoicesOfMonth.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No any invoice for " + year + " - " + comboMonthMonthlyReport.getSelectedItem());
+            return;
+        }
+        double totalIncome = 0;
+        dtmOfMonthlyReportTbl.setRowCount(0);
+        for (Invoice e : allInvoicesOfMonth) {
+            dtmOfMonthlyReportTbl.addRow(new Object[]{
+                e.getInvoiceNo(),
+                e.getCustomerDetail().toString(),
+                "user0",
+                "employee0", e.getTotalAmount(),
+                e.getFinalAmount()
+            });
+            totalIncome += e.getFinalAmount();
+        }
+        txtTotalIncomeMonthlyReport.setText(totalIncome + "");
+    }//GEN-LAST:event_btnViewMonthlyRecordsActionPerformed
+
+    private void btnViewAnnualRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAnnualRecordsActionPerformed
+        String year = txtYearAnnualReport.getText();
+
+        List<Invoice> allInvoicesOfYear = invoiceController.getAllInvoicesOfYear(Integer.parseInt(year));
+        if (allInvoicesOfYear == null || allInvoicesOfYear.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No any invoice for " + year);
+            return;
+        }
+        double totalIncome = 0;
+        dtmOfAnnualReportTbl.setRowCount(0);
+        totalIncome = allInvoicesOfYear.stream().map((e) -> {
+            dtmOfAnnualReportTbl.addRow(new Object[]{
+                e.getInvoiceNo(),
+                e.getCustomerDetail().toString(),
+                "user0",
+                "employee0", e.getTotalAmount(),
+                e.getFinalAmount()
+            });
+            return e;
+        }).map((e) -> e.getFinalAmount()).reduce(totalIncome, (accumulator, _item) -> accumulator + _item);
+        txtTotalIncomeAnnualReport.setText(totalIncome + "");
+    }//GEN-LAST:event_btnViewAnnualRecordsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancelAdd;
-    private javax.swing.JButton btnCancelSearchInvoice;
-    private javax.swing.JButton btnFindInvoice;
     private javax.swing.JButton btnNewInvoice;
     private javax.swing.JButton btnPrintInvoice;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnViewAnnualRecords;
     private javax.swing.JButton btnViewDailyRecords;
+    private javax.swing.JButton btnViewMonthlyRecords;
     private javax.swing.JComboBox comboCustomer;
+    private javax.swing.JComboBox comboMonthMonthlyReport;
     private javax.swing.JComboBox comboServiceName;
     private org.jdesktop.swingx.JXDatePicker datePickerDailyReport;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCustomer;
     private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblDate1;
+    private javax.swing.JLabel lblDate2;
+    private javax.swing.JLabel lblDate3;
     private javax.swing.JLabel lblInvoiceMain;
+    private javax.swing.JLabel lblMonthMonthlyReport;
     private javax.swing.JLabel lblNewBalance;
     private javax.swing.JLabel lblNewCost;
     private javax.swing.JLabel lblNewDiscount;
@@ -1002,13 +1102,13 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblNewPaidAmount;
     private javax.swing.JLabel lblNewService;
     private javax.swing.JLabel lblOutput;
-    private javax.swing.JLabel lblSearchInvoice;
-    private javax.swing.JLabel lblSearchInvoiceDate;
-    private javax.swing.JLabel lblSearchInvoiceNo;
+    private javax.swing.JLabel lblYearMonthlyReport;
+    private javax.swing.JLabel lblYearMonthlyReport1;
     private javax.swing.JPanel panelNewItem;
     private javax.swing.JTabbedPane panelSearchInvoice;
+    private javax.swing.JTable tblAnnualReport;
     private javax.swing.JTable tblDailyReport;
-    private javax.swing.JTable tblInvoiceDetail;
+    private javax.swing.JTable tblMonthlyReport;
     private javax.swing.JTable tblServiceDetail;
     private javax.swing.JFormattedTextField txtNewBalance;
     private javax.swing.JTextArea txtNewDesc;
@@ -1017,7 +1117,10 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private javax.swing.JTextField txtNewInvoiceNo;
     private javax.swing.JFormattedTextField txtNewPaidAmount;
     private javax.swing.JFormattedTextField txtNewTotalCost;
-    private javax.swing.JTextField txtSearchInvoiceDate;
-    private javax.swing.JTextField txtSearchInvoiceNo;
+    private javax.swing.JTextField txtTotalIncomeAnnualReport;
+    private javax.swing.JTextField txtTotalIncomeDailyReport;
+    private javax.swing.JTextField txtTotalIncomeMonthlyReport;
+    private javax.swing.JFormattedTextField txtYearAnnualReport;
+    private javax.swing.JFormattedTextField txtYearMonthlyReport;
     // End of variables declaration//GEN-END:variables
 }
