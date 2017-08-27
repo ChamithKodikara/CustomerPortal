@@ -2,6 +2,8 @@ package com.vgates.customerportal.dao.impl;
 
 import com.vgates.customerportal.dao.MasterInvoiceDAO;
 import com.vgates.customerportal.model.Invoice;
+import com.vgates.customerportal.model.InvoiceServiceMapper;
+import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.session.HibernateSessionManager;
 import com.vgates.customerportal.util.MethodResult;
 import org.apache.log4j.Logger;
@@ -24,7 +26,7 @@ public class MasterInvoiceDAOImpl implements MasterInvoiceDAO {
     }
 
     @Override
-    public MethodResult addNewInvoice(Invoice invoice) {
+    public MethodResult addNewInvoice(Invoice invoice, List<MasterService> serviceList) {
         MethodResult result = new MethodResult();
         result.setOk(false);
         try {
@@ -33,6 +35,9 @@ public class MasterInvoiceDAOImpl implements MasterInvoiceDAO {
             session.getTransaction().commit();
             result.setOk(true);
             result.setMessage("Invoice Successfully Created !");
+
+            createInvoiceServiceMap(invoice, serviceList);
+
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
             result.setStackMessage(ex.getMessage());
@@ -164,5 +169,34 @@ public class MasterInvoiceDAOImpl implements MasterInvoiceDAO {
             LOGGER.error(ex.getMessage(), ex);
         }
         return resultList;
+    }
+
+    @Override
+    public List<InvoiceServiceMapper> findInvoiceServiceDetails(long invoiceId) {
+        List<InvoiceServiceMapper> resultList = null;
+        try {
+            Query query = session.createQuery("SELECT map FROM InvoiceServiceMapper map WHERE map.invoice.id = :invId");
+            query.setParameter("invId", invoiceId);
+            resultList = (List<InvoiceServiceMapper>) query.list();
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return resultList;
+    }
+
+    private void createInvoiceServiceMap(Invoice invoice, List<MasterService> serviceList) {
+        try {
+            for (MasterService service : serviceList) {
+                InvoiceServiceMapper map = new InvoiceServiceMapper();
+                map.setInvoice(invoice);
+                map.setMasterService(service);
+                map.setMasterServiceCost(service.getCost());
+                session.beginTransaction();
+                session.save(map);
+                session.getTransaction().commit();
+            }
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
     }
 }

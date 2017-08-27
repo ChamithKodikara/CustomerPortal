@@ -3,6 +3,8 @@ package com.vgates.customerportal.controller;
 import com.vgates.customerportal.dao.MasterInvoiceDAO;
 import com.vgates.customerportal.dao.impl.MasterInvoiceDAOImpl;
 import com.vgates.customerportal.model.Invoice;
+import com.vgates.customerportal.model.InvoiceServiceMapper;
+import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.util.MethodResult;
 
 import java.util.Date;
@@ -15,8 +17,8 @@ public class MasterInvoiceController {
         masterInvoiceDAO = new MasterInvoiceDAOImpl();
     }
 
-    public MethodResult generateNewInvoice(Invoice invoice) {
-        return masterInvoiceDAO.addNewInvoice(invoice);
+    public MethodResult generateNewInvoice(Invoice invoice, List<MasterService> serviceList) {
+        return masterInvoiceDAO.addNewInvoice(invoice, serviceList);
     }
 
     public MethodResult updateInvoiceDetails(Invoice invoice) {
@@ -43,11 +45,15 @@ public class MasterInvoiceController {
         return masterInvoiceDAO.findAllActiveInvoicesForDay(date);
     }
 
-    public List<Invoice> getAllInvoicesOfMonth(int month,int year){
-        return masterInvoiceDAO.findAllActiveInvoicesByMonth(year,month);
+    public List<Invoice> getAllInvoicesOfMonth(int month, int year) {
+        return masterInvoiceDAO.findAllActiveInvoicesByMonth(year, month);
     }
 
-    public List<Invoice> getAllInvoicesOfYear(int year){
+    public List<Invoice> getAllInvoicesOfYear(int year) {
         return masterInvoiceDAO.findAllActiveInvoicesByYear(year);
+    }
+
+    public List<InvoiceServiceMapper> getInvoiceServiceDetails(long invId) {
+        return masterInvoiceDAO.findInvoiceServiceDetails(invId);
     }
 }
