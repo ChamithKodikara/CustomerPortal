@@ -343,7 +343,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             }
         });
 
-        txtNewDiscount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
+        txtNewDiscount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtNewDiscount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNewDiscount.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -361,7 +361,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             }
         });
 
-        txtNewPaidAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
+        txtNewPaidAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtNewPaidAmount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNewPaidAmount.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -967,6 +967,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             txtNewTotalCost.setText(String.valueOf(Double.parseDouble(txtNewTotalCost.getText()) + searchedService.getCost()));
             txtNewDiscount.setText(String.valueOf(Double.parseDouble(txtNewDiscount.getText()) + searchedService.getDiscount()));
             txtNewFinalAmount.setText(String.valueOf(Double.parseDouble(txtNewFinalAmount.getText()) + searchedService.getCost()));
+            lblOutput.setText("");
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -1120,7 +1121,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnViewAnnualRecordsActionPerformed
 
     private void comboEmployeeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboEmployeeItemStateChanged
-        if (comboEmployee.getSelectedIndex()== 0) {
+        if (comboEmployee.getSelectedIndex() == 0) {
             return;
         }
         employee = (EmployeeDetail) comboEmployee.getSelectedItem();
@@ -1131,13 +1132,16 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     }//GEN-LAST:event_comboEmployeeActionPerformed
 
     private void btnPrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintBillActionPerformed
-         if (comboCustomer.getSelectedIndex() == 0) {
+        if (comboCustomer.getSelectedIndex() == 0) {
             lblOutput.setText("Customer Not selected...");
+            return;
+        }
+        if (defaultServiceTableModel.getRowCount() < 1) {
+            lblOutput.setText("No services...");
             return;
         }
         CustomerDetail customer = (CustomerDetail) comboCustomer.getSelectedItem();
 
-        
         FileInputStream fileInputStream = null;
         try {
             Map<String, Object> param = new HashMap<>();
