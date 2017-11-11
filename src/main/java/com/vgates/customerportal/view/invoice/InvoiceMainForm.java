@@ -16,7 +16,11 @@ import com.vgates.customerportal.model.Invoice;
 import com.vgates.customerportal.model.MasterService;
 import com.vgates.customerportal.model.UserDetail;
 import com.vgates.customerportal.util.MethodResult;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterJob;
 
+import javax.print.attribute.Size2DSyntax;
+import javax.print.attribute.standard.MediaSize;
 import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,10 +33,22 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.HashPrintServiceAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Copies;
+import javax.print.attribute.standard.MediaSizeName;
+import javax.print.attribute.standard.PrinterName;
+import javax.swing.text.AttributeSet;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
 import net.sf.jasperreports.view.JasperViewer;
 import org.apache.log4j.Logger;
 
@@ -1157,7 +1173,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             param.put("BALANCE", txtNewBalance.getText());
             JRTableModelDataSource ds = new JRTableModelDataSource(defaultServiceTableModel);
             JasperPrint jp = JasperFillManager.fillReport(fileInputStream, param, ds);
-            JasperViewer.viewReport(jp, false);
+            //JasperViewer.viewReport(jp, false);
+            printDirect(jp);
         } catch (FileNotFoundException | JRException ex) {
             java.util.logging.Logger.getLogger(InvoiceMainForm.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -1169,7 +1186,50 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnPrintBillActionPerformed
 
+    private void printDirect(JasperPrint jasperPrint) {
+        try {
 
+           // String report = JasperCompileManager.compileReportToFile(sourceFileName);
+
+           // JasperPrint jasperPrint = JasperFillManager.fillReport(report, para, ds);
+
+            PrinterJob printerJob = PrinterJob.getPrinterJob();
+            
+            PageFormat pageFormat = PrinterJob.getPrinterJob().defaultPage();
+            printerJob.defaultPage(pageFormat);
+
+            int selectedService = 0;
+            
+            HashPrintServiceAttributeSet attributeSet = new HashPrintServiceAttributeSet(new PrinterName("Microsoft XPS Document Writer", null));
+
+            PrintService[] printService = PrintServiceLookup.lookupPrintServices(null, attributeSet);
+
+            try {
+                printerJob.setPrintService(printService[selectedService]);
+
+            } catch (Exception e) {
+
+                System.out.println(e);
+            }
+            JRPrintServiceExporter exporter;
+            PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+           // printRequestAttributeSet.add(MediaSizeName.NA_LETTER);
+            printRequestAttributeSet.add(new Copies(1));
+
+            // these are deprecated
+            exporter = new JRPrintServiceExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE, printService[selectedService]);
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE_ATTRIBUTE_SET, printService[selectedService].getAttributes());
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET, printRequestAttributeSet);
+            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PAGE_DIALOG, Boolean.FALSE);
+            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, Boolean.FALSE);
+            exporter.exportReport();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancelAdd;
