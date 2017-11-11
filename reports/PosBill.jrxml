@@ -75,19 +75,40 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="5" splitType="Stretch">
+		<band height="27" splitType="Stretch">
 			<line>
 				<reportElement x="3" y="2" width="254" height="1" uuid="43f9bd24-3edb-4ac5-a2fb-e819ef6441cc"/>
 				<graphicElement>
 					<pen lineWidth="1.25" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
+			<line>
+				<reportElement x="4" y="24" width="254" height="1" uuid="06b5766d-9bb3-4e97-b00b-60099ee25cd8"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="4" y="5" width="187" height="20" uuid="729d181b-02c4-4471-b047-6b16508de976"/>
+				<box leftPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Service]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="192" y="4" width="66" height="20" uuid="9cd61b54-4359-4b78-8b0f-512c50b3d2a8"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="47" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="257" height="20" uuid="043658e9-95de-4d39-9c7e-9d044dc2cb91"/>
+				<reportElement x="0" y="0" width="191" height="20" uuid="043658e9-95de-4d39-9c7e-9d044dc2cb91"/>
 				<box leftPadding="5">
 					<pen lineStyle="Solid" lineColor="#FFFFFF"/>
 					<topPen lineStyle="Solid" lineColor="#FFFFFF"/>
@@ -99,7 +120,7 @@
 				<textFieldExpression><![CDATA[$F{Service}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="158" y="20" width="99" height="20" uuid="3132e70c-bf04-4e61-b424-bb6bca4071d9"/>
+				<reportElement x="192" y="0" width="66" height="20" uuid="3132e70c-bf04-4e61-b424-bb6bca4071d9"/>
 				<box leftPadding="5">
 					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#FFFFFF"/>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#FFFFFF"/>
@@ -112,21 +133,29 @@
 			</textField>
 		</band>
 	</detail>
-	<lastPageFooter>
-		<band height="22"/>
-	</lastPageFooter>
+	<pageFooter>
+		<band height="24">
+			<staticText>
+				<reportElement x="0" y="0" width="261" height="20" uuid="5d8434f5-4147-4c90-9ade-a7b853ea87b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thank you... Come again...]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="115">
 			<staticText>
 				<reportElement x="77" y="50" width="70" height="22" uuid="f4230037-384a-41bb-837e-8664e3de4b17"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Final Amount]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="77" y="7" width="70" height="22" uuid="1b9b4aa5-b8ee-47e6-937b-a720a1df912b"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Amount]]></text>
@@ -140,7 +169,7 @@
 			</textField>
 			<staticText>
 				<reportElement x="77" y="71" width="70" height="22" uuid="63aaed24-9d9b-45e7-9942-bfb21df94231"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Paid]]></text>
@@ -154,7 +183,7 @@
 			</textField>
 			<staticText>
 				<reportElement x="77" y="28" width="70" height="22" uuid="9ea79424-d34d-48df-b886-d2b53ba601c3"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Discount]]></text>
@@ -168,7 +197,7 @@
 			</textField>
 			<staticText>
 				<reportElement x="78" y="91" width="70" height="22" uuid="5f8ffdca-5847-4a8b-8e2e-5703dde82ebc"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Balance]]></text>
@@ -187,13 +216,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{DISCOUNT}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="-1" y="-20" width="261" height="20" uuid="5d8434f5-4147-4c90-9ade-a7b853ea87b5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Thank you... Come again...]]></text>
-			</staticText>
 			<line>
 				<reportElement x="3" y="3" width="254" height="1" uuid="a4334c0f-3a66-4f50-96b9-fd100239817f"/>
 				<graphicElement>
