@@ -53,6 +53,8 @@ public class ServiceMainForm extends javax.swing.JPanel {
         txtUpdateCost.setText("00.00");
         txtUpdateDiscount.setText("00.00");
 
+        rdoBtnSalon.setSelected(true);
+
         loadServiceList();
     }
 
@@ -74,6 +76,8 @@ public class ServiceMainForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGrpServiceType = new javax.swing.ButtonGroup();
+        btnGrpServiceTypeSearch = new javax.swing.ButtonGroup();
         lblServiceMain = new javax.swing.JLabel();
         tabServiceMain = new javax.swing.JTabbedPane();
         panelNewService = new javax.swing.JPanel();
@@ -81,7 +85,6 @@ public class ServiceMainForm extends javax.swing.JPanel {
         lblNewServiceName = new javax.swing.JLabel();
         txtNewServiceName = new javax.swing.JTextField();
         lblNewServiceCategory = new javax.swing.JLabel();
-        txtNewServiceCategory = new javax.swing.JTextField();
         lblNewdesc = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtNewDesc = new javax.swing.JTextArea();
@@ -91,6 +94,8 @@ public class ServiceMainForm extends javax.swing.JPanel {
         txtNewDiscount = new javax.swing.JFormattedTextField();
         btnCancelAdd = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        rdoBtnSalon = new javax.swing.JRadioButton();
+        rdoBtnStudio = new javax.swing.JRadioButton();
         panelFindService = new javax.swing.JPanel();
         lblSearchServiceMain = new javax.swing.JLabel();
         txtFindServiceName = new javax.swing.JTextField();
@@ -104,8 +109,6 @@ public class ServiceMainForm extends javax.swing.JPanel {
         panelUpdateService = new javax.swing.JPanel();
         lblUpdateServiceMain = new javax.swing.JLabel();
         lblUpdateServiceNameList = new javax.swing.JLabel();
-        lblUpdateServiceCategory = new javax.swing.JLabel();
-        txtUpdateServiceCategory = new javax.swing.JTextField();
         lblUpdateDesc = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtUpdateDesc = new javax.swing.JTextArea();
@@ -115,9 +118,10 @@ public class ServiceMainForm extends javax.swing.JPanel {
         txtUpdateDiscount = new javax.swing.JFormattedTextField();
         comboServiceName = new javax.swing.JComboBox();
         lblUpdateServiceName = new javax.swing.JLabel();
-        txtUpdateServiceName = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+        rdoBtnSalonSearch = new javax.swing.JRadioButton();
+        rdoBtnStudioSearch = new javax.swing.JRadioButton();
 
         lblServiceMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblServiceMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -141,13 +145,6 @@ public class ServiceMainForm extends javax.swing.JPanel {
 
         lblNewServiceCategory.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNewServiceCategory.setText("Category");
-
-        txtNewServiceCategory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtNewServiceCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNewServiceCategoryActionPerformed(evt);
-            }
-        });
 
         lblNewdesc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNewdesc.setText("Description");
@@ -184,6 +181,32 @@ public class ServiceMainForm extends javax.swing.JPanel {
             }
         });
 
+        btnGrpServiceType.add(rdoBtnSalon);
+        rdoBtnSalon.setText("Salon");
+        rdoBtnSalon.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdoBtnSalonItemStateChanged(evt);
+            }
+        });
+        rdoBtnSalon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoBtnSalonActionPerformed(evt);
+            }
+        });
+
+        btnGrpServiceType.add(rdoBtnStudio);
+        rdoBtnStudio.setText("Studio");
+        rdoBtnStudio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdoBtnStudioItemStateChanged(evt);
+            }
+        });
+        rdoBtnStudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoBtnStudioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelNewServiceLayout = new javax.swing.GroupLayout(panelNewService);
         panelNewService.setLayout(panelNewServiceLayout);
         panelNewServiceLayout.setHorizontalGroup(
@@ -199,9 +222,12 @@ public class ServiceMainForm extends javax.swing.JPanel {
                                     .addComponent(lblNewServiceCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                                     .addComponent(lblNewServiceName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNewServiceCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                    .addComponent(txtNewServiceName)))
+                                .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNewServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelNewServiceLayout.createSequentialGroup()
+                                        .addComponent(rdoBtnSalon)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rdoBtnStudio))))
                             .addGroup(panelNewServiceLayout.createSequentialGroup()
                                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(lblNewDiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -232,7 +258,9 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNewServiceCategory)
-                    .addComponent(txtNewServiceCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rdoBtnSalon)
+                        .addComponent(rdoBtnStudio)))
                 .addGap(18, 18, 18)
                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,7 +273,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNewDiscount))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelAdd)
                     .addComponent(btnSave))
@@ -385,16 +413,6 @@ public class ServiceMainForm extends javax.swing.JPanel {
         lblUpdateServiceNameList.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUpdateServiceNameList.setText("Service List");
 
-        lblUpdateServiceCategory.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblUpdateServiceCategory.setText("Category");
-
-        txtUpdateServiceCategory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtUpdateServiceCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUpdateServiceCategoryActionPerformed(evt);
-            }
-        });
-
         lblUpdateDesc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUpdateDesc.setText("Description");
 
@@ -430,13 +448,6 @@ public class ServiceMainForm extends javax.swing.JPanel {
         lblUpdateServiceName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUpdateServiceName.setText("Category");
 
-        txtUpdateServiceName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtUpdateServiceName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUpdateServiceNameActionPerformed(evt);
-            }
-        });
-
         btnDelete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnDelete.setText("Delete Service Detail");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -450,6 +461,32 @@ public class ServiceMainForm extends javax.swing.JPanel {
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnGrpServiceTypeSearch.add(rdoBtnSalonSearch);
+        rdoBtnSalonSearch.setText("Salon");
+        rdoBtnSalonSearch.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdoBtnSalonSearchItemStateChanged(evt);
+            }
+        });
+        rdoBtnSalonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoBtnSalonSearchActionPerformed(evt);
+            }
+        });
+
+        btnGrpServiceTypeSearch.add(rdoBtnStudioSearch);
+        rdoBtnStudioSearch.setText("Studio");
+        rdoBtnStudioSearch.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdoBtnStudioSearchItemStateChanged(evt);
+            }
+        });
+        rdoBtnStudioSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoBtnStudioSearchActionPerformed(evt);
             }
         });
 
@@ -472,19 +509,17 @@ public class ServiceMainForm extends javax.swing.JPanel {
                                 .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtUpdateCost, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtUpdateDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))
+                                    .addComponent(jScrollPane3)))
                             .addGroup(panelUpdateServiceLayout.createSequentialGroup()
-                                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblUpdateServiceCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblUpdateServiceNameList, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblUpdateServiceNameList, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtUpdateServiceCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                    .addComponent(comboServiceName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(comboServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelUpdateServiceLayout.createSequentialGroup()
                                 .addComponent(lblUpdateServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtUpdateServiceName)))
+                                .addComponent(rdoBtnSalonSearch)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdoBtnStudioSearch)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUpdateServiceLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -505,11 +540,8 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUpdateServiceName)
-                    .addComponent(txtUpdateServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUpdateServiceCategory)
-                    .addComponent(txtUpdateServiceCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rdoBtnSalonSearch)
+                    .addComponent(rdoBtnStudioSearch))
                 .addGap(18, 18, 18)
                 .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -522,7 +554,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUpdateDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUpdateDiscount))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
                     .addComponent(btnUpdate))
@@ -554,14 +586,10 @@ public class ServiceMainForm extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtNewServiceNameActionPerformed
 
-    private void txtNewServiceCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewServiceCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNewServiceCategoryActionPerformed
-
     private void btnCancelAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddActionPerformed
         txtNewCost.setText("00.00");
         txtNewDiscount.setText("00.00");
-        txtNewServiceCategory.setText("");
+        rdoBtnSalon.setSelected(true);
         txtNewServiceName.setText("");
         txtNewDesc.setText("");
     }//GEN-LAST:event_btnCancelAddActionPerformed
@@ -573,7 +601,11 @@ public class ServiceMainForm extends javax.swing.JPanel {
             service.setActive(Boolean.TRUE);
             service.setCreatedBy(userDetail.getUserName());
             service.setCreatedDate(new Date());
-            service.setCategory(txtNewServiceCategory.getText());
+            if (rdoBtnSalon.isSelected()) {
+                service.setCategory("Salon");
+            } else if (rdoBtnStudio.isSelected()) {
+                service.setCategory("Studio");
+            }
             service.setCost(Double.parseDouble(txtNewCost.getText()));
             service.setDescription(txtNewDesc.getText());
             service.setDiscount(Double.parseDouble(txtNewDiscount.getText()));
@@ -584,7 +616,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, result.getMessage(), "New Service", JOptionPane.INFORMATION_MESSAGE);
                 txtNewCost.setText("00.00");
                 txtNewDiscount.setText("00.00");
-                txtNewServiceCategory.setText("");
+                rdoBtnSalon.setSelected(true);
                 txtNewServiceName.setText("");
                 txtNewDesc.setText("");
                 loadServiceList();
@@ -617,10 +649,6 @@ public class ServiceMainForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSearchServiceActionPerformed
 
-    private void txtUpdateServiceCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateServiceCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUpdateServiceCategoryActionPerformed
-
     private void comboServiceNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboServiceNameItemStateChanged
         if (comboServiceName.getSelectedIndex() != 0) {
             searchedService = (MasterService) comboServiceName.getSelectedItem();
@@ -628,16 +656,15 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 txtUpdateCost.setText(String.valueOf(searchedService.getCost()));
                 txtUpdateDiscount.setText(String.valueOf(searchedService.getDiscount()));
                 txtUpdateDesc.setText(searchedService.getDescription());
-                txtUpdateServiceCategory.setText(searchedService.getCategory());
-                txtUpdateServiceName.setText(searchedService.getServiceName());
+                if ("Salon".equalsIgnoreCase(searchedService.getCategory())) {
+                    rdoBtnSalonSearch.setSelected(true);
+                } else if ("Studio".equalsIgnoreCase(searchedService.getCategory())) {
+                    rdoBtnStudioSearch.setSelected(true);
+                }
             }
         }
 
     }//GEN-LAST:event_comboServiceNameItemStateChanged
-
-    private void txtUpdateServiceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateServiceNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUpdateServiceNameActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         if (searchedService != null) {
@@ -650,8 +677,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
                     txtUpdateCost.setText("00.00");
                     txtUpdateDiscount.setText("00.00");
                     txtUpdateDesc.setText("");
-                    txtUpdateServiceCategory.setText("");
-                    txtUpdateServiceName.setText("");
+                    rdoBtnSalonSearch.setSelected(true);
                     loadServiceList();
                 } else {
                     JOptionPane.showMessageDialog(this, "Service Detail delete failed...!", "Delete Service", JOptionPane.ERROR_MESSAGE);
@@ -667,7 +693,11 @@ public class ServiceMainForm extends javax.swing.JPanel {
 
             if (response == JOptionPane.YES_OPTION) {
                 searchedService.setActive(Boolean.TRUE);
-                searchedService.setCategory(txtNewServiceCategory.getText());
+                if (rdoBtnSalonSearch.isSelected()) {
+                    searchedService.setCategory("Salon");
+                } else if (rdoBtnStudioSearch.isSelected()) {
+                    searchedService.setCategory("Studio");
+                }
                 searchedService.setCost(Double.parseDouble(txtNewCost.getText()));
                 searchedService.setDescription(txtNewDesc.getText());
                 searchedService.setDiscount(Double.parseDouble(txtNewDiscount.getText()));
@@ -680,8 +710,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
                     txtUpdateCost.setText("00.00");
                     txtUpdateDiscount.setText("00.00");
                     txtUpdateDesc.setText("");
-                    txtUpdateServiceCategory.setText("");
-                    txtUpdateServiceName.setText("");
+                    rdoBtnSalonSearch.setSelected(true);
 
                     loadServiceList();
                 } else {
@@ -695,11 +724,45 @@ public class ServiceMainForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboServiceNameActionPerformed
 
+    private void rdoBtnSalonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoBtnSalonItemStateChanged
+
+    }//GEN-LAST:event_rdoBtnSalonItemStateChanged
+
+    private void rdoBtnSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnSalonActionPerformed
+
+    }//GEN-LAST:event_rdoBtnSalonActionPerformed
+
+    private void rdoBtnStudioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoBtnStudioItemStateChanged
+
+    }//GEN-LAST:event_rdoBtnStudioItemStateChanged
+
+    private void rdoBtnStudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnStudioActionPerformed
+
+    }//GEN-LAST:event_rdoBtnStudioActionPerformed
+
+    private void rdoBtnSalonSearchItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoBtnSalonSearchItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoBtnSalonSearchItemStateChanged
+
+    private void rdoBtnSalonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnSalonSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoBtnSalonSearchActionPerformed
+
+    private void rdoBtnStudioSearchItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoBtnStudioSearchItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoBtnStudioSearchItemStateChanged
+
+    private void rdoBtnStudioSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnStudioSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoBtnStudioSearchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelAdd;
     private javax.swing.JButton btnCancelSearch;
     private javax.swing.JButton btnDelete;
+    private javax.swing.ButtonGroup btnGrpServiceType;
+    private javax.swing.ButtonGroup btnGrpServiceTypeSearch;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearchService;
     private javax.swing.JButton btnUpdate;
@@ -720,13 +783,16 @@ public class ServiceMainForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblUpdateCost;
     private javax.swing.JLabel lblUpdateDesc;
     private javax.swing.JLabel lblUpdateDiscount;
-    private javax.swing.JLabel lblUpdateServiceCategory;
     private javax.swing.JLabel lblUpdateServiceMain;
     private javax.swing.JLabel lblUpdateServiceName;
     private javax.swing.JLabel lblUpdateServiceNameList;
     private javax.swing.JPanel panelFindService;
     private javax.swing.JPanel panelNewService;
     private javax.swing.JPanel panelUpdateService;
+    private javax.swing.JRadioButton rdoBtnSalon;
+    private javax.swing.JRadioButton rdoBtnSalonSearch;
+    private javax.swing.JRadioButton rdoBtnStudio;
+    private javax.swing.JRadioButton rdoBtnStudioSearch;
     private javax.swing.JTabbedPane tabServiceMain;
     private javax.swing.JTable tblServiceDetail;
     private javax.swing.JTextField txtFindCategory;
@@ -734,13 +800,10 @@ public class ServiceMainForm extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txtNewCost;
     private javax.swing.JTextArea txtNewDesc;
     private javax.swing.JFormattedTextField txtNewDiscount;
-    private javax.swing.JTextField txtNewServiceCategory;
     private javax.swing.JTextField txtNewServiceName;
     private javax.swing.JFormattedTextField txtUpdateCost;
     private javax.swing.JTextArea txtUpdateDesc;
     private javax.swing.JFormattedTextField txtUpdateDiscount;
-    private javax.swing.JTextField txtUpdateServiceCategory;
-    private javax.swing.JTextField txtUpdateServiceName;
     // End of variables declaration//GEN-END:variables
 
     public UserDetail getUserDetail() {
