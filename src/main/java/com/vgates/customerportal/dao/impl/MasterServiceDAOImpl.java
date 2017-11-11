@@ -149,4 +149,17 @@ public class MasterServiceDAOImpl implements MasterServiceDAO {
         }
         return serviceList;
     }
+
+    @Override
+    public List<MasterService> searchAllActiveServiceByCategory(String category) {
+        List<MasterService> serviceList = null;
+        try {
+            Query query = session.createQuery("SELECT service FROM MasterService service WHERE service.active = true AND service.category =:category");
+            query.setParameter("category", category);
+            serviceList = (List<MasterService>) query.list();
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return serviceList;
+    }
 }
