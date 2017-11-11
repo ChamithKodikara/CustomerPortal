@@ -120,7 +120,11 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Component id="txtNewInvoiceNo" min="-2" pref="125" max="-2" attributes="0"/>
-                                              <EmptySpace pref="458" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                              <Component id="rdoBtnSalon" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="rdoBtnStudio" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Component id="jScrollPane1" min="-2" pref="309" max="-2" attributes="0"/>
@@ -141,6 +145,8 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblNewService" min="-2" pref="188" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="comboServiceName" min="-2" pref="309" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -156,22 +162,11 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblEmployee" min="-2" pref="188" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="rdoBtnSalon" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="rdoBtnStudio" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="comboServiceName" min="-2" pref="309" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="comboEmployee" min="-2" pref="309" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="btnAdd" min="-2" pref="125" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="btnRemove" min="-2" pref="108" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="comboEmployee" min="-2" pref="309" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnAdd" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnRemove" min="-2" pref="108" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -189,8 +184,12 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblNewInvoiceNo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNewInvoiceNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Component id="rdoBtnSalon" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdoBtnStudio" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="comboCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -203,11 +202,9 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblNewService" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="comboServiceName" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="rdoBtnSalon" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="rdoBtnStudio" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comboServiceName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -246,7 +243,7 @@
                           <Component id="txtNewBalance" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblOutput" pref="25" max="32767" attributes="0"/>
+                      <Component id="lblOutput" pref="22" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnCancelAdd" alignment="3" min="-2" max="-2" attributes="0"/>

@@ -122,6 +122,8 @@ public class ServiceMainForm extends javax.swing.JPanel {
         btnUpdate = new javax.swing.JButton();
         rdoBtnSalonSearch = new javax.swing.JRadioButton();
         rdoBtnStudioSearch = new javax.swing.JRadioButton();
+        txtUpdateName = new javax.swing.JFormattedTextField();
+        lblUpdateCost1 = new javax.swing.JLabel();
 
         lblServiceMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblServiceMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -256,11 +258,11 @@ public class ServiceMainForm extends javax.swing.JPanel {
                     .addComponent(lblNewServiceName)
                     .addComponent(txtNewServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNewServiceCategory)
+                .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rdoBtnSalon)
-                        .addComponent(rdoBtnStudio)))
+                        .addComponent(rdoBtnStudio))
+                    .addComponent(lblNewServiceCategory))
                 .addGap(18, 18, 18)
                 .addGroup(panelNewServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -490,6 +492,12 @@ public class ServiceMainForm extends javax.swing.JPanel {
             }
         });
 
+        txtUpdateName.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtUpdateName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        lblUpdateCost1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblUpdateCost1.setText("Name");
+
         javax.swing.GroupLayout panelUpdateServiceLayout = new javax.swing.GroupLayout(panelUpdateService);
         panelUpdateService.setLayout(panelUpdateServiceLayout);
         panelUpdateServiceLayout.setHorizontalGroup(
@@ -498,6 +506,11 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblUpdateServiceMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUpdateServiceLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnUpdate)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete))
                     .addGroup(panelUpdateServiceLayout.createSequentialGroup()
                         .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelUpdateServiceLayout.createSequentialGroup()
@@ -519,13 +532,12 @@ public class ServiceMainForm extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(rdoBtnSalonSearch)
                                 .addGap(18, 18, 18)
-                                .addComponent(rdoBtnStudioSearch)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUpdateServiceLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnUpdate)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete)))
+                                .addComponent(rdoBtnStudioSearch))
+                            .addGroup(panelUpdateServiceLayout.createSequentialGroup()
+                                .addComponent(lblUpdateCost1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtUpdateName)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelUpdateServiceLayout.setVerticalGroup(
@@ -537,7 +549,11 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUpdateServiceNameList)
                     .addComponent(comboServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUpdateName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUpdateCost1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUpdateServiceName)
                     .addComponent(rdoBtnSalonSearch)
@@ -554,7 +570,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUpdateDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUpdateDiscount))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addGroup(panelUpdateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
                     .addComponent(btnUpdate))
@@ -701,7 +717,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
                 searchedService.setCost(Double.parseDouble(txtNewCost.getText()));
                 searchedService.setDescription(txtNewDesc.getText());
                 searchedService.setDiscount(Double.parseDouble(txtNewDiscount.getText()));
-                searchedService.setServiceName(txtNewServiceName.getText());
+                searchedService.setServiceName(txtUpdateName.getText());
 
                 MethodResult result = serviceController.updateServiceDetails(searchedService);
                 if (result.isOk()) {
@@ -781,6 +797,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblSearchServiceMain;
     private javax.swing.JLabel lblServiceMain;
     private javax.swing.JLabel lblUpdateCost;
+    private javax.swing.JLabel lblUpdateCost1;
     private javax.swing.JLabel lblUpdateDesc;
     private javax.swing.JLabel lblUpdateDiscount;
     private javax.swing.JLabel lblUpdateServiceMain;
@@ -804,6 +821,7 @@ public class ServiceMainForm extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txtUpdateCost;
     private javax.swing.JTextArea txtUpdateDesc;
     private javax.swing.JFormattedTextField txtUpdateDiscount;
+    private javax.swing.JFormattedTextField txtUpdateName;
     // End of variables declaration//GEN-END:variables
 
     public UserDetail getUserDetail() {
