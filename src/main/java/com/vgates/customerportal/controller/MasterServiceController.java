@@ -45,4 +45,6 @@ public class MasterServiceController {
         return serviceDAO.findAllActiveMasterService();
     }
 
+    public List<MasterService> searchAllActiveServiceByCategory(String category){return serviceDAO.searchAllActiveServiceByCategory(category);}
+
 }
