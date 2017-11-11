@@ -172,7 +172,7 @@ public class UserLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserNameActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        btnLogin.requestFocus();
+        btnLogin.doClick();
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     /**
