@@ -966,6 +966,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             txtNewTotalCost.setText(String.valueOf(Double.parseDouble(txtNewTotalCost.getText()) + searchedService.getCost()));
             txtNewDiscount.setText(String.valueOf(Double.parseDouble(txtNewDiscount.getText()) + searchedService.getDiscount()));
             txtNewFinalAmount.setText(String.valueOf(Double.parseDouble(txtNewFinalAmount.getText()) + searchedService.getCost()));
+            lblOutput.setText("");
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -1132,6 +1133,10 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private void btnPrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintBillActionPerformed
         if (comboCustomer.getSelectedIndex() == 0) {
             lblOutput.setText("Customer Not selected...");
+            return;
+        }
+        if (defaultServiceTableModel.getRowCount() < 1) {
+            lblOutput.setText("No services...");
             return;
         }
         CustomerDetail customer = (CustomerDetail) comboCustomer.getSelectedItem();
