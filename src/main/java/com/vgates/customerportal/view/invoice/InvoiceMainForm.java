@@ -8,33 +8,6 @@ package com.vgates.customerportal.view.invoice;
 import com.vgates.customerportal.controller.*;
 import com.vgates.customerportal.model.*;
 import com.vgates.customerportal.util.MethodResult;
-import java.awt.print.PageFormat;
-import java.awt.print.PrinterJob;
-
-import javax.print.attribute.Size2DSyntax;
-import javax.print.attribute.standard.MediaSize;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.HashPrintServiceAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
-import javax.print.attribute.standard.Copies;
-import javax.print.attribute.standard.MediaSizeName;
-import javax.print.attribute.standard.PrinterName;
-import javax.swing.text.AttributeSet;
-
-import com.vgates.customerportal.util.SearchComboBox;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -44,6 +17,27 @@ import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
 import net.sf.jasperreports.view.JasperViewer;
 import org.apache.log4j.Logger;
+
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.HashPrintServiceAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Copies;
+import javax.print.attribute.standard.PrinterName;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Chamith
@@ -516,8 +510,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                                         .addGap(48, 48, 48)
                                         .addComponent(rdoBtnSalon)
                                         .addGap(18, 18, 18)
-                                        .addComponent(rdoBtnStudio)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(rdoBtnStudio))
                                     .addGroup(panelNewItemLayout.createSequentialGroup()
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -559,12 +552,13 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblNewItemMain, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNewInvoiceNo)
-                    .addComponent(txtNewInvoiceNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rdoBtnSalon)
-                        .addComponent(rdoBtnStudio)))
+                        .addComponent(rdoBtnStudio))
+                    .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblNewInvoiceNo)
+                        .addComponent(txtNewInvoiceNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(8, 8, 8)
                 .addGroup(panelNewItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCustomer)
@@ -1208,14 +1202,14 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             fileInputStream = new FileInputStream(jasperFile2);
             if (rdoBtnSalon.isSelected()) {
                 param.put("COMPANY_NAME", "Salon Wonrose");
-                param.put("ADDRESS", "bnmdfvnjmfd");
-                param.put("EMAIL", "3456hjkd@gmail.com");
-                param.put("TELE", "0112224448");
+                param.put("ADDRESS", "328 C, New Kandy Road,Delgoda");
+                param.put("EMAIL", "info@salonwonrose.com");
+                param.put("TELE", "0112403605");
             } else {
                 param.put("COMPANY_NAME", "Studio Ronak");
-                param.put("ADDRESS", "dsfjansdfkl");
-                param.put("EMAIL", "sdfghjkl@gmail.com");
-                param.put("TELE", "0714125865");
+                param.put("ADDRESS", "328 C, New Kandy Road,Delgoda");
+                param.put("EMAIL", "info@ronakstudios.com");
+                param.put("TELE", "0112403605");
             }
             param.put("CUSTOMER_ID", customer.getCustomerNo());
 //            param.put("CUSTOMER_NAME", customer.getCustomerName());
