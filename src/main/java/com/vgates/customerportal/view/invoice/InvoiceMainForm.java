@@ -339,7 +339,6 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
         btnPrintInvoice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPrintInvoice.setText("Print");
-        btnPrintInvoice.setEnabled(false);
         btnPrintInvoice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrintInvoiceActionPerformed(evt);
@@ -437,7 +436,6 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
         btnPrintBill.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPrintBill.setText("Print Bill");
-        btnPrintBill.setEnabled(false);
         btnPrintBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrintBillActionPerformed(evt);
