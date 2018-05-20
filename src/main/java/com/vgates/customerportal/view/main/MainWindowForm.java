@@ -51,8 +51,9 @@ public class MainWindowForm extends javax.swing.JFrame {
         panelMainView = new org.jdesktop.swingx.JXImagePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1000, 600));
-        setMinimumSize(new java.awt.Dimension(1000, 600));
+        setMaximumSize(new java.awt.Dimension(1000, 700));
+        setMinimumSize(new java.awt.Dimension(1000, 700));
+        setPreferredSize(new java.awt.Dimension(1000, 700));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -60,13 +61,13 @@ public class MainWindowForm extends javax.swing.JFrame {
             }
         });
 
-        panelMain.setMaximumSize(new java.awt.Dimension(1000, 600));
-        panelMain.setMinimumSize(new java.awt.Dimension(1000, 600));
-        panelMain.setPreferredSize(new java.awt.Dimension(1000, 600));
+        panelMain.setMaximumSize(new java.awt.Dimension(1000, 700));
+        panelMain.setMinimumSize(new java.awt.Dimension(1000, 700));
+        panelMain.setPreferredSize(new java.awt.Dimension(1000, 700));
 
-        panelMainBtn.setMaximumSize(new java.awt.Dimension(200, 600));
-        panelMainBtn.setMinimumSize(new java.awt.Dimension(200, 600));
-        panelMainBtn.setPreferredSize(new java.awt.Dimension(200, 600));
+        panelMainBtn.setMaximumSize(new java.awt.Dimension(200, 700));
+        panelMainBtn.setMinimumSize(new java.awt.Dimension(200, 700));
+        panelMainBtn.setPreferredSize(new java.awt.Dimension(200, 700));
 
         btnCustomerMain.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCustomerMain.setText("Customer Details");
@@ -107,10 +108,10 @@ public class MainWindowForm extends javax.swing.JFrame {
             .addGroup(panelMainBtnLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelMainBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCustomerMain, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(btnServiceMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(btnItemMain, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(btnInvoiceMain, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                    .addComponent(btnCustomerMain, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(btnServiceMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnItemMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInvoiceMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelMainBtnLayout.setVerticalGroup(
@@ -124,18 +125,18 @@ public class MainWindowForm extends javax.swing.JFrame {
                 .addComponent(btnItemMain)
                 .addGap(18, 18, 18)
                 .addComponent(btnInvoiceMain)
-                .addContainerGap(402, Short.MAX_VALUE))
+                .addContainerGap(502, Short.MAX_VALUE))
         );
 
-        panelMainView.setMaximumSize(new java.awt.Dimension(800, 600));
-        panelMainView.setMinimumSize(new java.awt.Dimension(800, 600));
-        panelMainView.setPreferredSize(new java.awt.Dimension(800, 600));
+        panelMainView.setMaximumSize(new java.awt.Dimension(800, 700));
+        panelMainView.setMinimumSize(new java.awt.Dimension(800, 700));
+        panelMainView.setPreferredSize(new java.awt.Dimension(800, 700));
 
         javax.swing.GroupLayout panelMainViewLayout = new javax.swing.GroupLayout(panelMainView);
         panelMainView.setLayout(panelMainViewLayout);
         panelMainViewLayout.setHorizontalGroup(
             panelMainViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelMainViewLayout.setVerticalGroup(
             panelMainViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,12 +150,16 @@ public class MainWindowForm extends javax.swing.JFrame {
             .addGroup(panelMainLayout.createSequentialGroup()
                 .addComponent(panelMainBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelMainView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelMainView, javax.swing.GroupLayout.PREFERRED_SIZE, 781, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelMainLayout.setVerticalGroup(
             panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelMainBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelMainView, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelMainView, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

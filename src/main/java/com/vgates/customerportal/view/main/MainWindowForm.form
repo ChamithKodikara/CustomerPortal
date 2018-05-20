@@ -10,10 +10,13 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1000, 600]"/>
+      <Dimension value="[1000, 700]"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1000, 600]"/>
+      <Dimension value="[1000, 700]"/>
+    </Property>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1000, 700]"/>
     </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
@@ -52,13 +55,13 @@
     <Container class="javax.swing.JPanel" name="panelMain">
       <Properties>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[1000, 600]"/>
+          <Dimension value="[1000, 700]"/>
         </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[1000, 600]"/>
+          <Dimension value="[1000, 700]"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[1000, 600]"/>
+          <Dimension value="[1000, 700]"/>
         </Property>
       </Properties>
 
@@ -68,14 +71,19 @@
               <Group type="102" attributes="0">
                   <Component id="panelMainBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="panelMainView" max="32767" attributes="0"/>
+                  <Component id="panelMainView" pref="781" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="panelMainBtn" alignment="0" max="32767" attributes="0"/>
-              <Component id="panelMainView" alignment="1" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="panelMainView" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -83,13 +91,13 @@
         <Container class="javax.swing.JPanel" name="panelMainBtn">
           <Properties>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 600]"/>
+              <Dimension value="[200, 700]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 600]"/>
+              <Dimension value="[200, 700]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 600]"/>
+              <Dimension value="[200, 700]"/>
             </Property>
           </Properties>
 
@@ -99,10 +107,10 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnCustomerMain" alignment="0" pref="180" max="32767" attributes="0"/>
-                          <Component id="btnServiceMain" alignment="1" pref="180" max="32767" attributes="0"/>
-                          <Component id="btnItemMain" alignment="0" pref="180" max="32767" attributes="0"/>
-                          <Component id="btnInvoiceMain" alignment="0" pref="180" max="32767" attributes="0"/>
+                          <Component id="btnCustomerMain" alignment="0" pref="176" max="32767" attributes="0"/>
+                          <Component id="btnServiceMain" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnItemMain" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnInvoiceMain" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -119,7 +127,7 @@
                       <Component id="btnItemMain" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnInvoiceMain" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="402" max="32767" attributes="0"/>
+                      <EmptySpace pref="502" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -174,20 +182,20 @@
         <Container class="org.jdesktop.swingx.JXImagePanel" name="panelMainView">
           <Properties>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[800, 600]"/>
+              <Dimension value="[800, 700]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[800, 600]"/>
+              <Dimension value="[800, 700]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[800, 600]"/>
+              <Dimension value="[800, 700]"/>
             </Property>
           </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">

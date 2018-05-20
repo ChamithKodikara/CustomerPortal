@@ -22,12 +22,16 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblCustMain" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblCustMain" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="tabCustomerDetail" alignment="0" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="tabCustomerDetail" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -35,7 +39,8 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="lblCustMain" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="tabCustomerDetail" min="-2" pref="572" max="-2" attributes="0"/>
+              <Component id="tabCustomerDetail" pref="559" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,7 +106,7 @@
                                       <Component id="lblContactNoPatten2" pref="126" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="78" pref="315" max="32767" attributes="0"/>
+                              <EmptySpace min="78" pref="304" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -152,7 +157,7 @@
                           <Component id="lblNewAddress" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="11" max="32767" attributes="0"/>
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAddCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCancelAdd" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -335,7 +340,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jScrollPane2" max="32767" attributes="0"/>
-                          <Component id="lblFindCustMain" alignment="0" pref="775" max="32767" attributes="0"/>
+                          <Component id="lblFindCustMain" alignment="0" pref="763" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="lblFindCustRef" alignment="0" max="32767" attributes="0"/>
@@ -379,7 +384,7 @@
                           <Component id="btnCancelFind" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="316" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="299" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -552,7 +557,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnSearchCustomer" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="138" max="32767" attributes="0"/>
                           </Group>
                           <Component id="lblCustUpdate" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
@@ -598,7 +603,7 @@
                           <Component id="lblUpdateAddress" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="197" max="32767" attributes="0"/>
+                      <EmptySpace pref="215" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnDeleteCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnUpdateCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
