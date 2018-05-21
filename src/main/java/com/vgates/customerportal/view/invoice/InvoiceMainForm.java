@@ -1228,12 +1228,12 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 param.put("COMPANY_NAME", "Salon Wonrose");
                 param.put("ADDRESS", "328 C, New Kandy Road,Delgoda");
                 param.put("EMAIL", "info@salonwonrose.com");
-                param.put("TELE", "0112403605");
+                param.put("TELE", "0772284377 0112403605");
             } else {
                 param.put("COMPANY_NAME", "Studio Ronak");
                 param.put("ADDRESS", "328 C, New Kandy Road,Delgoda");
                 param.put("EMAIL", "info@ronakstudios.com");
-                param.put("TELE", "0112403605");
+                param.put("TELE", "0777444490 0112403605");
             }
             param.put("CUSTOMER_ID", customer.getCustomerNo());
 //            param.put("CUSTOMER_NAME", customer.getCustomerName());
