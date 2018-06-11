@@ -26,7 +26,7 @@ public interface CustomerDetailDAO {
 
     List<CustomerDetail> findAllActiveCustomerDetails();
 
-    List<CustomerDetail> findActiveCustomerDetails(String customerName, String refNo);
+    List<CustomerDetail> findActiveCustomerDetails(String customerName, String refNo, String category);
 
     List<CustomerDetail> findAllCustomerDetails();
 

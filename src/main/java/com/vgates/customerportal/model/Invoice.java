@@ -57,6 +57,9 @@ public class Invoice implements Serializable {
     @OneToMany(mappedBy = "invoice")
     private List<InvoiceServiceMapper> invoiceServiceMapperList;
 
+    @Column(name = "CATEGORY")
+    private String category;
+
     public Long getId() {
         return id;
     }
@@ -159,6 +162,14 @@ public class Invoice implements Serializable {
 
     public void setEmployeeDetail(EmployeeDetail employeeDetail) {
         this.employeeDetail = employeeDetail;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override

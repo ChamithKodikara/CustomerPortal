@@ -2,9 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="btnGroupGender">
-    </Component>
-    <Component class="javax.swing.ButtonGroup" name="btnGroupGenderUpdate">
+    <Component class="javax.swing.ButtonGroup" name="btnGrpCategory">
     </Component>
   </NonVisualComponents>
   <AuxValues>
@@ -77,45 +75,65 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblNewCustMain" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="lblNewAddress" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblNewContactNo" max="32767" attributes="0"/>
-                                  <Component id="lblNewEmail" max="32767" attributes="0"/>
-                                  <Component id="lblNewNicNo" max="32767" attributes="0"/>
-                                  <Component id="lblNewCustRef" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblNewCustName" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtNewCustName" max="32767" attributes="0"/>
-                                  <Component id="txtNewCustRef" max="32767" attributes="0"/>
-                                  <Component id="txtNewNicNo" max="32767" attributes="0"/>
-                                  <Component id="txtNewEmail" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtNewContactNo" min="-2" pref="170" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblContactNoPatten2" pref="126" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="lblNewAddress" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblNewContactNo" max="32767" attributes="0"/>
+                                          <Component id="lblNewEmail" max="32767" attributes="0"/>
+                                          <Component id="lblNewNicNo" max="32767" attributes="0"/>
+                                          <Component id="lblNewCustName" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtNewCustName" max="32767" attributes="0"/>
+                                          <Component id="txtNewNicNo" max="32767" attributes="0"/>
+                                          <Component id="txtNewEmail" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="txtNewContactNo" min="-2" pref="170" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblContactNoPatten2" pref="126" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace pref="495" max="-2" attributes="0"/>
+                                      <Component id="btnAddCustomer" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnCancelAdd" min="-2" pref="125" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="78" pref="304" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblNewCustMain" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="lblNewCustomerCategory" max="32767" attributes="0"/>
+                                          <Component id="lblNewCustRef" pref="152" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtNewCustRef" min="-2" pref="301" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="rdoBtnSalon" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="rdoBtnStudio" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnAddCustomer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnCancelAdd" min="-2" pref="125" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -129,7 +147,13 @@
                           <Component id="lblNewCustRef" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNewCustRef" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblNewCustomerCategory" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdoBtnSalon" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdoBtnStudio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblNewCustName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNewCustName" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -146,23 +170,23 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="lblNewContactNo" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtNewContactNo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lblContactNoPatten2" max="32767" attributes="0"/>
+                          <Component id="lblContactNoPatten2" min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblNewAddress" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAddCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCancelAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -322,6 +346,38 @@
                 <Property name="text" type="java.lang.String" value="07XXXXXXXX"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JRadioButton" name="rdoBtnStudio">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="btnGrpCategory"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Studio"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rdoBtnStudioItemStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoBtnStudioActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="rdoBtnSalon">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="btnGrpCategory"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Salon"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rdoBtnSalonItemStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoBtnSalonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblNewCustomerCategory">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Category"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panelSearchCustomer">
@@ -336,27 +392,37 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jScrollPane2" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
                           <Component id="lblFindCustMain" alignment="0" pref="763" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="lblFindCustRef" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblFindCustName" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtFindCustRef" pref="301" max="32767" attributes="0"/>
-                                  <Component id="txtFindCustName" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="btnFindCustomer" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnCancelFind" min="-2" pref="125" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="lblFindCustRef" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblFindCustName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtFindCustRef" pref="301" max="32767" attributes="0"/>
+                                          <Component id="txtFindCustName" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblFindCustCat" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txtFindCustCat" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -378,7 +444,12 @@
                           <Component id="lblFindCustName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtFindCustName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblFindCustCat" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFindCustCat" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnFindCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCancelFind" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -518,6 +589,24 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JTextField" name="txtFindCustCat">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="0"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFindCustCatActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblFindCustCat">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Customer Category        "/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panelUpdateCustomer">

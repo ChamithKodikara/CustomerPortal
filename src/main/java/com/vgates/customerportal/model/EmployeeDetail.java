@@ -42,6 +42,9 @@ public class EmployeeDetail implements Serializable {
     @OneToMany(mappedBy = "employeeDetail")
     private List<Invoice> invoiceList;
 
+    @Column(name = "CATEGORY")
+    private String category;
+
     public Long getId() {
         return id;
     }
@@ -112,6 +115,14 @@ public class EmployeeDetail implements Serializable {
 
     public void setInvoiceList(List<Invoice> invoiceList) {
         this.invoiceList = invoiceList;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override

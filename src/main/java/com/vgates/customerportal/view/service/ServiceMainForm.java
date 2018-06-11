@@ -5,6 +5,7 @@
  */
 package com.vgates.customerportal.view.service;
 
+import com.vgates.customerportal.CommonConstant;
 import com.vgates.customerportal.controller.MasterServiceController;
 import com.vgates.customerportal.controller.UserDetailController;
 import com.vgates.customerportal.model.MasterService;
@@ -620,10 +621,10 @@ public class ServiceMainForm extends javax.swing.JPanel {
             service.setActive(Boolean.TRUE);
             service.setCreatedBy(userDetail.getUserName());
             service.setCreatedDate(new Date());
-            if (rdoBtnSalon.isSelected()) {
-                service.setCategory("Salon");
+           if (rdoBtnSalon.isSelected()) {
+                service.setCategory(CommonConstant.SALON);
             } else if (rdoBtnStudio.isSelected()) {
-                service.setCategory("Studio");
+                service.setCategory(CommonConstant.STUDIO);
             }
             service.setCost(Double.parseDouble(txtNewCost.getText()));
             service.setDescription(txtNewDesc.getText());

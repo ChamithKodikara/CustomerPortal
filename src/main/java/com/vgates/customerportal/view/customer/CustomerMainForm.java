@@ -5,6 +5,7 @@
  */
 package com.vgates.customerportal.view.customer;
 
+import com.vgates.customerportal.CommonConstant;
 import com.vgates.customerportal.controller.CustomerDetailController;
 import com.vgates.customerportal.controller.UserDetailController;
 import com.vgates.customerportal.model.CustomerDetail;
@@ -48,6 +49,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
 
         userDetail = userDetailController.findUserDetailForActiveLogin();
         txtNewCustRef.setText(customerDetailController.newCustomerRef());
+        rdoBtnSalon.setSelected(true);
 
     }
 
@@ -60,8 +62,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGroupGender = new javax.swing.ButtonGroup();
-        btnGroupGenderUpdate = new javax.swing.ButtonGroup();
+        btnGrpCategory = new javax.swing.ButtonGroup();
         lblCustMain = new javax.swing.JLabel();
         tabCustomerDetail = new javax.swing.JTabbedPane();
         panelNewCustomer = new javax.swing.JPanel();
@@ -82,6 +83,9 @@ public class CustomerMainForm extends javax.swing.JPanel {
         btnCancelAdd = new javax.swing.JButton();
         btnAddCustomer = new javax.swing.JButton();
         lblContactNoPatten2 = new javax.swing.JLabel();
+        rdoBtnStudio = new javax.swing.JRadioButton();
+        rdoBtnSalon = new javax.swing.JRadioButton();
+        lblNewCustomerCategory = new javax.swing.JLabel();
         panelSearchCustomer = new javax.swing.JPanel();
         lblFindCustMain = new javax.swing.JLabel();
         lblFindCustRef = new javax.swing.JLabel();
@@ -92,6 +96,8 @@ public class CustomerMainForm extends javax.swing.JPanel {
         btnFindCustomer = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCustomerDetail = new javax.swing.JTable();
+        txtFindCustCat = new javax.swing.JTextField();
+        lblFindCustCat = new javax.swing.JLabel();
         panelUpdateCustomer = new javax.swing.JPanel();
         lblUpdateCustRef = new javax.swing.JLabel();
         lblUpdateCustName = new javax.swing.JLabel();
@@ -199,6 +205,35 @@ public class CustomerMainForm extends javax.swing.JPanel {
         lblContactNoPatten2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblContactNoPatten2.setText("07XXXXXXXX");
 
+        btnGrpCategory.add(rdoBtnStudio);
+        rdoBtnStudio.setText("Studio");
+        rdoBtnStudio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdoBtnStudioItemStateChanged(evt);
+            }
+        });
+        rdoBtnStudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoBtnStudioActionPerformed(evt);
+            }
+        });
+
+        btnGrpCategory.add(rdoBtnSalon);
+        rdoBtnSalon.setText("Salon");
+        rdoBtnSalon.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdoBtnSalonItemStateChanged(evt);
+            }
+        });
+        rdoBtnSalon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoBtnSalonActionPerformed(evt);
+            }
+        });
+
+        lblNewCustomerCategory.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNewCustomerCategory.setText("Category");
+
         javax.swing.GroupLayout panelNewCustomerLayout = new javax.swing.GroupLayout(panelNewCustomer);
         panelNewCustomer.setLayout(panelNewCustomerLayout);
         panelNewCustomerLayout.setHorizontalGroup(
@@ -207,34 +242,47 @@ public class CustomerMainForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelNewCustomerLayout.createSequentialGroup()
-                        .addComponent(lblNewCustMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(panelNewCustomerLayout.createSequentialGroup()
-                        .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblNewAddress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNewContactNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNewEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNewNicNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNewCustRef, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNewCustName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNewCustName)
-                            .addComponent(txtNewCustRef)
-                            .addComponent(txtNewNicNo)
-                            .addComponent(txtNewEmail)
-                            .addComponent(jScrollPane1)
+                        .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelNewCustomerLayout.createSequentialGroup()
-                                .addComponent(txtNewContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblContactNoPatten2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)))
-                        .addGap(78, 304, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNewCustomerLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAddCustomer)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                                .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblNewAddress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNewContactNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNewEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNewNicNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNewCustName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNewCustName)
+                                    .addComponent(txtNewNicNo)
+                                    .addComponent(txtNewEmail)
+                                    .addComponent(jScrollPane1)
+                                    .addGroup(panelNewCustomerLayout.createSequentialGroup()
+                                        .addComponent(txtNewContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblContactNoPatten2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)))
+                                .addGap(292, 292, 292))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNewCustomerLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAddCustomer)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 12, Short.MAX_VALUE))
+                    .addGroup(panelNewCustomerLayout.createSequentialGroup()
+                        .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNewCustMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelNewCustomerLayout.createSequentialGroup()
+                                .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblNewCustomerCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNewCustRef, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNewCustRef, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelNewCustomerLayout.createSequentialGroup()
+                                        .addComponent(rdoBtnSalon)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rdoBtnStudio)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         panelNewCustomerLayout.setVerticalGroup(
             panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +293,12 @@ public class CustomerMainForm extends javax.swing.JPanel {
                 .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNewCustRef)
                     .addComponent(txtNewCustRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(8, 8, 8)
+                .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNewCustomerCategory)
+                    .addComponent(rdoBtnSalon)
+                    .addComponent(rdoBtnStudio))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNewCustName)
                     .addComponent(txtNewCustName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -262,16 +315,16 @@ public class CustomerMainForm extends javax.swing.JPanel {
                     .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblNewContactNo)
                         .addComponent(txtNewContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblContactNoPatten2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblContactNoPatten2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNewAddress)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelNewCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddCustomer)
                     .addComponent(btnCancelAdd))
-                .addGap(167, 167, 167))
+                .addGap(143, 143, 143))
         );
 
         tabCustomerDetail.addTab("New Customer Details", panelNewCustomer);
@@ -352,28 +405,45 @@ public class CustomerMainForm extends javax.swing.JPanel {
             tblCustomerDetail.getColumnModel().getColumn(5).setResizable(false);
         }
 
+        txtFindCustCat.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtFindCustCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFindCustCatActionPerformed(evt);
+            }
+        });
+
+        lblFindCustCat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFindCustCat.setText("Customer Category        ");
+
         javax.swing.GroupLayout panelSearchCustomerLayout = new javax.swing.GroupLayout(panelSearchCustomer);
         panelSearchCustomer.setLayout(panelSearchCustomerLayout);
         panelSearchCustomerLayout.setHorizontalGroup(
             panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSearchCustomerLayout.createSequentialGroup()
+            .addGroup(panelSearchCustomerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(lblFindCustMain, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelSearchCustomerLayout.createSequentialGroup()
-                        .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblFindCustRef, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblFindCustName, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtFindCustRef, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                            .addComponent(txtFindCustName)))
-                    .addGroup(panelSearchCustomerLayout.createSequentialGroup()
+                .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblFindCustMain, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSearchCustomerLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnFindCustomer)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCancelFind, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCancelFind, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelSearchCustomerLayout.createSequentialGroup()
+                        .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelSearchCustomerLayout.createSequentialGroup()
+                                .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblFindCustRef, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblFindCustName, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFindCustRef, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                                    .addComponent(txtFindCustName)))
+                            .addGroup(panelSearchCustomerLayout.createSequentialGroup()
+                                .addComponent(lblFindCustCat)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtFindCustCat)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelSearchCustomerLayout.setVerticalGroup(
@@ -389,7 +459,11 @@ public class CustomerMainForm extends javax.swing.JPanel {
                 .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFindCustName)
                     .addComponent(txtFindCustName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFindCustCat)
+                    .addComponent(txtFindCustCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(panelSearchCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFindCustomer)
                     .addComponent(btnCancelFind))
@@ -567,7 +641,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblCustMain)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tabCustomerDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                .addComponent(tabCustomerDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 559, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -608,7 +682,6 @@ public class CustomerMainForm extends javax.swing.JPanel {
 
         if (responce == JOptionPane.YES_OPTION) {
 
-
             CustomerDetail customerDetail = new CustomerDetail();
             customerDetail.setCustomerNo(txtNewCustRef.getText());
             customerDetail.setCustomerName(txtNewCustName.getText());
@@ -618,6 +691,11 @@ public class CustomerMainForm extends javax.swing.JPanel {
             customerDetail.setCreatedDate(new Date());
             customerDetail.setCreatedBy(userDetail.getUserName());
             customerDetail.setActive(Boolean.TRUE);
+            if (rdoBtnSalon.isSelected()) {
+                customerDetail.setCategory(CommonConstant.SALON);
+            } else if (rdoBtnStudio.isSelected()) {
+                customerDetail.setCategory(CommonConstant.STUDIO);
+            }
 
             MethodResult result = customerDetailController.addNewCustomerDetail(customerDetail);
             if (result.isOk()) {
@@ -629,7 +707,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
                 txtNewEmail.setText("");
                 txtNewContactNo.setText("");
                 txtNewAddress.setText("");
- 
+
             } else {
                 JOptionPane.showMessageDialog(this, result.getMessage(), "New Customer", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -653,7 +731,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
 
     private void btnFindCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindCustomerActionPerformed
         defaultCustTableModel.setRowCount(0);
-        List<CustomerDetail> customerList = customerDetailController.getActiveCustomerList(txtFindCustName.getText(), txtFindCustRef.getText());
+        List<CustomerDetail> customerList = customerDetailController.getActiveCustomerList(txtFindCustName.getText(), txtFindCustRef.getText(), txtFindCustCat.getText());
         if (customerList != null) {
             customerList.forEach(e -> {
                 Object rows[] = {e.getCustomerNo(), e.getCustomerName(), e.getEmail(), e.getContactNo(), e.getAddress()};
@@ -741,6 +819,26 @@ public class CustomerMainForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 
+    private void rdoBtnStudioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoBtnStudioItemStateChanged
+
+    }//GEN-LAST:event_rdoBtnStudioItemStateChanged
+
+    private void rdoBtnStudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnStudioActionPerformed
+
+    }//GEN-LAST:event_rdoBtnStudioActionPerformed
+
+    private void rdoBtnSalonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoBtnSalonItemStateChanged
+
+    }//GEN-LAST:event_rdoBtnSalonItemStateChanged
+
+    private void rdoBtnSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnSalonActionPerformed
+
+    }//GEN-LAST:event_rdoBtnSalonActionPerformed
+
+    private void txtFindCustCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindCustCatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFindCustCatActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCustomer;
@@ -748,8 +846,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelFind;
     private javax.swing.JButton btnDeleteCustomer;
     private javax.swing.JButton btnFindCustomer;
-    private javax.swing.ButtonGroup btnGroupGender;
-    private javax.swing.ButtonGroup btnGroupGenderUpdate;
+    private javax.swing.ButtonGroup btnGrpCategory;
     private javax.swing.JButton btnSearchCustomer;
     private javax.swing.JButton btnUpdateCustomer;
     private javax.swing.JScrollPane jScrollPane1;
@@ -759,6 +856,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblContactNoPatten2;
     private javax.swing.JLabel lblCustMain;
     private javax.swing.JLabel lblCustUpdate;
+    private javax.swing.JLabel lblFindCustCat;
     private javax.swing.JLabel lblFindCustMain;
     private javax.swing.JLabel lblFindCustName;
     private javax.swing.JLabel lblFindCustRef;
@@ -767,6 +865,7 @@ public class CustomerMainForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblNewCustMain;
     private javax.swing.JLabel lblNewCustName;
     private javax.swing.JLabel lblNewCustRef;
+    private javax.swing.JLabel lblNewCustomerCategory;
     private javax.swing.JLabel lblNewEmail;
     private javax.swing.JLabel lblNewNicNo;
     private javax.swing.JLabel lblUpdateAddress;
@@ -777,8 +876,11 @@ public class CustomerMainForm extends javax.swing.JPanel {
     private javax.swing.JPanel panelNewCustomer;
     private javax.swing.JPanel panelSearchCustomer;
     private javax.swing.JPanel panelUpdateCustomer;
+    private javax.swing.JRadioButton rdoBtnSalon;
+    private javax.swing.JRadioButton rdoBtnStudio;
     private javax.swing.JTabbedPane tabCustomerDetail;
     private javax.swing.JTable tblCustomerDetail;
+    private javax.swing.JTextField txtFindCustCat;
     private javax.swing.JTextField txtFindCustName;
     private javax.swing.JTextField txtFindCustRef;
     private javax.swing.JTextArea txtNewAddress;

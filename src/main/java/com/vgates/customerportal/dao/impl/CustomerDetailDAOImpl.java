@@ -154,9 +154,10 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
     }
 
     @Override
-    public List<CustomerDetail> findActiveCustomerDetails(String customerName, String refNo) {
+    public List<CustomerDetail> findActiveCustomerDetails(String customerName, String refNo, String category) {
         StringBuilder sbName = new StringBuilder();
         StringBuilder sbRef = new StringBuilder();
+        StringBuilder sbCat = new StringBuilder();
         if (customerName == null || customerName.isEmpty()) {
             sbName.append("%%");
         } else {
@@ -167,11 +168,17 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         } else {
             sbRef.append("%").append(refNo).append("%");
         }
+        if (category == null || category.isEmpty()) {
+            sbCat.append("%%");
+        } else {
+            sbCat.append("%").append(category).append("%");
+        }
         List<CustomerDetail> customerDetailList = null;
         try {
-            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.active = true AND customer.customerName LIKE :name AND customer.customerNo LIKE :ref ORDER BY customer.customerName ASC ");
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.active = true AND customer.customerName LIKE :name AND customer.customerNo LIKE :ref AND customer.category LIKE :cat ORDER BY customer.customerName ASC ");
             query.setParameter("name", sbName.toString());
             query.setParameter("ref", sbRef.toString());
+            query.setParameter("cat", sbCat.toString());
             customerDetailList = (List<CustomerDetail>) query.list();
 
         } catch (Exception ex) {
