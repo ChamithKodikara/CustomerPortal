@@ -30,4 +30,5 @@ public interface CustomerDetailDAO {
 
     List<CustomerDetail> findAllCustomerDetails();
 
+    List<CustomerDetail> getAllActiveCustomersByCategory(String category);
 }

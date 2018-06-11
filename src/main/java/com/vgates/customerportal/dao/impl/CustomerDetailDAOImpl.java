@@ -199,4 +199,18 @@ public class CustomerDetailDAOImpl implements CustomerDetailDAO {
         }
         return customerDetailList;
     }
+
+    @Override
+    public List<CustomerDetail> getAllActiveCustomersByCategory(String category) {
+        List<CustomerDetail> customerDetailList = null;
+        try {
+            Query query = session.createQuery("SELECT customer FROM CustomerDetail customer WHERE customer.category = :cat ORDER BY customer.customerName ASC ");
+            query.setParameter("cat", category);
+            customerDetailList = (List<CustomerDetail>) query.list();
+
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        }
+        return customerDetailList;
+    }
 }

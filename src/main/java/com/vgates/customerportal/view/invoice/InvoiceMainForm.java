@@ -5,6 +5,7 @@
  */
 package com.vgates.customerportal.view.invoice;
 
+import com.vgates.customerportal.CommonConstant;
 import com.vgates.customerportal.controller.*;
 import com.vgates.customerportal.model.*;
 import com.vgates.customerportal.util.MethodResult;
@@ -95,7 +96,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtNewInvoiceNo.setText("");
         txtNewDesc.setText("");
         txtNewInvoiceNo.setText(invoiceController.newInvoiceNo());
-        serviceCategory = "Salon";
+        serviceCategory = CommonConstant.SALON;
         rdoBtnSalon.setSelected(true);
 
         loadServiceList();
@@ -117,7 +118,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private void loadCustomerList() {
         comboCustomer.removeAllItems();
         comboCustomer.addItem("[SELECT]");
-        List<CustomerDetail> allActiveCustomerList = customerDetailController.getAllActiveCustomerList();
+        List<CustomerDetail> allActiveCustomerList = customerDetailController.getAllActiveCustomersByCategory(serviceCategory);
         allActiveCustomerList.forEach(e -> {
             comboCustomer.addItem(e);
         });
@@ -1263,40 +1264,48 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
     private void rdoBtnSalonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoBtnSalonItemStateChanged
         if (rdoBtnSalon.isSelected()) {
-            serviceCategory = "Salon";
+            serviceCategory = CommonConstant.SALON;
             loadServiceList();
+            loadCustomerList();
         } else if (rdoBtnStudio.isSelected()) {
-            serviceCategory = "Studio";
+            serviceCategory = CommonConstant.STUDIO;
             loadServiceList();
+            loadCustomerList();
         }
     }//GEN-LAST:event_rdoBtnSalonItemStateChanged
 
     private void rdoBtnStudioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoBtnStudioItemStateChanged
         if (rdoBtnSalon.isSelected()) {
-            serviceCategory = "Salon";
+            serviceCategory = CommonConstant.SALON;
             loadServiceList();
+            loadCustomerList();
         } else if (rdoBtnStudio.isSelected()) {
-            serviceCategory = "Studio";
+            serviceCategory = CommonConstant.STUDIO;
             loadServiceList();
+            loadCustomerList();
         }
     }//GEN-LAST:event_rdoBtnStudioItemStateChanged
 
     private void rdoBtnSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnSalonActionPerformed
         if (rdoBtnSalon.isSelected()) {
-            serviceCategory = "Salon";
+            serviceCategory = CommonConstant.SALON;
+            loadCustomerList();
             loadServiceList();
         } else if (rdoBtnStudio.isSelected()) {
-            serviceCategory = "Studio";
+            serviceCategory = CommonConstant.STUDIO;
+            loadCustomerList();
             loadServiceList();
         }
     }//GEN-LAST:event_rdoBtnSalonActionPerformed
 
     private void rdoBtnStudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnStudioActionPerformed
         if (rdoBtnSalon.isSelected()) {
-            serviceCategory = "Salon";
+            serviceCategory = CommonConstant.SALON;
+            loadCustomerList();
             loadServiceList();
         } else if (rdoBtnStudio.isSelected()) {
-            serviceCategory = "Studio";
+            serviceCategory = CommonConstant.STUDIO;
+            loadCustomerList();
             loadServiceList();
         }
     }//GEN-LAST:event_rdoBtnStudioActionPerformed

@@ -56,4 +56,8 @@ public class CustomerDetailController {
     public List<CustomerDetail> getAllCustomers() {
         return customerDetailDAO.findAllCustomerDetails();
     }
+
+    public List<CustomerDetail> getAllActiveCustomersByCategory(String category){
+        return customerDetailDAO.getAllActiveCustomersByCategory(category);
+    }
 }
