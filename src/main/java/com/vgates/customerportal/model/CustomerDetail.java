@@ -36,7 +36,6 @@ public class CustomerDetail implements Serializable {
     @Column(name = "ADDRESS", length = 500)
     private String address;
 
-
     @Column(name = "CREATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
@@ -49,7 +48,6 @@ public class CustomerDetail implements Serializable {
 
     @Column(name = "CATEGORY")
     private String category;
-
 
     public Long getId() {
         return id;
@@ -74,8 +72,6 @@ public class CustomerDetail implements Serializable {
     public void setActive(Boolean active) {
         this.active = active;
     }
-
-
 
     public String getEmail() {
         return email;
@@ -162,7 +158,7 @@ public class CustomerDetail implements Serializable {
 
     @Override
     public String toString() {
-        return id + " - " + customerName;
+        return customerName + "  [" + customerNo + "]";
     }
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "MASTER_SERVICE")
 public class MasterService implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,7 +102,6 @@ public class MasterService implements Serializable {
         this.discount = discount;
     }
 
-
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -147,6 +147,6 @@ public class MasterService implements Serializable {
 
     @Override
     public String toString() {
-        return serviceName;
+        return serviceName + " - " + cost;
     }
 }
