@@ -1112,7 +1112,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNewDiscountFocusGained
 
     private void txtNewPaidAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPaidAmountActionPerformed
-        btnNewInvoice.doClick();
+        btnNewBill.doClick();
     }//GEN-LAST:event_txtNewPaidAmountActionPerformed
 
     private void txtNewPaidAmountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNewPaidAmountFocusGained
