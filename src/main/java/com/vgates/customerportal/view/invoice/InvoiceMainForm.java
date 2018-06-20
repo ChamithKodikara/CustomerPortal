@@ -5,6 +5,7 @@
  */
 package com.vgates.customerportal.view.invoice;
 
+import com.jidesoft.swing.ComboBoxSearchable;
 import com.vgates.customerportal.CommonConstant;
 import com.vgates.customerportal.controller.*;
 import com.vgates.customerportal.model.*;
@@ -122,6 +123,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         allActiveCustomerList.forEach(e -> {
             comboCustomer.addItem(e);
         });
+        ComboBoxSearchable searchable =new ComboBoxSearchable(comboCustomer);
     }
 
     private void loadEmployeeList() {
@@ -131,6 +133,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         allActiveEmployeeList.forEach(e -> {
             comboEmployee.addItem(e);
         });
+        ComboBoxSearchable searchable =new ComboBoxSearchable(comboEmployee);
     }
 
     private void loadServiceList() {
@@ -140,9 +143,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         serviceList.forEach(e -> {
             comboServiceName.addItem(e);
         });
-
-//        SearchComboBox searchService = new SearchComboBox();
-//        searchService.search(comboServiceName, true, "No Service Found");
+        ComboBoxSearchable searchable =new ComboBoxSearchable(comboServiceName);
     }
 
     /**
