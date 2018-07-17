@@ -1237,7 +1237,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 param.put("EMAIL", "info@ronakstudios.com");
                 param.put("TELE", "0777444490 0112403605");
             }
-            param.put("CUSTOMER_ID", customer.getCustomerNo());
+            param.put("CUSTOMER_ID", customer.getCustomerName());
 //            param.put("CUSTOMER_NAME", customer.getCustomerName());
 //            param.put("CUSTOMER_ADDRESS", customer.getAddress());
             param.put("INVOICE_ID", txtNewInvoiceNo.getText());
