@@ -27,11 +27,11 @@ public interface MasterInvoiceDAO {
 
     List<Invoice> findAllActiveInvoices();
 
-    List<Invoice> findAllActiveInvoicesForDay(Date date);
+    List<Invoice> findAllActiveInvoicesForDay(Date date, String category);
 
-    List<Invoice> findAllActiveInvoicesByMonth(int year, int month);
+    List<Invoice> findAllActiveInvoicesByMonth(int year, int month, String category);
 
-    List<Invoice> findAllActiveInvoicesByYear(int year);
+    List<Invoice> findAllActiveInvoicesByYear(int year, String category);
 
     List<InvoiceServiceMapper> findInvoiceServiceDetails(long invoiceId);
 

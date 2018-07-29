@@ -20,6 +20,7 @@ public class MasterInvoiceController {
     public String newInvoiceNo() {
         return masterInvoiceDAO.newInvoiceNo();
     }
+
     public MethodResult generateNewInvoice(Invoice invoice, List<MasterService> serviceList) {
         return masterInvoiceDAO.addNewInvoice(invoice, serviceList);
     }
@@ -44,16 +45,16 @@ public class MasterInvoiceController {
         return masterInvoiceDAO.findAllActiveInvoices();
     }
 
-    public List<Invoice> getAllInvoiceOfDay(Date date) {
-        return masterInvoiceDAO.findAllActiveInvoicesForDay(date);
+    public List<Invoice> getAllInvoiceOfDay(Date date, String category) {
+        return masterInvoiceDAO.findAllActiveInvoicesForDay(date, category);
     }
 
-    public List<Invoice> getAllInvoicesOfMonth(int year, int month) {
-        return masterInvoiceDAO.findAllActiveInvoicesByMonth(year, month);
+    public List<Invoice> getAllInvoicesOfMonth(int year, int month, String category) {
+        return masterInvoiceDAO.findAllActiveInvoicesByMonth(year, month, category);
     }
 
-    public List<Invoice> getAllInvoicesOfYear(int year) {
-        return masterInvoiceDAO.findAllActiveInvoicesByYear(year);
+    public List<Invoice> getAllInvoicesOfYear(int year, String category) {
+        return masterInvoiceDAO.findAllActiveInvoicesByYear(year, category);
     }
 
     public List<InvoiceServiceMapper> getInvoiceServiceDetails(long invId) {

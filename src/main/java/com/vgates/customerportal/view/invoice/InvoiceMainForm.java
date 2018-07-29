@@ -110,9 +110,13 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         dtmOfDailyReportTbl = (DefaultTableModel) tblDailyReport.getModel();
         dtmOfMonthlyReportTbl = (DefaultTableModel) tblMonthlyReport.getModel();
         dtmOfAnnualReportTbl = (DefaultTableModel) tblAnnualReport.getModel();
-        
+
         btnPrintBill.setVisible(false);
         btnPrintInvoice.setVisible(false);
+
+        rdoBtnDRepoSalon.setSelected(true);
+        rdoBtnMRepoSalon.setSelected(true);
+        rdoBtnARepoSalon.setSelected(true);
 
     }
 
@@ -123,7 +127,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         allActiveCustomerList.forEach(e -> {
             comboCustomer.addItem(e);
         });
-        ComboBoxSearchable searchable =new ComboBoxSearchable(comboCustomer);
+        ComboBoxSearchable searchable = new ComboBoxSearchable(comboCustomer);
     }
 
     private void loadEmployeeList() {
@@ -133,7 +137,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         allActiveEmployeeList.forEach(e -> {
             comboEmployee.addItem(e);
         });
-        ComboBoxSearchable searchable =new ComboBoxSearchable(comboEmployee);
+        ComboBoxSearchable searchable = new ComboBoxSearchable(comboEmployee);
     }
 
     private void loadServiceList() {
@@ -143,7 +147,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         serviceList.forEach(e -> {
             comboServiceName.addItem(e);
         });
-        ComboBoxSearchable searchable =new ComboBoxSearchable(comboServiceName);
+        ComboBoxSearchable searchable = new ComboBoxSearchable(comboServiceName);
     }
 
     /**
@@ -156,6 +160,9 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private void initComponents() {
 
         btnGrpServiceType = new javax.swing.ButtonGroup();
+        btnGrpDailyRepo = new javax.swing.ButtonGroup();
+        btnGrpMonthlyRepo = new javax.swing.ButtonGroup();
+        btnGrpAnnuallyRepo = new javax.swing.ButtonGroup();
         lblInvoiceMain = new javax.swing.JLabel();
         panelSearchInvoice = new javax.swing.JTabbedPane();
         panelNewItem = new javax.swing.JPanel();
@@ -203,6 +210,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         tblDailyReport = new javax.swing.JTable();
         lblDate1 = new javax.swing.JLabel();
         txtTotalIncomeDailyReport = new javax.swing.JTextField();
+        rdoBtnDRepoSalon = new javax.swing.JRadioButton();
+        rdoBtnDRepoStudio = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         txtYearMonthlyReport = new javax.swing.JFormattedTextField();
         lblYearMonthlyReport = new javax.swing.JLabel();
@@ -213,6 +222,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         btnViewMonthlyRecords = new javax.swing.JButton();
         lblDate2 = new javax.swing.JLabel();
         txtTotalIncomeMonthlyReport = new javax.swing.JTextField();
+        rdoBtnMRepoSalon = new javax.swing.JRadioButton();
+        rdoBtnMRepoStudio = new javax.swing.JRadioButton();
         jPanel5 = new javax.swing.JPanel();
         lblDate3 = new javax.swing.JLabel();
         btnViewAnnualRecords = new javax.swing.JButton();
@@ -221,6 +232,8 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         lblYearMonthlyReport1 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblAnnualReport = new javax.swing.JTable();
+        rdoBtnARepoSalon = new javax.swing.JRadioButton();
+        rdoBtnARepoStudio = new javax.swing.JRadioButton();
 
         lblInvoiceMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblInvoiceMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -675,6 +688,17 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtTotalIncomeDailyReport.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtTotalIncomeDailyReport.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
+        btnGrpDailyRepo.add(rdoBtnDRepoSalon);
+        rdoBtnDRepoSalon.setText("Salon");
+        rdoBtnDRepoSalon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoBtnDRepoSalonActionPerformed(evt);
+            }
+        });
+
+        btnGrpDailyRepo.add(rdoBtnDRepoStudio);
+        rdoBtnDRepoStudio.setText("Studio");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -683,15 +707,18 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(datePickerDailyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
+                        .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(datePickerDailyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoBtnDRepoSalon)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoBtnDRepoStudio)
+                        .addGap(18, 18, 18)
                         .addComponent(btnViewDailyRecords)
-                        .addGap(316, 316, 316))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4)
-                        .addContainerGap())))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -706,14 +733,16 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDate)
                     .addComponent(datePickerDailyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnViewDailyRecords))
+                    .addComponent(btnViewDailyRecords)
+                    .addComponent(rdoBtnDRepoSalon)
+                    .addComponent(rdoBtnDRepoStudio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDate1)
                     .addComponent(txtTotalIncomeDailyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Daily", jPanel3);
@@ -769,6 +798,22 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         txtTotalIncomeMonthlyReport.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtTotalIncomeMonthlyReport.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
+        btnGrpMonthlyRepo.add(rdoBtnMRepoSalon);
+        rdoBtnMRepoSalon.setText("Salon");
+        rdoBtnMRepoSalon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoBtnMRepoSalonActionPerformed(evt);
+            }
+        });
+
+        btnGrpMonthlyRepo.add(rdoBtnMRepoStudio);
+        rdoBtnMRepoStudio.setText("Studio");
+        rdoBtnMRepoStudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoBtnMRepoStudioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -777,17 +822,21 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(lblYearMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblYearMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtYearMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(txtYearMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblMonthMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboMonthMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addComponent(comboMonthMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoBtnMRepoSalon)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoBtnMRepoStudio)
+                        .addGap(18, 18, 18)
                         .addComponent(btnViewMonthlyRecords)
-                        .addGap(0, 114, Short.MAX_VALUE))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -804,14 +853,16 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                     .addComponent(txtYearMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblMonthMonthlyReport)
                     .addComponent(comboMonthMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnViewMonthlyRecords))
+                    .addComponent(btnViewMonthlyRecords)
+                    .addComponent(rdoBtnMRepoSalon)
+                    .addComponent(rdoBtnMRepoStudio))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDate2)
                     .addComponent(txtTotalIncomeMonthlyReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Monthly", jPanel4);
@@ -861,27 +912,44 @@ public class InvoiceMainForm extends javax.swing.JPanel {
         });
         jScrollPane6.setViewportView(tblAnnualReport);
 
+        btnGrpAnnuallyRepo.add(rdoBtnARepoSalon);
+        rdoBtnARepoSalon.setText("Salon");
+
+        btnGrpAnnuallyRepo.add(rdoBtnARepoStudio);
+        rdoBtnARepoStudio.setText("Studio");
+        rdoBtnARepoStudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoBtnARepoStudioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(lblYearMonthlyReport1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtYearAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(btnViewAnnualRecords)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblDate3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(lblYearMonthlyReport1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotalIncomeAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE))
+                        .addComponent(txtYearAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoBtnARepoSalon)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoBtnARepoStudio)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnViewAnnualRecords)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblDate3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTotalIncomeAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -891,10 +959,12 @@ public class InvoiceMainForm extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnViewAnnualRecords)
                     .addComponent(lblYearMonthlyReport1)
-                    .addComponent(txtYearAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtYearAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdoBtnARepoSalon)
+                    .addComponent(rdoBtnARepoStudio))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDate3)
                     .addComponent(txtTotalIncomeAnnualReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -975,6 +1045,11 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             invoice.setFinalAmount(Double.parseDouble(txtNewFinalAmount.getText()));
             invoice.setCustomerDetail((CustomerDetail) comboCustomer.getSelectedItem());
             invoice.setEmployeeDetail(employee);
+            if (rdoBtnSalon.isSelected()) {
+                invoice.setCategory(CommonConstant.SALON);
+            } else if (rdoBtnStudio.isSelected()) {
+                invoice.setCategory(CommonConstant.STUDIO);
+            }
 
             MethodResult result = invoiceController.generateNewInvoice(invoice, masterServices);
             if (result.isOk()) {
@@ -1133,9 +1208,15 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
     private void btnViewDailyRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDailyRecordsActionPerformed
         Date date = datePickerDailyReport.getDate();
-        List<Invoice> allInvoiceOfDay = invoiceController.getAllInvoiceOfDay(date);
+        String category = CommonConstant.SALON;
+        if (rdoBtnDRepoStudio.isSelected()) {
+            category = CommonConstant.STUDIO;
+        }
+        List<Invoice> allInvoiceOfDay = invoiceController.getAllInvoiceOfDay(date, category);
         if (allInvoiceOfDay == null || allInvoiceOfDay.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No any invoice for " + sdf.format(date));
+            dtmOfDailyReportTbl.setRowCount(0);
+            txtTotalIncomeDailyReport.setText("0.00");
             return;
         }
         double totalIncome = 0;
@@ -1156,10 +1237,15 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private void btnViewMonthlyRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewMonthlyRecordsActionPerformed
         String year = txtYearMonthlyReport.getText();
         int month = comboMonthMonthlyReport.getSelectedIndex() + 1;
-        System.out.println(year + " " + month);
-        List<Invoice> allInvoicesOfMonth = invoiceController.getAllInvoicesOfMonth(Integer.parseInt(year), month);
+        String category = CommonConstant.SALON;
+        if (rdoBtnMRepoStudio.isSelected()) {
+            category = CommonConstant.STUDIO;
+        }
+        List<Invoice> allInvoicesOfMonth = invoiceController.getAllInvoicesOfMonth(Integer.parseInt(year), month, category);
         if (allInvoicesOfMonth == null || allInvoicesOfMonth.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No any invoice for " + year + " - " + comboMonthMonthlyReport.getSelectedItem());
+            dtmOfMonthlyReportTbl.setRowCount(0);
+            txtTotalIncomeMonthlyReport.setText("0.00");
             return;
         }
         double totalIncome = 0;
@@ -1179,10 +1265,15 @@ public class InvoiceMainForm extends javax.swing.JPanel {
 
     private void btnViewAnnualRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAnnualRecordsActionPerformed
         String year = txtYearAnnualReport.getText();
-
-        List<Invoice> allInvoicesOfYear = invoiceController.getAllInvoicesOfYear(Integer.parseInt(year));
+        String category = CommonConstant.SALON;
+        if (rdoBtnARepoStudio.isSelected()) {
+            category = CommonConstant.STUDIO;
+        }
+        List<Invoice> allInvoicesOfYear = invoiceController.getAllInvoicesOfYear(Integer.parseInt(year), category);
         if (allInvoicesOfYear == null || allInvoicesOfYear.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No any invoice for " + year);
+            dtmOfAnnualReportTbl.setRowCount(0);
+            txtTotalIncomeAnnualReport.setText("0.00");
             return;
         }
         double totalIncome = 0;
@@ -1312,7 +1403,7 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     }//GEN-LAST:event_rdoBtnStudioActionPerformed
 
     private void btnNewBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewBillActionPerformed
-       //        int responce = JOptionPane.showConfirmDialog(this, "Are you sure you want to add this Invoice...?", "New Invoice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        //        int responce = JOptionPane.showConfirmDialog(this, "Are you sure you want to add this Invoice...?", "New Invoice", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 //        int responce = JOptionPane.YES_OPTION;
         if (comboCustomer.getSelectedIndex() == 0) {
             lblOutput.setText("Customer Not selected...");
@@ -1332,6 +1423,11 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             invoice.setFinalAmount(Double.parseDouble(txtNewFinalAmount.getText()));
             invoice.setCustomerDetail((CustomerDetail) comboCustomer.getSelectedItem());
             invoice.setEmployeeDetail(employee);
+            if (rdoBtnSalon.isSelected()) {
+                invoice.setCategory(CommonConstant.SALON);
+            } else if (rdoBtnStudio.isSelected()) {
+                invoice.setCategory(CommonConstant.STUDIO);
+            }
 
             MethodResult result = invoiceController.generateNewInvoice(invoice, masterServices);
             if (result.isOk()) {
@@ -1351,6 +1447,22 @@ public class InvoiceMainForm extends javax.swing.JPanel {
             lblOutput.setText("Bill cannot continue cause Paid amount not enough");
         }
     }//GEN-LAST:event_btnNewBillActionPerformed
+
+    private void rdoBtnDRepoSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnDRepoSalonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoBtnDRepoSalonActionPerformed
+
+    private void rdoBtnMRepoSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnMRepoSalonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoBtnMRepoSalonActionPerformed
+
+    private void rdoBtnMRepoStudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnMRepoStudioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoBtnMRepoStudioActionPerformed
+
+    private void rdoBtnARepoStudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBtnARepoStudioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoBtnARepoStudioActionPerformed
 
     private void printDirect(JasperPrint jasperPrint) {
         try {
@@ -1397,6 +1509,9 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancelAdd;
+    private javax.swing.ButtonGroup btnGrpAnnuallyRepo;
+    private javax.swing.ButtonGroup btnGrpDailyRepo;
+    private javax.swing.ButtonGroup btnGrpMonthlyRepo;
     private javax.swing.ButtonGroup btnGrpServiceType;
     private javax.swing.JButton btnNewBill;
     private javax.swing.JButton btnNewInvoice;
@@ -1443,6 +1558,12 @@ public class InvoiceMainForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblYearMonthlyReport1;
     private javax.swing.JPanel panelNewItem;
     private javax.swing.JTabbedPane panelSearchInvoice;
+    private javax.swing.JRadioButton rdoBtnARepoSalon;
+    private javax.swing.JRadioButton rdoBtnARepoStudio;
+    private javax.swing.JRadioButton rdoBtnDRepoSalon;
+    private javax.swing.JRadioButton rdoBtnDRepoStudio;
+    private javax.swing.JRadioButton rdoBtnMRepoSalon;
+    private javax.swing.JRadioButton rdoBtnMRepoStudio;
     private javax.swing.JRadioButton rdoBtnSalon;
     private javax.swing.JRadioButton rdoBtnStudio;
     private javax.swing.JTable tblAnnualReport;

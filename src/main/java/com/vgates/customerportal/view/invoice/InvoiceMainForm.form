@@ -4,6 +4,12 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="btnGrpServiceType">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="btnGrpDailyRepo">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="btnGrpMonthlyRepo">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="btnGrpAnnuallyRepo">
+    </Component>
   </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -703,19 +709,21 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblDate" pref="81" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="datePickerDailyReport" min="-2" pref="252" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblDate" min="-2" pref="84" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="datePickerDailyReport" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="rdoBtnDRepoSalon" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="rdoBtnDRepoStudio" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnViewDailyRecords" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="316" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane4" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane4" pref="744" max="32767" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
@@ -734,6 +742,8 @@
                                   <Component id="lblDate" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="datePickerDailyReport" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnViewDailyRecords" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoBtnDRepoSalon" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoBtnDRepoStudio" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane4" min="-2" pref="399" max="-2" attributes="0"/>
@@ -742,7 +752,7 @@
                                   <Component id="lblDate1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtTotalIncomeDailyReport" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="27" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -846,6 +856,25 @@
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JRadioButton" name="rdoBtnDRepoSalon">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btnGrpDailyRepo"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Salon"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoBtnDRepoSalonActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="rdoBtnDRepoStudio">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btnGrpDailyRepo"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Studio"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel4">
@@ -864,18 +893,22 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblYearMonthlyReport" min="-2" pref="82" max="-2" attributes="0"/>
+                                      <Component id="lblYearMonthlyReport" min="-2" pref="50" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtYearMonthlyReport" min="-2" pref="121" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txtYearMonthlyReport" min="-2" pref="90" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lblMonthMonthlyReport" min="-2" pref="82" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="comboMonthMonthlyReport" min="-2" pref="222" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                      <Component id="comboMonthMonthlyReport" min="-2" pref="110" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="rdoBtnMRepoSalon" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="rdoBtnMRepoStudio" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnViewMonthlyRecords" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="114" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane5" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane5" alignment="1" pref="744" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Component id="lblDate2" min="-2" pref="121" max="-2" attributes="0"/>
@@ -897,6 +930,8 @@
                                   <Component id="lblMonthMonthlyReport" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="comboMonthMonthlyReport" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnViewMonthlyRecords" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoBtnMRepoSalon" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoBtnMRepoStudio" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane5" min="-2" pref="379" max="-2" attributes="0"/>
@@ -905,7 +940,7 @@
                                   <Component id="lblDate2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtTotalIncomeMonthlyReport" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="36" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1045,6 +1080,28 @@
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JRadioButton" name="rdoBtnMRepoSalon">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btnGrpMonthlyRepo"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Salon"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoBtnMRepoSalonActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="rdoBtnMRepoStudio">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btnGrpMonthlyRepo"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Studio"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoBtnMRepoStudioActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel5">
@@ -1060,24 +1117,32 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="lblYearMonthlyReport1" min="-2" pref="82" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtYearAnnualReport" min="-2" pref="121" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Component id="btnViewAnnualRecords" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="lblDate3" min="-2" pref="121" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Component id="lblYearMonthlyReport1" min="-2" pref="82" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtTotalIncomeAnnualReport" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="txtYearAnnualReport" min="-2" pref="121" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="rdoBtnARepoSalon" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="rdoBtnARepoStudio" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnViewAnnualRecords" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane6" alignment="1" pref="744" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <Component id="lblDate3" min="-2" pref="121" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtTotalIncomeAnnualReport" min="-2" pref="200" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jScrollPane6" alignment="1" pref="744" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1091,10 +1156,12 @@
                                   <Component id="btnViewAnnualRecords" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblYearMonthlyReport1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtYearAnnualReport" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoBtnARepoSalon" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoBtnARepoStudio" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane6" min="-2" pref="379" max="-2" attributes="0"/>
-                              <EmptySpace pref="42" max="32767" attributes="0"/>
+                              <EmptySpace pref="41" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblDate3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtTotalIncomeAnnualReport" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1208,6 +1275,25 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JRadioButton" name="rdoBtnARepoSalon">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btnGrpAnnuallyRepo"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Salon"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="rdoBtnARepoStudio">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btnGrpAnnuallyRepo"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Studio"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoBtnARepoStudioActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>

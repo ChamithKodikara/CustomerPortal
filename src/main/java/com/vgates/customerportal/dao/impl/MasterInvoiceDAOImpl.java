@@ -145,11 +145,12 @@ public class MasterInvoiceDAOImpl implements MasterInvoiceDAO {
     }
 
     @Override
-    public List<Invoice> findAllActiveInvoicesForDay(Date date) {
+    public List<Invoice> findAllActiveInvoicesForDay(Date date, String category) {
         List<Invoice> resultList = null;
         try {
-            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true AND DATE(inv.createdDate) = :invDate");
+            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true AND DATE(inv.createdDate) = :invDate AND inv.category = :category");
             query.setParameter("invDate", date);
+            query.setParameter("category", category);
             resultList = (List<Invoice>) query.list();
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
@@ -158,12 +159,13 @@ public class MasterInvoiceDAOImpl implements MasterInvoiceDAO {
     }
 
     @Override
-    public List<Invoice> findAllActiveInvoicesByMonth(int year, int month) {
+    public List<Invoice> findAllActiveInvoicesByMonth(int year, int month, String category) {
         List<Invoice> resultList = null;
         try {
-            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true AND YEAR(inv.createdDate) = :invYear AND MONTH(inv.createdDate) = :invMonth");
+            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true AND YEAR(inv.createdDate) = :invYear AND MONTH(inv.createdDate) = :invMonth AND inv.category = :category");
             query.setParameter("invYear", year);
             query.setParameter("invMonth", month);
+            query.setParameter("category", category);
             resultList = (List<Invoice>) query.list();
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
@@ -172,11 +174,12 @@ public class MasterInvoiceDAOImpl implements MasterInvoiceDAO {
     }
 
     @Override
-    public List<Invoice> findAllActiveInvoicesByYear(int year) {
+    public List<Invoice> findAllActiveInvoicesByYear(int year, String category) {
         List<Invoice> resultList = null;
         try {
-            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true AND YEAR(inv.createdDate) = :invYear");
+            Query query = session.createQuery("SELECT inv FROM Invoice inv WHERE inv.active= true AND YEAR(inv.createdDate) = :invYear AND inv.category = :category");
             query.setParameter("invYear", year);
+            query.setParameter("category", category);
             resultList = (List<Invoice>) query.list();
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
